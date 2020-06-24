@@ -14,3 +14,15 @@ body::after{
   content:"";
   }
 
+.top-bar{
+    z-index:-1;
+    opacity:0.35;
+}
+.searchBar{
+    margin-right: 0;
+    padding: 2px;
+}
+.submitBtn{
+    padding: 10px;
+    margin-left: 1px;
+}
