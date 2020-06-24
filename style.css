@@ -14,3 +14,17 @@ body::after{
   content:"";
   }
 
+
+
+/* Added to make cards closer together. */
+.card{
+    margin-bottom:5px;
+    height: 160px;
+  
+}
+/* Padding Added to cards to add some seperation between them. */
+.cell{
+    padding-right: 20px;
+    padding-left:20px;
+}
+
