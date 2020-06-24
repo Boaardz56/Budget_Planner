@@ -1,10 +1,13 @@
-// var queryURL = "https://thefork.p.rapidapi.com/locations/list?google_place_id=ChIJ53USP0nBhkcRjQ50xhPN_zw" + apiKey
-// var apiKey = "eec2f665f6msh2d3f36fae53a543p11853ajsn8b422c1ada74"
-// $.ajax({
-//     url: queryURL,
-//     method: "GET"
-// })
-//     .then(function (response) {
 
-// console.log(response)
-//     })
+//google api to get some restaurants with rating around a location
+//google places AJAX call
+var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+console.log(queryURL);
+$.ajax({
+  url: queryURL,
+  method: "GET"
+  
+}).then(function(response) {
+console.log (response);
+});
+  
