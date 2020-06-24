@@ -26,3 +26,34 @@ body::after{
     padding: 10px;
     margin-left: 1px;
 }
+.input-group-rounded .input-group-field {
+    border-radius: 5000px 0 0 5000px;
+    padding-left: 1rem;
+  }
+  .input-group-rounded .input-group-button .button {
+    border-radius: 0 5000px 5000px 0;
+    font-size: 0.8rem;
+  }
+  #startingBtn{
+      float: center;
+      margin: 200px;
+  }
+/* centered checkbox under search bar */
+#checkBox{
+    float: center;
+    margin:50px;
+    margin-right: 100px;
+    text-align: center;
+    
+    
+}
+/* modify checkbox font and styling */
+  .checkText {
+      font-size: 30px;
+      font-style: italic;
+  }
+/* change size of check boxes */
+  input[type=checkbox] {
+    transform: scale(2);
+}
+  
