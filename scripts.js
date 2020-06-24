@@ -69,3 +69,24 @@ $.ajax({
 console.log (response);
 });
   
+//yelp
+
+// Client ID
+// oo2Qdb12rcApUjtG7bi8WQ
+
+// API Key
+// U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx
+
+
+var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=Orlando&categories=";
+console.log(queryURL);
+$.ajax({
+  url: queryURL,
+  method: "GET",
+  headers:{
+    Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+  }
+  
+}).then(function(response) {
+console.log ("yelp" , response);
+});
