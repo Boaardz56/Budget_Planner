@@ -2,7 +2,7 @@
 var cardsContainer = $(".grid-container").hide();
 
 
-=======
+// =======
 $(document).ready(function(){
 
 //google api to get some restaurants with rating around a location
@@ -82,7 +82,7 @@ function yelpSearch(userSearch) {
       //attaching for loop
       //for (var i=0; i<cardInput.length;i++) {
         
-    }
+ 
 
       
 
