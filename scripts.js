@@ -1,8 +1,9 @@
 //Global variable that hides the container with the cards on the opening page.
 var cardsContainer = $(".grid-container").hide();
+var categoriesListFood=$('#dropdownfood');
+var businesses=[];
 
 
-// =======
 $(document).ready(function(){
 
 //google api to get some restaurants with rating around a location
@@ -81,13 +82,9 @@ function yelpSearch(userSearch) {
       cardRating.append(cardPrice);
       //attaching for loop
       //for (var i=0; i<cardInput.length;i++) {
+
+      console.log(response.businesses.)
         
- 
-
-      
-
-
-
   });
 
 
