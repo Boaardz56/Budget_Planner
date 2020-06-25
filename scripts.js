@@ -26,13 +26,15 @@ $.ajax({
 console.log ("yelp" , response);
 });
 
+
 $("#submitBtn").click(function(){
-  $("#searchField").hide();
-  $("#checkBox").hide();
-  $("#submitBtn").hide();
+  $("#searchField").hide("scale-out-down");
+  $("#checkBox").hide("scale-out-down");
+  $("#submitBtn").hide("scale-out-down");
   console.log("works")
 
 })
+
 
 })
 
