@@ -38,20 +38,20 @@ function yelpSearch(userSearch) {
   }).then(function(response) {
       console.log ("yelp" , response);
       //attaching Restaurant name to title of card
-      var name = $("#cardTitle");
+      var yelpCard = $("#yelpCard");
+      //add loop to pull business info 
+      for (var i=0; i<yelpCard.length; i++) {
+      var name = $("#yelpFoodTitle");
       name.text(response.businesses[0].name);
       // var foodPic = $("<img>");
       // foodPic.attr(response.businesses[0].image_url);
-      // var cardSection = $("#cardSection");
-      // cardSection.attr('src', response.businesses[0].image_url);
-      var cardRating = $("#cardSection");
+      var cardRating = $("#yelpFoodSection");
       cardRating.text("Rating: " + response.businesses[0].rating);
       var cardPrice = $("<p>");
       cardPrice.text("Price: " + response.businesses[0].price);
       cardRating.append(cardPrice);
-      //attaching for loop
-      //for (var i=0; i<cardInput.length;i++) {
-        
+      //attaching for condition??
+    }
   
 
       
