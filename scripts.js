@@ -1,20 +1,23 @@
 //Global variable that hides the container with the cards on the opening page.
 var cardsContainer = $(".grid-container").hide();
 
+
 $(document).ready(function(){
 
-
-//Button event for user's search.
+  //Button event for user's search.
 $("#submitBtn").click(function(){
   $("#searchField").hide("scale-out-down");
   $("#checkBox").hide("scale-out-down");
   $("#submitBtn").hide("scale-out-down");
+  //storing User input into local storage
+  var userSearch = $("#searchField").val();
+  localStorage.setItem("userSearch",userSearch)
 
 //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
   //var cardHeader = $("h4");
-  var userSearch = $("#searchField").val();
+  // var userSearch = $("#searchField").val();
   //cardHeader.text(userSearch)
-  // console.log(userSearch)
+  console.log(userSearch)
 //Shows container with cards after search.
   $(".grid-container").show();
   yelpSearch(userSearch);
@@ -25,7 +28,7 @@ $("#submitBtn").click(function(){
 
 //-------------------------Yelp API and functions--------------------------------------------------
 function yelpSearch(userSearch) {
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&categories=";
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=Orlando&categories=";
   console.log(yelpQueryURL);
   //start Ajax call  
   $.ajax({
@@ -52,16 +55,7 @@ function yelpSearch(userSearch) {
       cardRating.append(cardPrice);
       //attaching for condition??
     }
-  
-
-      
-
-
-
   });
-
-
-
 }
 
 //google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
@@ -98,6 +92,8 @@ $.ajax({
 }).then(function(response) {
 // console.log (response);
 });
+
+
 
 //commented out for future use
 //google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
