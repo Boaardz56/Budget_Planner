@@ -43,6 +43,17 @@ $("#submitBtn").click(function(){
   $(".grid-container").show();
 
 
+$("#submitBtn").click(function(){
+  $("#searchField").hide("scale-out-down");
+  $("#checkBox").hide("scale-out-down");
+  $("#submitBtn").hide("scale-out-down");
+  console.log("works")
+
+})
+
+
+
+
 
 })
 
