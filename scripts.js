@@ -9,7 +9,6 @@ $("#submitBtn").click(function(){
   $("#searchField").hide("scale-out-down");
   $("#checkBox").hide("scale-out-down");
   $("#submitBtn").hide("scale-out-down");
-
 //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
   //var cardHeader = $("h4");
   var userSearch = $("#searchField").val();
@@ -18,7 +17,8 @@ $("#submitBtn").click(function(){
 //Shows container with cards after search.
   $(".grid-container").show();
   yelpSearch(userSearch);
-  
+  window.location.href = "#cardResults"
+
 });
 
 
