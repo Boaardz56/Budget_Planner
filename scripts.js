@@ -32,6 +32,8 @@ $.ajax({
 
 }).then(function(response) {
 console.log ("yelp" , response);
+console.log("categories are " + response.businesses[2].categories[0].title);
+
 });
 
 //Button event for user's search.
@@ -67,6 +69,8 @@ function yelpSearch(userSearch) {
 
   }).then(function(response) {
       console.log ("yelp" , response);
+
+     
       //attaching Restaurant name to title of card
       var cardInput = $(".cell large-6");
       var name = $("#cardTitle");
@@ -83,11 +87,11 @@ function yelpSearch(userSearch) {
       //attaching for loop
       //for (var i=0; i<cardInput.length;i++) {
 
-      console.log(response.businesses.)
+       
         
   });
 
-
+  
 
 }
 
