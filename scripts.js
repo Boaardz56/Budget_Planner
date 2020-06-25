@@ -4,27 +4,31 @@ var cardsContainer = $(".grid-container").hide();
 
 $(document).ready(function(){
 
+
   //Button event for user's search.
+
+
+
+
+$(document).ready(function(){
+
+
+//Button event for user's search.
 $("#submitBtn").click(function(){
   $("#searchField").hide("scale-out-down");
   $("#checkBox").hide("scale-out-down");
   $("#submitBtn").hide("scale-out-down");
-  //storing User input into local storage
-  var userSearch = $("#searchField").val();
-  localStorage.setItem("userSearch",userSearch)
-
 //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
   //var cardHeader = $("h4");
-  // var userSearch = $("#searchField").val();
+  var userSearch = $("#searchField").val();
   //cardHeader.text(userSearch)
-  console.log(userSearch)
+  // console.log(userSearch)
 //Shows container with cards after search.
   $(".grid-container").show();
   yelpSearch(userSearch);
-  
+  window.location.href = "#cardResults"
+
 });
-
-
 
 //-------------------------Yelp API and functions--------------------------------------------------
 function yelpSearch(userSearch) {
@@ -61,17 +65,6 @@ function yelpSearch(userSearch) {
 //google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
 
 var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
-// console.log(queryURL);
-$.ajax({
-  url: queryURL,
-  method: "GET"
-  
-}).then(function(response) {
-// console.log (response);
-});
-
-//google api to get some restaurants with rating around a location
-var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
 // console.log(queryURL);
 $.ajax({
   url: queryURL,

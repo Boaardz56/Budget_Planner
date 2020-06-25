@@ -10,15 +10,15 @@
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <!---- SASS stylesheet added from Foundation---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
 
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-   
+
 </head>
 
 <body>
-    
+
 
 
     <!-----------------created top nav bar----------------------->
@@ -34,14 +34,68 @@
             </ul>
         </div>
     </div> -->
+
     <!-----------------------created initial search input page----------------->
     <div class="container" id="startingBtn">
         <div class="input-group input-group-rounded">
             <input class="input-group-field" id=searchField type="search">
             <div class="input-group-button">
                 <input type="submit" id="submitBtn" class="button secondary" value="Search">
+
+    <!-----------------created initial search input page------------>
+<!--     <div class="opening-page"> -->
+
+
+        <div class="container" id="startingBtn">
+            <div class="input-group input-group-rounded">
+                <input class="input-group-field" id=searchField type="search">
+                <div class="input-group-button">
+                    <input type="submit" id="submitBtn" class="button secondary" value="Search">
+                </div>
+
             </div>
-        </div>
+
+
+            <!-- DROPDOWN FOOD and entertainment -->
+
+            <div>
+
+
+                <ul class="dropdown menu" id="dropdownfood" data-dropdown-menu>
+                    <li class="is-dropdown-submenu-parent">
+                        <a href="#">Eat!</a>
+                        <ul class="menu">
+                            <li><a href="#">Asian</a></li>
+                            <li><a href="#">Asian Fusion</a></li>
+                            <li><a href="#">Vegan</a></li>
+                            <li><a href="#">Mexican</a></li>
+                            <li><a href="#">Sushi</a></li>
+                            <li><a href="#">BBQ</a></li>
+                            <li><a href="#">New American</a></li>
+                            <li><a href="#">Seafood</a></li>
+                        </ul>
+
+                    </li>
+                    <!-- </li> -->
+                </ul>
+
+                </li>
+                </ul>
+
+                <br>
+
+                <ul class="dropdown menu" id="dropdownentertain" data-dropdown-menu>
+                    <li class="is-dropdown-submenu-parent">
+                        <a href="#">Entertainment!</a>
+                        <ul class="menu">
+                            <li><a href="#">Item 1</a></li>
+                            <li><a href="#">Item 2</a></li>
+                            <li><a href="#">Item 3</a></li>
+                            <li><a href="#">Item 4</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                </ul>
 
      <!---------------------------- adding dropdown menu --------------------------------->
 
@@ -84,27 +138,19 @@
              </li>
             </ul>
 
-             <br>
-             
-             <ul class="dropdown menu" id="dropdownentertain" data-dropdown-menu>
-             <li class="is-dropdown-submenu-parent"> 
-             <a href="#">Entertainment!</a>
-             <ul class="menu">
-                 <li><a href="#">Item 1</a></li>
-                 <li><a href="#">Item 2</a></li>
-                 <li><a href="#">Item 3</a></li>
-                 <li><a href="#">Item 4</a></li>
-             </ul>
-          </li>
-          </ul>
-          </ul>
-        
-        </div>
+
+            </div>
 
 
-    </div>
 
     <!------------- Created a container for card displays. ---------------------->
+
+        </div>
+
+    </div>
+    <!-- Created a container for card displays. -->
+    <a href="#" id="cardResults"></a>
+
     <div class="grid-container">
         <div class="grid-x">
             <div class="cell large-6">
@@ -220,17 +266,22 @@
 
 
 
+
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-<!-- FAST CLICK CDN -->
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
+    <!-- FAST CLICK CDN -->
 
-<!-- FOUNDATION CDNS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.touch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
+
+    <!-- FOUNDATION CDNS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.touch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.nest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.core.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.dropdownMenu.min.js"></script>
@@ -238,9 +289,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.box.min.js"></script> -->
 
 
-<!-- APPLICATION JS -->
-<script src="scripts.js"></script>
-<script>$(document).foundation();</script>
+    <!-- APPLICATION JS -->
+    <script src="scripts.js"></script>
+    <script>$(document).foundation();</script>
 </body>
 
 </html>
