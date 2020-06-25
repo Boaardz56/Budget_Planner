@@ -49,7 +49,7 @@ $.ajax({
   method: "GET"
   
 }).then(function(response) {
-console.log (response);
+
 });
 
 map = new google.maps.Map(document.getElementById('map'), {
