@@ -45,7 +45,7 @@ $("#submitBtn").click(function(){
 
 //-------------------------Yelp API and functions--------------------------------------------------
 function yelpSearch(userSearch) {
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&categories=";
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=";
   console.log(yelpQueryURL);
   //start Ajax call  
   $.ajax({
@@ -173,6 +173,16 @@ $.ajax({
 }).then(function(response) {
 // console.log (response);
 });
+
+
+
+
+
+
+
+
+
+
 
 //commented out for future use
 //google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
