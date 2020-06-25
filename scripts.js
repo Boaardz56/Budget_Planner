@@ -82,7 +82,7 @@ function yelpSearch(userSearch) {
       //attaching for loop
       //for (var i=0; i<cardInput.length;i++) {
         
-  
+
 
       
 
