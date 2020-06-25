@@ -1,3 +1,6 @@
+//Global variable that hides the container with the cards on the opening page.
+var cardsContainer = $(".grid-container").hide();
+
 $(document).ready(function(){
 //google api to get some restaurants with rating around a location
 //google places AJAX call
