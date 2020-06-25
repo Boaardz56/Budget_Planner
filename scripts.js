@@ -39,6 +39,9 @@ $("#submitBtn").click(function(){
   var userSearch = $("#searchField").val();
   cardHeader.text(userSearch)
   console.log(userSearch)
+//Shows container with cards after search.
+  $(".grid-container").show();
+
 
 
 })
