@@ -20,8 +20,13 @@
 <body>
 
 
+
+    <!-----------------created top nav bar----------------------->
+    <div class="top-bar">
+
     <!-----------------created top nav bar (LEAVING OUT FOR NOW) -------------------------->
     <!-- <div class="top-bar">
+
         <div class="top-bar-right">
             <ul class="menu">
                 <li><input type="search" placeholder="Search" class="searchBar"></li>
@@ -30,7 +35,7 @@
         </div>
     </div> -->
     <!-----------------created initial search input page------------>
-    <div class="opening-page">
+<!--     <div class="opening-page"> -->
 
 
         <div class="container" id="startingBtn">
@@ -40,6 +45,7 @@
                     <input type="submit" id="submitBtn" class="button secondary" value="Search">
                 </div>
             </div>
+
 
             <!-- DROPDOWN FOOD and entertainment -->
 
@@ -82,9 +88,52 @@
                 </ul>
                 </ul>
 
+
+     <!-- DROPDOWN -->
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="is-dropdown-submenu-parent">   
+                <a href="#">Item 1</a>
+                <ul class="menu">
+                    <li><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul>
+
+<!-- DROPDOWN FOOD and entertainment -->
+
+     <div>
+
+        
+        <ul class="dropdown menu" id="dropdownfood" data-dropdown-menu>
+            <li class="is-dropdown-submenu-parent">   
+                <a href="#">Eat!</a>
+                <ul class="menu">
+                    <li><a href="#">Asian</a></li>
+                    <li><a href="#">Asian Fusion</a></li>
+                    <li><a href="#">Vegan</a></li>
+                    <li><a href="#">Mexican</a></li>
+                    <li><a href="#">Sushi</a></li>
+                    <li><a href="#">BBQ</a></li>
+                    <li><a href="#">New American</a></li>
+                    <li><a href="#">Seafood</a></li>                   
+                </ul>
+
+
+            </li>
+            <!-- </li> -->
+          </ul>
+
+
+             </li>
+            </ul>
+
+
             </div>
 
+
         </div>
+
     </div>
     <!-- Created a container for card displays. -->
     <a href="#" id="cardResults"></a>
