@@ -39,3 +39,20 @@ $.ajax({
 }).then(function(response) {
 console.log (response);
 });
+
+//google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
+
+// var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ&callback=myMap";
+// console.log(queryURL);
+// $.ajax({
+//   url: queryURL,
+//   method: "GET"
+  
+// }).then(function(response) {
+
+// });
+
+// map = new google.maps.Map(document.getElementById('map'), {
+//     center: {lat: -34.397, lng: 150.644},
+//     zoom: 8
+//   });
