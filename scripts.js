@@ -5,29 +5,56 @@ $("#submitBtn").click(function(){
   $("#searchField").hide();
   $("#checkBox").hide();
   $("#submitBtn").hide();
-//Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
-  var cardHeader = $("h4");
-  var userSearch = $("#searchField").val();
-  cardHeader.text(userSearch)
-  console.log(userSearch)
+  //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
+    // var cardHeader = $("h4");
+    var userSearch = $("#searchField").val();
+    // cardHeader.text(userSearch)
+    console.log(userSearch)
+    yelpSearch(userSearch);
+
+});
 
 
-})
-
-})
-
-var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=Orlando&categories=";
-console.log(queryURL);
-$.ajax({
-  url: queryURL,
+//-------------------------Yelp API and functions--------------------------------------------------
+function yelpSearch(userSearch) {
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=Orlando&categories=";
+  console.log(yelpQueryURL);
+  //start Ajax call  
+  $.ajax({
+  url: yelpQueryURL,
   method: "GET",
   headers:{
     Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
   }
 
-}).then(function(response) {
-console.log ("yelp" , response);
-});
+  }).then(function(response) {
+      console.log ("yelp" , response);
+      //attaching Restaurant name to title of card
+      var cardInput = $(".cell large-6");
+      var name = $("#cardTitle");
+      name.text(response.businesses[0].name);
+      // var foodPic = $("<img>");
+      // foodPic.attr(response.businesses[0].image_url);
+      // var cardSection = $("#cardSection");
+      // cardSection.attr('src', response.businesses[0].image_url);
+      var cardRating = $("#cardSection");
+      cardRating.text("Rating: " + response.businesses[0].rating);
+      var cardPrice = $("<p>");
+      cardPrice.text("Price: " + response.businesses[0].price);
+      cardRating.append(cardPrice);
+      //attaching for loop
+      for (var i=0; i<cardInput.length;i++) {
+        
+    }
+
+      
+
+
+
+  });
+
+
+}
 
 
 
@@ -72,3 +99,8 @@ console.log (response);
 //     zoom: 8
 //   });
 
+
+
+
+//CLOSING document tag!!!
+});
