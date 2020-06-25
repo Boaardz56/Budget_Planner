@@ -71,4 +71,9 @@ body::after{
     transform: scale(2);
 }
 
+.menu{
+  background: #333;
+
+}
+
   

@@ -13,11 +13,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
 
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+   
 </head>
 
 <body>
+    
+
     <!-----------------created top nav bar----------------------->
     <div class="top-bar">
         <div class="top-bar-right">
@@ -35,12 +37,28 @@
                 <input type="submit" id="submitBtn" class="button secondary" value="Search">
             </div>
         </div>
-        <form id="checkBox">
-            <input type="checkbox" value="food">
-            <label class="checkText"> Food</label>
-            <input type="checkbox" value="experience">
-            <label class=checkText> Experience</label>
-        </form>
+
+     <!-- DROPDOWN -->
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="is-dropdown-submenu-parent">   
+                <a href="#">Item 1</a>
+                <ul class="menu">
+                    <li><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul>
+            </li>
+            <!-- </li> -->
+          </ul>
+
+
+
+
+   
+
+
+
     </div>
 
     <!-- Created a container for card displays. -->
@@ -172,12 +190,27 @@
             </div>
         </div>
     </div>
+<!-- JQUERY -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+<!-- FAST CLICK CDN -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
+
+<!-- FOUNDATION CDNS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.touch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.nest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.dropdownMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.keyboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.box.min.js"></script> -->
 
 
-
-
-    <script src="scripts.js"></script>
-
+<!-- APPLICATION JS -->
+<script src="scripts.js"></script>
+<script>$(document).foundation();</script>
 </body>
 
 </html>
