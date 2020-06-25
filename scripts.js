@@ -12,6 +12,7 @@ $.ajax({
 console.log (response);
 });
   
+//
 
 
 var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=Orlando&categories=";
