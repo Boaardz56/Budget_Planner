@@ -74,6 +74,17 @@ body::after{
 .menu{
   background: #333;
 
+  width: 30%;
+  margin: auto;
+}
+
+#dropdownfood{
+/* float: left; */
+}
+
+#dropdownentertain{
+/* float:right; */
+
 }
 
   
