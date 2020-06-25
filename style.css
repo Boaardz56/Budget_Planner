@@ -70,4 +70,10 @@ body::after{
   input[type=checkbox] {
     transform: scale(2);
 }
+
+.menu{
+  background: #333;
+  
+
+}
   
