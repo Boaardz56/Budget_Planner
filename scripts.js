@@ -21,12 +21,11 @@ var businesses=[];
 //string that is compared to restaraunt categories
   var foodChoice="";
 
-
 //runs the generate list function which creates the list items used to select food type
 generateList();
 
 //Button event for user's search.
-$("#submitBtn").click(function(){
+  $("#submitBtn").click(function(){
   $("#searchField").hide("scale-out-down");
   $("#checkBox").hide("scale-out-down");
   $("#submitBtn").hide("scale-out-down");
@@ -41,7 +40,6 @@ $("#submitBtn").click(function(){
   yelpSearch(userSearch);
   
 });
-
 
 
 //-------------------------Yelp API and functions--------------------------------------------------
