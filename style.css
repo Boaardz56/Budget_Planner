@@ -12,8 +12,6 @@ body::after{
   content:"";
   }
 
-
-
 /* Added to make cards closer together. */
 .card{
     margin-bottom:5px;
@@ -26,10 +24,6 @@ body::after{
     padding-left:20px;
 }
 
-/* .top-bar{
-    z-index:-1;
-    opacity:0.35;
-} */
 .searchBar{
     margin-right: 0;
     padding: 2px;
@@ -41,55 +35,39 @@ body::after{
 .input-group-rounded .input-group-field {
     border-radius: 5000px 0 0 5000px;
     padding-left: 1rem;
+   
   }
-  .input-group-rounded .input-group-button .button {
+.input-group-rounded .input-group-button .button {
     border-radius: 0 5000px 5000px 0;
     font-size: 0.8rem;
   }
-  #startingBtn{
-      float: center;
+#startingBtn{
       margin: 200px;
   }
 /* centered checkbox under search bar */
-#checkBox{
-    float: center;
-    margin:50px;
-    margin-right: 100px;
-    text-align: center;
-    
-    
-}
-/* modify checkbox font and styling */
-  .checkText {
-      font-size: 30px;
-      font-style: italic;
-  }
-/* change size of check boxes */
-  input[type=checkbox] {
-    transform: scale(2);
-}
-
 .menu{
   background: #333;
   width: 30%;
-  margin: auto;
-}
+  }
 /* Stick search bar to top og page when scrolled down. */
 #searchContainer{
-width:100%;
 position:-webkit-sticky;
 position:sticky;
 top:0;
 }
 
 #dropdownfood{
-/* float: left; */
+float:left;
+margin-top: -16px;
+margin-left:20%;
+border-bottom-left-radius: 50px; 
 }
 
 #dropdownentertain{
-/* float:right; */
+  margin-top:-16px;
+  border-bottom-right-radius: 50px;
+  }
 
-}
 /* Added margin spacing to create seperate environment for card results. */
 /* .grid-container{
   margin-top: 40%;
