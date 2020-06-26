@@ -7,7 +7,6 @@ body{
 /* Adding a transparent background color for the elements in top of it to pop out, and aligning them to center. */
   #opening-page{
    
-  z-index:-1;
   background-color: rgba(0, 0, 0, 0.308);
   height:100vh;
   display: flex;
