@@ -198,7 +198,7 @@ function generateEntertainList(){
 /////////////////////function for yelp entertainment user search//////////////////////
 
 function yelpSearchEntertain(userSearch) {
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=arts";
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.toLowerCase();
   console.log(yelpQueryURL);
 //start Ajax call  
   $.ajax({
@@ -241,8 +241,6 @@ console.log(matchingEntertainPlace);
       
   });
 }
-
-
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
