@@ -4,7 +4,7 @@ var categoriesListFood=$('#dropdownfood');
 var businesses=[];
 
 //Global variable that hides the container with the cards on the opening page.
-  var cardsContainer = $(".grid-container").hide();
+  var cardsContainer = $("#card-page").hide();
 
   //the unordered list that holds drop down menu items
   var foodOptions = $("#foodOptions");
@@ -33,7 +33,7 @@ $("#submitBtn").click(function(){
   //cardHeader.text(userSearch)
   // console.log(userSearch)
 //Shows container with cards after search.
-  $(".grid-container").show();
+  $("#card-page").show();
   yelpSearch(userSearch);
   window.location.href = "#cardResults"
   });

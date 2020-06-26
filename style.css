@@ -4,7 +4,7 @@ body{
   background-repeat: no-repeat; 
   background-size: cover;
 }
-
+/* Adding a transparent background color for the elements in top of it to pop out, and aligning them to center. */
   #opening-page{
    
   z-index:-1;
@@ -19,12 +19,17 @@ body{
   #card-page{
     background-image: url("./assets/images/Dining.jpg");
     background-size: cover;
-    
+    background-color: rgba(0, 0, 0, 0.308);
+    height:100vh;
   }
+ 
+
+  
 /* Added to make cards closer together. */
 .card{
     margin-bottom:5px;
     height: 160px;
+  
   
 }
 /* Padding Added to cards to add some seperation between them. */
@@ -65,6 +70,8 @@ position:sticky;
 top:0;
 width:70%;
 }
+
+
 
 #dropdownfood{
 float:left;
