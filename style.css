@@ -1,7 +1,7 @@
-body{
+
     
    
-}
+
 body::after{
   background-image:url("./assets/images/Party.jpg"); 
   z-index:-1;
@@ -73,6 +73,7 @@ body::after{
 
 .menu{
   background: #333;
+
   width: 30%;
   margin: auto;
 }
@@ -85,5 +86,9 @@ body::after{
 /* float:right; */
 
 }
-
+/* Added margin spacing to create seperate environment for card results. */
+/* .grid-container{
+  margin-top: 40%;
+  margin-bottom: 100px;
+} */
   
