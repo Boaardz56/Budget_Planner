@@ -55,8 +55,6 @@ generateEntertainList();
   
 });
 
-
-
 //-------------------------Yelp API and functions--------------------------------------------------
 function yelpSearch(userSearch) {
   var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=";
@@ -140,8 +138,7 @@ $.ajax({
 // console.log (response);
 });
 
-
-///////////////////////////FOOD MATCHING FUNCTIONS/////////////////////////////////////////////////////
+///////////////////////////FOOD MATCHING FUNCTIONS///////////////////////////////////////////////////////////
 
 //here we generate list for food categories
 function generateFoodList(){
@@ -206,6 +203,35 @@ function generateEntertainList(){
       }
     }
 
+
+
+
+//function to compare restaraunt categories to search term
+  function resultCompareLoop(searchTerm){
+//loops through all 50 restaraunts
+    for(i=0; i<searchResponse.length; i++){
+//loops through categories in restaraunt
+      for(j=0; j<searchResponse[i].categories.length; j++){
+//if the selected term matches restaraunt categories        
+        if(searchResponse[i].categories[j].title == searchTerm){
+//push the matching restaraunt object into the matching food place array
+          matchingFoodPlace.push(searchResponse[i]);
+          console.log("added to array");
+        }
+
+// console.log(searchResponse[i].categories[j].title);
+      } 
+    }
+  }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+});
+
+
+
+
+///////////////STUFF WE CAN USE LATER MAYBE/////////////////////////////////////////////
+
 ////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
 
 // function generateEntertainSelect(){
@@ -260,34 +286,6 @@ function generateEntertainList(){
 
 
 
-//function to compare restaraunt categories to search term
-  function resultCompareLoop(searchTerm){
-//loops through all 50 restaraunts
-    for(i=0; i<searchResponse.length; i++){
-//loops through categories in restaraunt
-      for(j=0; j<searchResponse[i].categories.length; j++){
-//if the selected term matches restaraunt categories        
-        if(searchResponse[i].categories[j].title == searchTerm){
-//push the matching restaraunt object into the matching food place array
-          matchingFoodPlace.push(searchResponse[i]);
-          console.log("added to array");
-        }
-
-// console.log(searchResponse[i].categories[j].title);
-      } 
-    }
-  }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
 //commented out for future use
 //google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
 
@@ -313,4 +311,3 @@ function generateEntertainList(){
 
 
 
-});
