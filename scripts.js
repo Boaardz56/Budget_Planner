@@ -35,6 +35,7 @@ $("#submitBtn").click(function(){
 //Shows container with cards after search.
   $(".grid-container").show();
   yelpSearch(userSearch);
+  window.location.href = "#cardResults"
   });
 
 //-------------------------Yelp API and functions--------------------------------------------------
