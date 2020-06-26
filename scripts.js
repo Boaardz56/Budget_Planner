@@ -48,7 +48,7 @@ $("#submitBtn").click(function(){
 function yelpSearch(userSearch) {
   var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=";
   console.log(yelpQueryURL);
-  //start Ajax call  
+//start Ajax call  
   $.ajax({
   url: yelpQueryURL,
   method: "GET",
@@ -60,7 +60,7 @@ function yelpSearch(userSearch) {
       console.log ("yelp" , response);
 
      
-      //attaching Restaurant name to title of card
+//attaching Restaurant name to title of card
       var name = $("#cardTitle");
       name.text(response.businesses[0].name);
       // var foodPic = $("<img>");
@@ -131,12 +131,12 @@ $.ajax({
 function generateList(){
 //for loop that creates each list item with a tag
   for (i = 0; i < categoriesForChoose.length; i++) {
-    //creates list items so each has own id
+//creates list items so each has own id
         var listID = "foodType" + categoriesForChoose[i];
-    //creates list element
+//creates list element
         var li = document.createElement("li");
         var a = document.createElement("a");
-        //makes link clickable
+//makes link clickable
             a.setAttribute('href', "#");
 //adds on click function that sets food choice = innerhtml
             a.onclick=function(){
@@ -170,7 +170,7 @@ function generateList(){
           console.log("added to array");
         }
 
-        // console.log(searchResponse[i].categories[j].title);
+// console.log(searchResponse[i].categories[j].title);
       } 
     }
   
