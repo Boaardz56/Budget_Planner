@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-var categoriesListFood=$('#dropdownfood');
+// var categoriesListFood=$('#dropdownfood');
 var businesses=[];
 
 //Global variable that hides the container with the cards on the opening page.
@@ -10,6 +10,9 @@ var businesses=[];
   var foodOptions = $("#foodOptions");
 
   var entertainOptions = $('#entertainOptions');
+
+  var entertainSelects = $('#dropdownentertainselect')
+  var foodSelects = $('#dropdownfoodselect')
 
   //array of predetermined choices/can be edited
   var categoriesForChoose=["Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
@@ -32,6 +35,8 @@ var entertainChoice="";
 //runs the generate list function which creates the list items used to select food type
 generateFoodList();
 generateEntertainList();
+// generateEntertainSelect();
+// generateFoodSelect();
 
 //Button event for user's search.
   $("#submitBtn").click(function(){
@@ -170,7 +175,8 @@ function generateFoodList(){
 ////////////////////end food drop down////////////////////////
 
 ////////////////ENTERTAINMENT DROP DOWN////////////////
-//here we generate list for entertain categories
+// here we generate list for entertain categories
+
 function generateEntertainList(){
   //for loop that creates each list item with a tag
     for (i = 0; i < categoriesforFun.length; i++) {
@@ -199,7 +205,57 @@ function generateEntertainList(){
   
       }
     }
-////////////////////////////////////////////////////////////////
+
+////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
+
+// function generateEntertainSelect(){
+//   for (i = 0; i < categoriesforFun.length; i++) {
+//     var optionID = "entertainType" + categoriesforFun[i];
+//     var options = document.createElement("OPTION");
+
+//   options.onclick=function(){
+//    console.log("running the click function");
+//    entertainChoice = $(this)[0].innerHTML;
+   
+//    console.log($(this)[0].innerHTML);
+//     }
+//     //   //add ID to list item
+//       options.id = optionID;
+
+//      options.innerHTML=categoriesforFun[i];
+
+//      entertainSelects.append(options);
+//   }
+// }
+//////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+// function generateFoodSelect(){
+//   for (i = 0; i < categoriesForChoose.length; i++) {
+//     var optionID = "foodType" + categoriesForChoose[i];
+//     //console.log(optionID);
+//     var options = document.createElement("OPTION");
+//     //console.log(options);
+
+//   options.setAttribute('value', "#");
+
+//   options.onclick=function(){
+//     preventDefault ()
+
+//    console.log("running the click function");
+
+//    foodChoice = $(this)[0].innerHTML;
+
+//    //console.log($(this)[0].innerHTML);
+//     }
+//     //   //add ID to list item
+//       options.id = optionID;
+
+//      options.innerHTML=categoriesForChoose[i];
+
+//      foodSelects.append(options);
+//   }
+// }
+
+///////////////////////////////////////////////////////////////////////////////////
 
 
 
