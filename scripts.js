@@ -89,7 +89,9 @@ console.log(matchingFoodPlace);
   });
 }
 
-//google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
+//////////////////////////////////////////////GOOGLE MAPS API WE WANT//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//google maps api key AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
 
 var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
 // console.log(queryURL);
@@ -124,6 +126,8 @@ $.ajax({
 // console.log (response);
 });
 
+
+///////////////////////////FOOD MATCHING FUNCTIONS/////////////////////////////////////////////////////
 
 //here we generate list for food categories
 function generateList(){
@@ -171,10 +175,8 @@ function generateList(){
 // console.log(searchResponse[i].categories[j].title);
       } 
     }
-  
-  
   }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
