@@ -56,6 +56,7 @@ generateEntertainList();
 });
 
 
+
 //-------------------------Yelp API and functions--------------------------------------------------
 function yelpSearch(userSearch) {
   var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=";
@@ -86,7 +87,6 @@ function yelpSearch(userSearch) {
       cardRating.append(cardPrice);
       //attaching for loop
       //for (var i=0; i<cardInput.length;i++) {
-
 
 
 //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
