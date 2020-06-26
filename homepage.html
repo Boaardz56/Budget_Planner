@@ -14,8 +14,8 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-   
-</head>
+
+   </head>
 
 <body>
 
@@ -28,74 +28,55 @@
             </ul>
         </div>
     </div> -->
-
     <!-----------------created initial search input page------------>
     <!--     <div class="opening-page"> -->
-  
-    <div class="container" id="startingBtn">
-        <div class="input-group input-group-rounded">
-            <input class="input-group-field" id=searchField type="search">
-            <div class="input-group-button">
-                <input type="submit" id="submitBtn" class="button secondary" value="Search">
-            </div>
-        </div>
+
+    <div id="searchContainer">
+        <div class="container" id="startingBtn">
+            <div class="input-group input-group-rounded">
+                <input class="input-group-field" id=searchField type="search">
+                <div class="input-group-button">
+                    <input type="submit" id="submitBtn" class="button secondary" value="Search">
+                </div>
+          </div>
 
 
-        <!-- DROPDOWN FOOD and entertainment -->
+            <!-- DROPDOWN FOOD and entertainment -->
+           
+            <ul class="dropdown menu" id="dropdownfood" data-dropdown-menu>
+                <li class="is-dropdown-submenu-parent">
+                    <a href="#">Eat!</a>
+                    <ul class="menu">
+                        <li><a href="#">Asian</a></li>
+                        <li><a href="#">Asian Fusion</a></li>
+                        <li><a href="#">Vegan</a></li>
+                        <li><a href="#">Mexican</a></li>
+                        <li><a href="#">Sushi</a></li>
+                        <li><a href="#">BBQ</a></li>
+                        <li><a href="#">New American</a></li>
+                        <li><a href="#">Seafood</a></li>
+                    </ul>
+                </li>
+            </ul>
 
-        <ul class="dropdown menu" id="dropdownfood" data-dropdown-menu>
-            <li class="is-dropdown-submenu-parent">
-                <a href="#">Eat!</a>
-                <ul class="menu" id="foodOptions">
-                    <!-- <li><a href="#"></a>Asian</a></li>
-                    <li><a href="#">Asian Fusion</a></li>
-                    <li><a href="#">Vegan</a></li>
-                    <li><a href="#">Mexican</a></li>
-                    <li><a href="#">Sushi</a></li>
-                    <li><a href="#">BBQ</a></li>
-                    <li><a href="#">New American</a></li>
-                    <li><a href="#">Seafood</a></li>                    
-                </ul>
-            </li>
-        </ul>
-        <br>
-
-        <!---------------------------- adding dropdown menu --------------------------------->
-        <ul class="dropdown menu" id="dropdownentertain" data-dropdown-menu>
-            <li class="is-dropdown-submenu-parent">
-                <a href="#">Entertainment!</a>
-                <ul class="menu">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
-                    <li><a href="#">Item 4</a></li>
-                </ul>
-            </li>
-          </ul>
-
-             <br>
-             
-             <ul class="dropdown menu" id="dropdownentertain" data-dropdown-menu>
-             <li class="is-dropdown-submenu-parent"> 
-             <a href="#">Entertainment!</a>
-             <ul class="menu">
-                 <li><a href="#">Item 1</a></li>
-                 <li><a href="#">Item 2</a></li>
-                 <li><a href="#">Item 3</a></li>
-                 <li><a href="#">Item 4</a></li>
-             </ul>
-          </li>
-          </ul>
-          </ul>       
+            <!---------------------------- adding dropdown menu --------------------------------->
+            <ul class="dropdown menu" id="dropdownentertain" data-dropdown-menu>
+                <li class="is-dropdown-submenu-parent">
+                    <a href="#">Entertainment!</a>
+                    <ul class="menu">
+                        <li><a href="#">Item 1</a></li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
+                        <li><a href="#">Item 4</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 
-    <!-- Created a container for card displays. -->
+  <!-- Created a container for card displays. -->
     <a href="#" id="cardResults"></a>
-
-
-    <!-- Created a container for card displays. -->
-    <div class="grid-container">
+  <div class="grid-container">
         <div class="grid-x">
             <div class="cell large-6">
                 <div class="card">
@@ -238,6 +219,7 @@
 <!-- APPLICATION JS -->
 <script src="scripts.js"></script>
 <script>$(document).foundation();</script>
+
 </body>
 
 </html>
