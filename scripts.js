@@ -9,8 +9,13 @@ var businesses=[];
   //the unordered list that holds drop down menu items
   var foodOptions = $("#foodOptions");
 
+  var entertainOptions = $('#entertainOptions');
+
   //array of predetermined choices/can be edited
   var categoriesForChoose=["Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
+
+  //array of predetermined choices for entertainment
+  var categoriesforFun=["Bars", "Cinema", "Art Galleries", "Casinos", "Museums", "Paint & Sip", "Performing Arts"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace=[];
@@ -21,8 +26,12 @@ var businesses=[];
 //string that is compared to restaraunt categories
   var foodChoice="";
 
+//string that is compared to entertainment categories
+var entertainChoice="";
+
 //runs the generate list function which creates the list items used to select food type
-generateList();
+generateFoodList();
+generateEntertainList();
 
 //Button event for user's search.
   $("#submitBtn").click(function(){
@@ -130,7 +139,7 @@ $.ajax({
 ///////////////////////////FOOD MATCHING FUNCTIONS/////////////////////////////////////////////////////
 
 //here we generate list for food categories
-function generateList(){
+function generateFoodList(){
 //for loop that creates each list item with a tag
   for (i = 0; i < categoriesForChoose.length; i++) {
 //creates list items so each has own id
@@ -158,6 +167,42 @@ function generateList(){
 
     }
   }
+////////////////////end food drop down////////////////////////
+
+////////////////ENTERTAINMENT DROP DOWN////////////////
+//here we generate list for entertain categories
+function generateEntertainList(){
+  //for loop that creates each list item with a tag
+    for (i = 0; i < categoriesforFun.length; i++) {
+  //creates list items so each has own id
+          var listID = "entertainType" + categoriesforFun[i];
+  //creates list element
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+  //makes link clickable
+              a.setAttribute('href', "#");
+  //adds on click function that sets food choice = innerhtml
+              a.onclick=function(){
+                console.log("running the click function");
+                 entertainChoice = $(this)[0].innerHTML;
+                console.log($(this)[0].innerHTML);
+              }
+             
+  //add ID to list item
+          li.id = listID;
+  //sets innerhtml of a tag so text is displayed
+          a.innerHTML=categoriesforFun[i];
+  //append a tag to list item
+      li.appendChild(a);
+  //append list item to unordered list
+          entertainOptions.append(li);
+  
+      }
+    }
+////////////////////////////////////////////////////////////////
+
+
+
 
 //function to compare restaraunt categories to search term
   function resultCompareLoop(searchTerm){
