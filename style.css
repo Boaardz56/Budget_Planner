@@ -71,9 +71,15 @@ body::after{
 
 .menu{
   background: #333;
-
   width: 30%;
   margin: auto;
+}
+/* Stick search bar to top og page when scrolled down. */
+#searchContainer{
+width:100%;
+position:-webkit-sticky;
+position:sticky;
+top:0;
 }
 
 #dropdownfood{
