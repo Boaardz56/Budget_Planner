@@ -4,7 +4,7 @@ $(document).ready(function(){
 var businesses=[];
 
 //Global variable that hides the container with the cards on the opening page.
-  var cardsContainer = $(".grid-container").hide();
+  var cardsContainer = $("#card-page").hide();
 
   //the unordered list that holds drop down menu items
   var foodOptions = $("#foodOptions");
@@ -50,12 +50,18 @@ generateEntertainList();
   //cardHeader.text(userSearch)
   // console.log(userSearch)
 //Shows container with cards after search.
-  $(".grid-container").show();
+  $("#card-page").show();
   yelpSearch(userSearch);
-  
-});
+
 
 //-------------------------Yelp API and functions for food--------------------------------------------------
+
+  window.location.href = "#cardResults"
+  });
+
+
+//-------------------------Yelp API and functions--------------------------------------------------
+
 function yelpSearch(userSearch) {
   var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
   console.log(yelpQueryURL);
