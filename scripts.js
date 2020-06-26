@@ -18,7 +18,7 @@ var businesses=[];
   var categoriesForChoose=["Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-  var categoriesforFun=["Bars", "Cinema", "Art Galleries", "Casinos", "Museums", "Paint & Sip", "Performing Arts"]
+  var categoriesforFun=["Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace=[];
@@ -65,7 +65,8 @@ generateEntertainList();
 //-------------------------Yelp API and functions--------------------------------------------------
 
 function yelpSearch(userSearch) {
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
+  String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.alltrim().toLowerCase();
   console.log(yelpQueryURL);
 //start Ajax call  
   $.ajax({
@@ -198,7 +199,11 @@ function generateEntertainList(){
 /////////////////////function for yelp entertainment user search//////////////////////
 
 function yelpSearchEntertain(userSearch) {
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.toLowerCase();
+  String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.alltrim().toLowerCase();
+
+  console.log(entertainChoice.alltrim().toLowerCase());
   console.log(yelpQueryURL);
 //start Ajax call  
   $.ajax({
@@ -246,7 +251,7 @@ console.log(matchingEntertainPlace);
 
 /////function to compare restaraunt categories to search term/////
 function resultCompareLoopEntertain(searchTerm){
-  console.log("search term is " + searchTerm)
+  // console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
 for(i=0; i<searchResponseEntertain.length; i++){
 //loops through categories in restaraunt
@@ -319,7 +324,6 @@ $.ajax({
 });
 
 });
-
 
 
 
