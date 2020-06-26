@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    
 
     <!-----------------created top nav bar (LEAVING OUT FOR NOW) -------------------------->
     <!-- <div class="top-bar">
@@ -29,7 +28,10 @@
             </ul>
         </div>
     </div> -->
+
     <!-----------------created initial search input page------------>
+    <!--     <div class="opening-page"> -->
+  
     <div class="container" id="startingBtn">
         <div class="input-group input-group-rounded">
             <input class="input-group-field" id=searchField type="search">
@@ -38,13 +40,11 @@
             </div>
         </div>
 
-<!-- DROPDOWN FOOD and entertainment -->
 
-     <div>
+        <!-- DROPDOWN FOOD and entertainment -->
 
-        
         <ul class="dropdown menu" id="dropdownfood" data-dropdown-menu>
-            <li class="is-dropdown-submenu-parent">   
+            <li class="is-dropdown-submenu-parent">
                 <a href="#">Eat!</a>
                 <ul class="menu" id="foodOptions">
                     <!-- <li><a href="#"></a>Asian</a></li>
@@ -54,15 +54,24 @@
                     <li><a href="#">Sushi</a></li>
                     <li><a href="#">BBQ</a></li>
                     <li><a href="#">New American</a></li>
-                    <li><a href="#">Seafood</a></li>                    -->
+                    <li><a href="#">Seafood</a></li>                    
                 </ul>
-
             </li>
-            <!-- </li> -->
-          </ul>
+        </ul>
+        <br>
 
-             </li>
-            </ul>
+        <!---------------------------- adding dropdown menu --------------------------------->
+        <ul class="dropdown menu" id="dropdownentertain" data-dropdown-menu>
+            <li class="is-dropdown-submenu-parent">
+                <a href="#">Entertainment!</a>
+                <ul class="menu">
+                    <li><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul>
+            </li>
+          </ul>
 
              <br>
              
@@ -77,11 +86,13 @@
              </ul>
           </li>
           </ul>
-          </ul>
-        
+          </ul>       
         </div>
-
     </div>
+
+    <!-- Created a container for card displays. -->
+    <a href="#" id="cardResults"></a>
+
 
     <!-- Created a container for card displays. -->
     <div class="grid-container">
@@ -195,6 +206,7 @@
                     <div class="card-section">
                         <h4>This is a card.</h4>
                         <p>It has an easy to override visual style, and is appropriately subdued.</p>
+
                     </div>
                 </div>
             </div>
@@ -212,23 +224,16 @@
             </div>
         </div>
     </div>
+
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 <!-- FAST CLICK CDN -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
 
 <!-- FOUNDATION CDNS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.touch.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.nest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.core.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.dropdownMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.keyboard.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/plugins/foundation.util.box.min.js"></script> -->
-
 
 <!-- APPLICATION JS -->
 <script src="scripts.js"></script>

@@ -21,7 +21,6 @@ var businesses=[];
 //string that is compared to restaraunt categories
   var foodChoice="";
 
-
 //runs the generate list function which creates the list items used to select food type
 generateList();
 
