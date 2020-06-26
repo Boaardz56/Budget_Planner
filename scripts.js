@@ -5,12 +5,6 @@ var cardsContainer = $(".grid-container").hide();
 $(document).ready(function(){
 
 
-  //Button event for user's search.
-
-
-
-
-$(document).ready(function(){
 
 
 //Button event for user's search.
