@@ -23,8 +23,12 @@ var businesses=[];
   //empty array that holds matching places with food category
   var matchingFoodPlace=[];
 
+  var matchingEntertainPlace=[];
+
 //empty array that holds the whole 50 restaraunts in area
   var searchResponse = [];
+
+  var searchResponseEntertain= [];
 
 //string that is compared to restaraunt categories
   var foodChoice="";
@@ -49,6 +53,7 @@ generateEntertainList();
 //Shows container with cards after search.
   $("#card-page").show();
   yelpSearch(userSearch);
+  yelpSearchEntertain(userSearch);
 
 
 //-------------------------Yelp API and functions for food--------------------------------------------------
@@ -136,6 +141,28 @@ function generateFoodList(){
   }
 ////////////////////end food drop down////////////////////////
 
+////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
+
+/////function to compare restaraunt categories to search term/////
+  function resultCompareLoop(searchTerm){
+      console.log("search term is " + searchTerm)
+//loops through all 50 restaraunts
+    for(i=0; i<searchResponse.length; i++){
+//loops through categories in restaraunt
+      for(j=0; j<searchResponse[i].categories.length; j++){
+//if the selected term matches restaraunt categories        
+        if(searchResponse[i].categories[j].title == searchTerm){
+//push the matching restaraunt object into the matching food place array
+          matchingFoodPlace.push(searchResponse[i]);
+          console.log("added to array");
+        }
+
+// console.log(searchResponse[i].categories[j].title);
+      } 
+    }
+  }
+////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
+
 ////////////////ENTERTAINMENT DROP DOWN////////////////
 // here we generate list for entertain categories
 
@@ -167,30 +194,76 @@ function generateEntertainList(){
   
       }
     }
+
+/////////////////////function for yelp entertainment user search//////////////////////
+
+function yelpSearchEntertain(userSearch) {
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=arts";
+  console.log(yelpQueryURL);
+//start Ajax call  
+  $.ajax({
+  url: yelpQueryURL,
+  method: "GET",
+  headers:{
+    Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+  }
+
+  }).then(function(response) {
+      console.log ("yelp entertain" , response);
+
+     
+//attaching Restaurant name to title of card
+      // var name = $("#cardTitle");
+      // name.text(response.businesses[0].name);
+      // var foodPic = $("<img>");
+      // foodPic.attr(response.businesses[0].image_url);
+      // var cardSection = $("#cardSection");
+      // cardSection.attr('src', response.businesses[0].image_url);
+      // var cardRating = $("#cardSection");
+      // cardRating.text("Rating: " + response.businesses[0].rating);
+      // var cardPrice = $("<p>");
+      // cardPrice.text("Price: " + response.businesses[0].price);
+      // cardRating.append(cardPrice);
+      //attaching for loop
+      //for (var i=0; i<cardInput.length;i++) {
+
+
+//for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
+       console.log(response.businesses.length);
+           for(i=0; i<response.businesses.length; i++ ){
+              searchResponseEntertain.push(response.businesses[i]);
+              // console.log("search response " + JSON.stringify(searchResponse[i]))
+           }
+      
+//runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
+resultCompareLoopEntertain(entertainChoice);
+console.log(matchingEntertainPlace);
+      
+  });
+}
+
+
+
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
 /////function to compare restaraunt categories to search term/////
-  function resultCompareLoop(searchTerm){
-      console.log("search term is " + searchTerm)
+function resultCompareLoopEntertain(searchTerm){
+  console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
-    for(i=0; i<searchResponse.length; i++){
+for(i=0; i<searchResponseEntertain.length; i++){
 //loops through categories in restaraunt
-      for(j=0; j<searchResponse[i].categories.length; j++){
+  for(j=0; j<searchResponseEntertain[i].categories.length; j++){
 //if the selected term matches restaraunt categories        
-        if(searchResponse[i].categories[j].title == searchTerm){
+    if(searchResponseEntertain[i].categories[j].title == searchTerm){
 //push the matching restaraunt object into the matching food place array
-          matchingFoodPlace.push(searchResponse[i]);
-          console.log("added to array");
-        }
+      matchingEntertainPlace.push(searchResponseEntertain[i]);
+      console.log("added to array");
+    }
 
 // console.log(searchResponse[i].categories[j].title);
-      } 
-    }
-  }
-////////////////////////////////END YELP STUFF////////////////////////////////////////////////////////////////////////////////
-
-
-
+  } 
+}
+}
 
 
 
