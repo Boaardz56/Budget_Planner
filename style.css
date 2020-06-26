@@ -1,17 +1,26 @@
 
+body{
+  background-image:url("./assets/images/Party.jpg");
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
 
-body::after{
-  background-image:url("./assets/images/Party.jpg"); 
+  #opening-page{
+   
   z-index:-1;
-  opacity:0.8;
-  position: absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  content:"";
+  background-color: rgba(0, 0, 0, 0.308);
+  height:100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   }
 
+  #card-page{
+    background-image: url("./assets/images/Dining.jpg");
+    background-size: cover;
+    
+  }
 /* Added to make cards closer together. */
 .card{
     margin-bottom:5px;
@@ -42,7 +51,7 @@ body::after{
     font-size: 0.8rem;
   }
 #startingBtn{
-      margin: 200px;
+  
   }
 /* centered checkbox under search bar */
 .menu{
@@ -54,6 +63,7 @@ body::after{
 position:-webkit-sticky;
 position:sticky;
 top:0;
+width:70%;
 }
 
 #dropdownfood{
