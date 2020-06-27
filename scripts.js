@@ -47,6 +47,7 @@ var inputSearchLoc = false;
 generateEntertainSelect();
 generateFoodSelect();
 buttonEnableDisable();
+
 // checkforInput();
 
 
@@ -65,6 +66,16 @@ function buttonEnableDisable(){
   console.log(searchFoodSelected)
   console.log(inputSearchLoc)
 }
+
+
+
+//runs the generate list function which creates the list items used to select food type
+// generateFoodList();
+// generateEntertainList();
+//generateEntertainSelect();
+//generateFoodSelect();
+
+
 
 
 //Button event for user's search.
@@ -174,6 +185,7 @@ function generateFoodSelect(){
       options.id = optionID;
      options.innerHTML=categoriesForChoose[i];
      foodSelects.append(options);
+
   }
   document.getElementById('dropdownfoodselect').onchange=function(){
     // console.log(this.value)
@@ -184,6 +196,7 @@ function generateFoodSelect(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
+
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
@@ -206,6 +219,7 @@ function generateFoodSelect(){
     }
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
+
 
 /////////////////////function for yelp entertainment user search//////////////////////
 
@@ -287,6 +301,7 @@ function generateEntertainSelect(){
     var optionID = "entertainType" + categoriesforFun[i];
     var options = document.createElement("OPTION");
       options.id = optionID;
+
      options.innerHTML=categoriesforFun[i];
      entertainSelects.append(options);
   }
@@ -298,7 +313,7 @@ function generateEntertainSelect(){
   }
 }
 
-
+///////////////////////////////////////////////////////////////////////////////////
 
 
 
