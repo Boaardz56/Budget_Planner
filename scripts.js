@@ -36,11 +36,35 @@ $(document).ready(function () {
 //string that is compared to entertainment categories
 var entertainChoice="";
 
+var searchFoodSelected = false;
+var searchFunSelected = false;
+
+var inputSearchLoc = false;
+
+
+//runs the generate list function which creates the list items used to select food type
+
+generateEntertainSelect();
+generateFoodSelect();
+buttonEnableDisable();
+
+
+function buttonEnableDisable(){
+  document.getElementById('submitBtn').disabled=true;
+  if(searchFunSelected===true && searchFoodSelected ===true){
+    
+    document.getElementById('submitBtn').disabled=false;
+ 
+  }
+  console.log(searchFunSelected)
+}
+
 //runs the generate list function which creates the list items used to select food type
 // generateFoodList();
 // generateEntertainList();
 generateEntertainSelect();
 generateFoodSelect();
+
 
 
 //Button event for user's search.
@@ -49,7 +73,6 @@ generateFoodSelect();
 //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
   //var cardHeader = $("h4");
   var userSearch = $("#searchField").val();
-
   //cardHeader.text(userSearch)
   // console.log(userSearch)
 //Shows container with cards after search.
@@ -134,6 +157,27 @@ function yelpSearch(userSearch) {
       }).then(function (response) {
         console.log("bing", response);
 
+////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+function generateFoodSelect(){
+  for (i = 0; i < categoriesForChoose.length; i++) {
+    var optionID = "foodType" + categoriesForChoose[i];
+    //console.log(optionID);
+    var options = document.createElement("OPTION");
+    //console.log(options);
+      options.id = optionID;
+     options.innerHTML=categoriesForChoose[i];
+     foodSelects.append(options);
+  }
+  document.getElementById('dropdownfoodselect').onchange=function(){
+    // console.log(this.value)
+    foodChoice=this.value;
+    searchFoodSelected = true;
+    buttonEnableDisable();
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
 
       })
 
@@ -141,44 +185,11 @@ function yelpSearch(userSearch) {
   }
   //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
 
-
-  ///////////////////////////FOOD MATCHING FUNCTIONS///////////////////////////////////////////////////////////
-
-  //here we generate list for food categories
-  function generateFoodList() {
-    //for loop that creates each list item with a tag
-    for (i = 0; i < categoriesForChoose.length; i++) {
-      //creates list items so each has own id
-      var listID = "foodType" + categoriesForChoose[i];
-      //creates list element
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      //makes link clickable
-      a.setAttribute('href', "#");
-      //adds on click function that sets food choice = innerhtml
-      a.onclick = function () {
-        console.log("running the click function");
-        foodChoice = $(this)[0].innerHTML;
-        console.log($(this)[0].innerHTML);
-      }
-
-      //add ID to list item
-      li.id = listID;
-      //sets innerhtml of a tag so text is displayed
-      a.innerHTML = categoriesForChoose[i];
-      //append a tag to list item
-      li.appendChild(a);
-      //append list item to unordered list
-      foodOptions.append(li);
-    }
-  }
-  ////////////////////end food drop down////////////////////////
-
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
 /////function to compare restaraunt categories to search term/////
   function resultCompareLoop(searchTerm){
-      console.log("search term is " + searchTerm)
+      // console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
     for(i=0; i<searchResponse.length; i++){
 //loops through categories in restaraunt
@@ -187,7 +198,7 @@ function yelpSearch(userSearch) {
         if(searchResponse[i].categories[j].title == searchTerm){
 //push the matching restaraunt object into the matching food place array
           matchingFoodPlace.push(searchResponse[i]);
-          console.log("added to array");
+          // console.log("added to array");
         }
 
 // console.log(searchResponse[i].categories[j].title);
@@ -196,37 +207,7 @@ function yelpSearch(userSearch) {
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
 
-////////////////ENTERTAINMENT DROP DOWN////////////////
-// here we generate list for entertain categories
 
-
-  function generateEntertainList() {
-    //for loop that creates each list item with a tag
-    for (i = 0; i < categoriesforFun.length; i++) {
-      //creates list items so each has own id
-      var listID = "entertainType" + categoriesforFun[i];
-      //creates list element
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      //makes link clickable
-      a.setAttribute('href', "#");
-      //adds on click function that sets food choice = innerhtml
-      a.onclick = function () {
-        console.log("running the click function");
-        entertainChoice = $(this)[0].innerHTML;
-        console.log($(this)[0].innerHTML);
-      }
-
-      //add ID to list item
-      li.id = listID;
-      //sets innerhtml of a tag so text is displayed
-      a.innerHTML = categoriesforFun[i];
-      //append a tag to list item
-      li.appendChild(a);
-      //append list item to unordered list
-      entertainOptions.append(li);
-
-    }
 
 /////////////////////function for yelp entertainment user search//////////////////////
 
@@ -283,7 +264,6 @@ console.log(matchingEntertainPlace);
 
 /////function to compare restaraunt categories to search term/////
 function resultCompareLoopEntertain(searchTerm){
-  // console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
 console.log("this is entertainchoice" + entertainChoice)
 console.log ("this is search term" + searchTerm)
@@ -296,9 +276,6 @@ for(i=0; i<searchResponseEntertain.length; i++){
       matchingEntertainPlace.push(searchResponseEntertain[i]);
       console.log("added to array");
     }
-
-
-// console.log(searchResponse[i].categories[j].title);
   } 
 }
 }
@@ -314,6 +291,20 @@ function generateEntertainSelect(){
       options.id = optionID;
 
      options.innerHTML=categoriesforFun[i];
+     entertainSelects.append(options);
+  }
+  document.getElementById('dropdownentertainselect').onchange=function(){
+    console.log(this.value)
+    entertainChoice=this.value;
+    searchFunSelected=true;
+    buttonEnableDisable();
+  }
+}
+
+
+
+     options.innerHTML=categoriesforFun[i];
+
 
      entertainSelects.append(options);
   }
