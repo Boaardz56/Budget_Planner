@@ -117,20 +117,22 @@ function yelpSearch(userSearch) {
       console.log(lat, lon)
 
       //attaching Restaurant name to title of card
-      var name = $("#cardTitle");
-      name.text(response.businesses[0].name);
+      for(i=0; i < 5; i++){
+      var name = $('#cardTitle' + i);
+      name.text(response.businesses[i].name);
       // var foodPic = $("<img>");
       // foodPic.attr(response.businesses[0].image_url);
       // var cardSection = $("#cardSection");
       // cardSection.attr('src', response.businesses[0].image_url);
 
-      var cardRating = $("#cardSection");
-      cardRating.text("Rating: " + response.businesses[0].rating);
+      var cardRating = $('#cardSection' + i);
+      cardRating.text("Rating: " + response.businesses[i].rating);
       var cardPrice = $("<p>");
-      cardPrice.text("Price: " + response.businesses[0].price);
+      cardPrice.text("Price: " + response.businesses[i].price);
       cardRating.append(cardPrice);
       //attaching for loop
       //for (var i=0; i<cardInput.length;i++) {
+      }
 
 
       //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
@@ -221,20 +223,23 @@ function yelpSearchEntertain(userSearch) {
       console.log ("yelp entertain" , response);
 
      
-//attaching Restaurant name to title of card
-      // var name = $("#cardTitle");
-      // name.text(response.businesses[0].name);
-      // var foodPic = $("<img>");
-      // foodPic.attr(response.businesses[0].image_url);
-      // var cardSection = $("#cardSection");
-      // cardSection.attr('src', response.businesses[0].image_url);
-      // var cardRating = $("#cardSection");
-      // cardRating.text("Rating: " + response.businesses[0].rating);
-      // var cardPrice = $("<p>");
-      // cardPrice.text("Price: " + response.businesses[0].price);
-      // cardRating.append(cardPrice);
-      //attaching for loop
-      //for (var i=0; i<cardInput.length;i++) {
+   //attaching Restaurant name to title of card
+   for(i=5; i < 10; i++){
+    var name = $('#cardTitle' + i);
+    name.text(response.businesses[i-5].name);
+    // var foodPic = $("<img>");
+    // foodPic.attr(response.businesses[0].image_url);
+    // var cardSection = $("#cardSection");
+    // cardSection.attr('src', response.businesses[0].image_url);
+
+    var cardRating = $('#cardSection' + i);
+    cardRating.text("Rating: " + response.businesses[i-5].rating);
+    var cardPrice = $("<p>");
+    cardPrice.text("Price: " + response.businesses[i-5].price);
+    cardRating.append(cardPrice);
+    //attaching for loop
+    //for (var i=0; i<cardInput.length;i++) {
+    }
 
 
 //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
