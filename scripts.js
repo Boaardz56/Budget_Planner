@@ -46,16 +46,21 @@ $(document).ready(function () {
 
   //Button event for user's search.
   $("#submitBtn").click(function () {
-
-//Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
-  //var cardHeader = $("h4");
-  var userSearch = $("#searchField").val();
+   //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
+    //var cardHeader = $("h4");
+    var userSearch = $("#searchField").val();
+    if (userSearch === "") {
+      return;
+    }
   //cardHeader.text(userSearch)
   // console.log(userSearch)
 //Shows container with cards after search.
   $("#card-page").show();
   yelpSearch(userSearch);
   yelpSearchEntertain(userSearch);
+  window.location.href = "#cardResults"
+  });  
+
 
 
     //-------------------------Yelp API and functions for food--------------------------------------------------
@@ -63,6 +68,17 @@ $(document).ready(function () {
     window.location.href = "#cardResults"
   });
 
+
+  function yelpSearch(userSearch) {
+    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
+    console.log(yelpQueryURL);
+    //start Ajax call  
+    $.ajax({
+      url: yelpQueryURL,
+      method: "GET",
+      headers: {
+        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+      }
 
   //-------------------------Yelp API and functions--------------------------------------------------
 
@@ -83,7 +99,6 @@ function yelpSearch(userSearch) {
       var lon = response.region.center.longitude;
       console.log("yelp", response);
       console.log(lat, lon)
-
 
       //attaching Restaurant name to title of card
       var name = $("#cardTitle");
@@ -127,8 +142,6 @@ function yelpSearch(userSearch) {
     });
   }
   //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
-
-
 
 
   ///////////////////////////FOOD MATCHING FUNCTIONS///////////////////////////////////////////////////////////
@@ -283,6 +296,7 @@ for(i=0; i<searchResponseEntertain.length; i++){
       matchingEntertainPlace.push(searchResponseEntertain[i]);
       console.log("added to array");
     }
+
 
 // console.log(searchResponse[i].categories[j].title);
   } 
