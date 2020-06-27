@@ -18,16 +18,22 @@ $(document).ready(function () {
   var categoriesForChoose = ["Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-  var categoriesforFun = ["Bars", "Cinema", "Art Galleries", "Casinos", "Museums", "Paint & Sip", "Performing Arts"]
+
+  var categoriesforFun=["Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
+
 
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
 
-  //empty array that holds the whole 50 restaraunts in area
+  var matchingEntertainPlace=[];
+
+//empty array that holds the whole 50 restaraunts in area
   var searchResponse = [];
 
-  //string that is compared to restaraunt categories
-  var foodChoice = "";
+  var searchResponseEntertain= [];
+
+//string that is compared to restaraunt categories
+  var foodChoice="";
 
   //string that is compared to entertainment categories
   var entertainChoice = "";
@@ -41,14 +47,15 @@ $(document).ready(function () {
   //Button event for user's search.
   $("#submitBtn").click(function () {
 
-    //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
-    //var cardHeader = $("h4");
-    var userSearch = $("#searchField").val();
-    //cardHeader.text(userSearch)
-    // console.log(userSearch)
-    //Shows container with cards after search.
-    $("#card-page").show();
-    yelpSearch(userSearch);
+//Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
+  //var cardHeader = $("h4");
+  var userSearch = $("#searchField").val();
+  //cardHeader.text(userSearch)
+  // console.log(userSearch)
+//Shows container with cards after search.
+  $("#card-page").show();
+  yelpSearch(userSearch);
+  yelpSearchEntertain(userSearch);
 
 
     //-------------------------Yelp API and functions for food--------------------------------------------------
@@ -59,16 +66,17 @@ $(document).ready(function () {
 
   //-------------------------Yelp API and functions--------------------------------------------------
 
-  function yelpSearch(userSearch) {
-    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
-    console.log(yelpQueryURL);
-    //start Ajax call  
-    $.ajax({
-      url: yelpQueryURL,
-      method: "GET",
-      headers: {
-        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
-      }
+function yelpSearch(userSearch) {
+  String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.alltrim().toLowerCase();
+  console.log(yelpQueryURL);
+//start Ajax call  
+  $.ajax({
+  url: yelpQueryURL,
+  method: "GET",
+  headers:{
+    Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+  }
 
     }).then(function (response) {
       var lat = response.region.center.latitude;
@@ -155,8 +163,31 @@ $(document).ready(function () {
   }
   ////////////////////end food drop down////////////////////////
 
-  ////////////////ENTERTAINMENT DROP DOWN////////////////
-  // here we generate list for entertain categories
+////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
+
+/////function to compare restaraunt categories to search term/////
+  function resultCompareLoop(searchTerm){
+      console.log("search term is " + searchTerm)
+//loops through all 50 restaraunts
+    for(i=0; i<searchResponse.length; i++){
+//loops through categories in restaraunt
+      for(j=0; j<searchResponse[i].categories.length; j++){
+//if the selected term matches restaraunt categories        
+        if(searchResponse[i].categories[j].title == searchTerm){
+//push the matching restaraunt object into the matching food place array
+          matchingFoodPlace.push(searchResponse[i]);
+          console.log("added to array");
+        }
+
+// console.log(searchResponse[i].categories[j].title);
+      } 
+    }
+  }
+////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
+
+////////////////ENTERTAINMENT DROP DOWN////////////////
+// here we generate list for entertain categories
+
 
   function generateEntertainList() {
     //for loop that creates each list item with a tag
@@ -185,31 +216,78 @@ $(document).ready(function () {
       entertainOptions.append(li);
 
     }
+
+/////////////////////function for yelp entertainment user search//////////////////////
+
+function yelpSearchEntertain(userSearch) {
+  String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+
+  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.alltrim().toLowerCase();
+
+  console.log(entertainChoice.alltrim().toLowerCase());
+  console.log(yelpQueryURL);
+//start Ajax call  
+  $.ajax({
+  url: yelpQueryURL,
+  method: "GET",
+  headers:{
+    Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
   }
-  ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
-  /////function to compare restaraunt categories to search term/////
-  function resultCompareLoop(searchTerm) {
-    console.log("search term is " + searchTerm)
-    //loops through all 50 restaraunts
-    for (i = 0; i < searchResponse.length; i++) {
-      //loops through categories in restaraunt
-      for (j = 0; j < searchResponse[i].categories.length; j++) {
-        //if the selected term matches restaraunt categories        
-        if (searchResponse[i].categories[j].title == searchTerm) {
-          //push the matching restaraunt object into the matching food place array
-          matchingFoodPlace.push(searchResponse[i]);
-          console.log("added to array");
-        }
+  }).then(function(response) {
+      console.log ("yelp entertain" , response);
 
-        // console.log(searchResponse[i].categories[j].title);
-      }
+     
+//attaching Restaurant name to title of card
+      // var name = $("#cardTitle");
+      // name.text(response.businesses[0].name);
+      // var foodPic = $("<img>");
+      // foodPic.attr(response.businesses[0].image_url);
+      // var cardSection = $("#cardSection");
+      // cardSection.attr('src', response.businesses[0].image_url);
+      // var cardRating = $("#cardSection");
+      // cardRating.text("Rating: " + response.businesses[0].rating);
+      // var cardPrice = $("<p>");
+      // cardPrice.text("Price: " + response.businesses[0].price);
+      // cardRating.append(cardPrice);
+      //attaching for loop
+      //for (var i=0; i<cardInput.length;i++) {
+
+
+//for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
+       console.log(response.businesses.length);
+           for(i=0; i<response.businesses.length; i++ ){
+              searchResponseEntertain.push(response.businesses[i]);
+              // console.log("search response " + JSON.stringify(searchResponse[i]))
+           }
+      
+//runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
+resultCompareLoopEntertain(entertainChoice);
+console.log(matchingEntertainPlace);
+      
+  });
+}
+
+////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
+
+/////function to compare restaraunt categories to search term/////
+function resultCompareLoopEntertain(searchTerm){
+  // console.log("search term is " + searchTerm)
+//loops through all 50 restaraunts
+for(i=0; i<searchResponseEntertain.length; i++){
+//loops through categories in restaraunt
+  for(j=0; j<searchResponseEntertain[i].categories.length; j++){
+//if the selected term matches restaraunt categories        
+    if(searchResponseEntertain[i].categories[j].title == searchTerm){
+//push the matching restaraunt object into the matching food place array
+      matchingEntertainPlace.push(searchResponseEntertain[i]);
+      console.log("added to array");
     }
-  }
-  ////////////////////////////////END YELP STUFF////////////////////////////////////////////////////////////////////////////////
 
-
-
+// console.log(searchResponse[i].categories[j].title);
+  } 
+}
+}
 
 
 
@@ -267,7 +345,6 @@ $(document).ready(function () {
   });
 
 });
-
 
 
 
