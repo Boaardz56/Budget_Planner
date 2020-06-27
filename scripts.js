@@ -59,6 +59,13 @@ function buttonEnableDisable(){
   console.log(searchFunSelected)
 }
 
+//runs the generate list function which creates the list items used to select food type
+// generateFoodList();
+// generateEntertainList();
+generateEntertainSelect();
+generateFoodSelect();
+
+
 
 //Button event for user's search.
   $("#submitBtn").click(function(){
@@ -282,6 +289,7 @@ function generateEntertainSelect(){
     var optionID = "entertainType" + categoriesforFun[i];
     var options = document.createElement("OPTION");
       options.id = optionID;
+
      options.innerHTML=categoriesforFun[i];
      entertainSelects.append(options);
   }
@@ -294,6 +302,35 @@ function generateEntertainSelect(){
 }
 
 
+
+     options.innerHTML=categoriesforFun[i];
+
+
+     entertainSelects.append(options);
+  }
+  document.getElementById('dropdownentertainselect').onchange=function(){
+    console.log(this.value)
+    entertainChoice=this.value;
+  }
+}
+////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+function generateFoodSelect(){
+  for (i = 0; i < categoriesForChoose.length; i++) {
+    var optionID = "foodType" + categoriesForChoose[i];
+    //console.log(optionID);
+    var options = document.createElement("OPTION");
+    //console.log(options);
+      options.id = optionID;
+     options.innerHTML=categoriesForChoose[i];
+     foodSelects.append(options);
+  }
+  document.getElementById('dropdownfoodselect').onchange=function(){
+    console.log(this.value)
+    foodChoice=this.value;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
 
 
 
