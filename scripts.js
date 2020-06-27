@@ -36,11 +36,28 @@ var businesses=[];
 //string that is compared to entertainment categories
 var entertainChoice="";
 
+var searchFoodSelected = false;
+var searchFunSelected = false;
+
+var inputSearchLoc = false;
+
+
 //runs the generate list function which creates the list items used to select food type
-// generateFoodList();
-// generateEntertainList();
+
 generateEntertainSelect();
 generateFoodSelect();
+buttonEnableDisable();
+
+
+function buttonEnableDisable(){
+  document.getElementById('submitBtn').disabled=true;
+  if(searchFunSelected===true && searchFoodSelected ===true){
+    
+    document.getElementById('submitBtn').disabled=false;
+ 
+  }
+  console.log(searchFunSelected)
+}
 
 
 //Button event for user's search.
@@ -111,43 +128,34 @@ console.log(matchingFoodPlace);
   });
 }
 
-///////////////////////////FOOD MATCHING FUNCTIONS///////////////////////////////////////////////////////////
-
-//here we generate list for food categories
-function generateFoodList(){
-//for loop that creates each list item with a tag
+////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+function generateFoodSelect(){
   for (i = 0; i < categoriesForChoose.length; i++) {
-//creates list items so each has own id
-        var listID = "foodType" + categoriesForChoose[i];
-//creates list element
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-//makes link clickable
-            a.setAttribute('href', "#");
-//adds on click function that sets food choice = innerhtml
-            a.onclick=function(){
-              console.log("running the click function");
-               foodChoice = $(this)[0].innerHTML;
-              console.log($(this)[0].innerHTML);
-            }
-           
-//add ID to list item
-        li.id = listID;
-//sets innerhtml of a tag so text is displayed
-        a.innerHTML=categoriesForChoose[i];
-//append a tag to list item
-    li.appendChild(a);
-//append list item to unordered list
-        foodOptions.append(li);
-    }
+    var optionID = "foodType" + categoriesForChoose[i];
+    //console.log(optionID);
+    var options = document.createElement("OPTION");
+    //console.log(options);
+      options.id = optionID;
+     options.innerHTML=categoriesForChoose[i];
+     foodSelects.append(options);
   }
-////////////////////end food drop down////////////////////////
+  document.getElementById('dropdownfoodselect').onchange=function(){
+    // console.log(this.value)
+    foodChoice=this.value;
+    searchFoodSelected = true;
+    buttonEnableDisable();
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
 /////function to compare restaraunt categories to search term/////
   function resultCompareLoop(searchTerm){
-      console.log("search term is " + searchTerm)
+      // console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
     for(i=0; i<searchResponse.length; i++){
 //loops through categories in restaraunt
@@ -156,7 +164,7 @@ function generateFoodList(){
         if(searchResponse[i].categories[j].title == searchTerm){
 //push the matching restaraunt object into the matching food place array
           matchingFoodPlace.push(searchResponse[i]);
-          console.log("added to array");
+          // console.log("added to array");
         }
 
 // console.log(searchResponse[i].categories[j].title);
@@ -164,38 +172,6 @@ function generateFoodList(){
     }
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
-
-////////////////ENTERTAINMENT DROP DOWN////////////////
-// here we generate list for entertain categories
-
-function generateEntertainList(){
-  //for loop that creates each list item with a tag
-    for (i = 0; i < categoriesforFun.length; i++) {
-  //creates list items so each has own id
-          var listID = "entertainType" + categoriesforFun[i];
-  //creates list element
-          var li = document.createElement("li");
-          var a = document.createElement("a");
-  //makes link clickable
-              a.setAttribute('href', "#");
-  //adds on click function that sets food choice = innerhtml
-              a.onclick=function(){
-                console.log("running the click function");
-                 entertainChoice = $(this)[0].innerHTML;
-                console.log($(this)[0].innerHTML);
-              }
-             
-  //add ID to list item
-          li.id = listID;
-  //sets innerhtml of a tag so text is displayed
-          a.innerHTML=categoriesforFun[i];
-  //append a tag to list item
-      li.appendChild(a);
-  //append list item to unordered list
-          entertainOptions.append(li);
-  
-      }
-    }
 
 /////////////////////function for yelp entertainment user search//////////////////////
 
@@ -252,7 +228,6 @@ console.log(matchingEntertainPlace);
 
 /////function to compare restaraunt categories to search term/////
 function resultCompareLoopEntertain(searchTerm){
-  // console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
 console.log("this is entertainchoice" + entertainChoice)
 console.log ("this is search term" + searchTerm)
@@ -265,8 +240,6 @@ for(i=0; i<searchResponseEntertain.length; i++){
       matchingEntertainPlace.push(searchResponseEntertain[i]);
       console.log("added to array");
     }
-
-// console.log(searchResponse[i].categories[j].title);
   } 
 }
 }
@@ -280,34 +253,18 @@ function generateEntertainSelect(){
     var optionID = "entertainType" + categoriesforFun[i];
     var options = document.createElement("OPTION");
       options.id = optionID;
-
      options.innerHTML=categoriesforFun[i];
-
      entertainSelects.append(options);
   }
   document.getElementById('dropdownentertainselect').onchange=function(){
     console.log(this.value)
     entertainChoice=this.value;
-  }
-}
-////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
-function generateFoodSelect(){
-  for (i = 0; i < categoriesForChoose.length; i++) {
-    var optionID = "foodType" + categoriesForChoose[i];
-    //console.log(optionID);
-    var options = document.createElement("OPTION");
-    //console.log(options);
-      options.id = optionID;
-     options.innerHTML=categoriesForChoose[i];
-     foodSelects.append(options);
-  }
-  document.getElementById('dropdownfoodselect').onchange=function(){
-    console.log(this.value)
-    foodChoice=this.value;
+    searchFunSelected=true;
+    buttonEnableDisable();
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////////
+
 
 
 
