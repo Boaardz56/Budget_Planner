@@ -43,12 +43,9 @@ var inputSearchLoc = false;
 
 
 //runs the generate list function which creates the list items used to select food type
-
 generateEntertainSelect();
 generateFoodSelect();
 buttonEnableDisable();
-
-// checkforInput();
 
 
 //function to enable and disable the search button if not all 3 inputs are met
@@ -68,16 +65,6 @@ function buttonEnableDisable(){
 }
 
 
-
-//runs the generate list function which creates the list items used to select food type
-// generateFoodList();
-// generateEntertainList();
-//generateEntertainSelect();
-//generateFoodSelect();
-
-
-
-
 //Button event for user's search.
   $("#submitBtn").click(function(){
 
@@ -91,10 +78,11 @@ function buttonEnableDisable(){
   yelpSearch(userSearch);
   yelpSearchEntertain(userSearch);
 
-    //-------------------------Yelp API and functions for food--------------------------------------------------
+//-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
+
 
 ///this is where we disable the search button if there is no input for location
   document.getElementById('searchField').oninput=function(){
@@ -106,18 +94,6 @@ function buttonEnableDisable(){
     }
     buttonEnableDisable();
   }
-
-
-  function yelpSearch(userSearch) {
-    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
-    console.log(yelpQueryURL);
-    //start Ajax call  
-    $.ajax({
-      url: yelpQueryURL,
-      method: "GET",
-      headers: {
-        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
-      }
 
   //-------------------------Yelp API and functions--------------------------------------------------
 
@@ -134,9 +110,10 @@ function yelpSearch(userSearch) {
   }
 
     }).then(function (response) {
+
       var lat = response.region.center.latitude;
       var lon = response.region.center.longitude;
-      console.log("yelp", response);
+      // console.log("yelp", response);
       console.log(lat, lon)
 
       //attaching Restaurant name to title of card
@@ -174,8 +151,12 @@ function yelpSearch(userSearch) {
 
       }).then(function (response) {
         console.log("bing", response);
+      })
+    });
+  }
+  
 
-////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+////////////////FOOD SELECTS//////////////////////////////////////////////
 function generateFoodSelect(){
   for (i = 0; i < categoriesForChoose.length; i++) {
     var optionID = "foodType" + categoriesForChoose[i];
@@ -195,8 +176,6 @@ function generateFoodSelect(){
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////////
-
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
@@ -213,13 +192,13 @@ function generateFoodSelect(){
           matchingFoodPlace.push(searchResponse[i]);
           // console.log("added to array");
         }
-
 // console.log(searchResponse[i].categories[j].title);
       } 
     }
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
 
+//////start entertainment////////////
 
 /////////////////////function for yelp entertainment user search//////////////////////
 
@@ -335,40 +314,41 @@ function generateEntertainSelect(){
 
   //google maps api key AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
 
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
-  // console.log(queryURL);
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
+  // // console.log(queryURL);
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
 
-  }).then(function (response) {
-    // console.log (response);
-  });
+  // }).then(function (response) {
+  //   // console.log (response);
+  // });
 
-  //google api to get some restaurants with rating around a location
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-  // console.log(queryURL);
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+  // //google api to get some restaurants with rating around a location
+  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+  // // console.log(queryURL);
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
 
-  }).then(function (response) {
-    // console.log (response);
-  });
+  // }).then(function (response) {
+  //   // console.log (response);
+  // });
 
-  //google api to get some restaurants with rating around a location
-  //google places AJAX call
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-  // console.log(queryURL);
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+  // //google api to get some restaurants with rating around a location
+  // //google places AJAX call
+  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+  // // console.log(queryURL);
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
 
-  }).then(function (response) {
-    // console.log (response);
-  });
+  // }).then(function (response) {
+  //   // console.log (response);
+  // });
 
 });
+
 
 
 
@@ -452,4 +432,4 @@ function generateEntertainSelect(){
 //CLOSING document tag!!!
 
 
-
+    
