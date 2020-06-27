@@ -163,7 +163,7 @@ function yelpSearch(userSearch) {
       }
 
       function bingAPI(latitude, longitude) {
-        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins="+ userLocallat+","+userLocallon+"&destinations="+latitude+","+longitude+"&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
+        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins="+ userLocallat+","+userLocallon+"&destinations="+latitude+","+longitude+"&travelMode=driving&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
         $.ajax({
           url: queryURL,
           method: "GET"
