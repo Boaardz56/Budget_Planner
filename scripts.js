@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
   // var categoriesListFood=$('#dropdownfood');
   var businesses = [];
 
@@ -113,7 +114,7 @@ function yelpSearch(userSearch) {
 
       var lat = response.region.center.latitude;
       var lon = response.region.center.longitude;
-      // console.log("yelp", response);
+      console.log("yelp", response);
       console.log(lat, lon)
 
       //attaching Restaurant name to title of card
@@ -145,6 +146,14 @@ function yelpSearch(userSearch) {
       //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
       resultCompareLoop(foodChoice);
       console.log(matchingFoodPlace);
+
+      navigator.geolocation.getCurrentPosition(locationHandler);
+ 
+      function locationHandler(position){
+   var lat = position.coords.latitude;
+   var lng = position.coords.longitude;
+   console.log("These are the coords" + lat,lng)
+ }
 
       var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations=" + lat + "," + lon + "&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
       $.ajax({
