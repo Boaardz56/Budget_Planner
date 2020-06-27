@@ -11,16 +11,14 @@ $(document).ready(function () {
 
   var entertainOptions = $('#entertainOptions');
 
-  // var entertainSelects = $('#dropdownentertainselect')
-  // var foodSelects = $('#dropdownfoodselect')
+  var entertainSelects = $('#dropdownentertainselect')
+  var foodSelects = $('#dropdownfoodselect')
 
   //array of predetermined choices/can be edited
-  var categoriesForChoose = ["Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
+  var categoriesForChoose=["Choose Food", "Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-
-  var categoriesforFun=["Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
-
+  var categoriesforFun=["Choose Entertainment","Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
@@ -35,23 +33,23 @@ $(document).ready(function () {
 //string that is compared to restaraunt categories
   var foodChoice="";
 
-  //string that is compared to entertainment categories
-  var entertainChoice = "";
+//string that is compared to entertainment categories
+var entertainChoice="";
 
-  //runs the generate list function which creates the list items used to select food type
-  generateFoodList();
-  generateEntertainList();
-  // generateEntertainSelect();
-  // generateFoodSelect();
+//runs the generate list function which creates the list items used to select food type
+// generateFoodList();
+// generateEntertainList();
+generateEntertainSelect();
+generateFoodSelect();
 
-  //Button event for user's search.
-  $("#submitBtn").click(function () {
-   //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
-    //var cardHeader = $("h4");
-    var userSearch = $("#searchField").val();
-    if (userSearch === "") {
-      return;
-    }
+
+//Button event for user's search.
+  $("#submitBtn").click(function(){
+
+//Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
+  //var cardHeader = $("h4");
+  var userSearch = $("#searchField").val();
+
   //cardHeader.text(userSearch)
   // console.log(userSearch)
 //Shows container with cards after search.
@@ -281,12 +279,14 @@ console.log(matchingEntertainPlace);
   });
 }
 
-////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
+////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
 /////function to compare restaraunt categories to search term/////
 function resultCompareLoopEntertain(searchTerm){
   // console.log("search term is " + searchTerm)
 //loops through all 50 restaraunts
+console.log("this is entertainchoice" + entertainChoice)
+console.log ("this is search term" + searchTerm)
 for(i=0; i<searchResponseEntertain.length; i++){
 //loops through categories in restaraunt
   for(j=0; j<searchResponseEntertain[i].categories.length; j++){
@@ -303,7 +303,43 @@ for(i=0; i<searchResponseEntertain.length; i++){
 }
 }
 
+///////////////STUFF WE CAN USE LATER MAYBE/////////////////////////////////////////////
 
+////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
+
+function generateEntertainSelect(){
+  for (i = 0; i < categoriesforFun.length; i++) {
+    var optionID = "entertainType" + categoriesforFun[i];
+    var options = document.createElement("OPTION");
+      options.id = optionID;
+
+     options.innerHTML=categoriesforFun[i];
+
+     entertainSelects.append(options);
+  }
+  document.getElementById('dropdownentertainselect').onchange=function(){
+    console.log(this.value)
+    entertainChoice=this.value;
+  }
+}
+////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+function generateFoodSelect(){
+  for (i = 0; i < categoriesForChoose.length; i++) {
+    var optionID = "foodType" + categoriesForChoose[i];
+    //console.log(optionID);
+    var options = document.createElement("OPTION");
+    //console.log(options);
+      options.id = optionID;
+     options.innerHTML=categoriesForChoose[i];
+     foodSelects.append(options);
+  }
+  document.getElementById('dropdownfoodselect').onchange=function(){
+    console.log(this.value)
+    foodChoice=this.value;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
 
 
 
