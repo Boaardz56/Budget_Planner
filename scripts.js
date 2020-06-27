@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   // var categoriesListFood=$('#dropdownfood');
   var businesses = [];
 
@@ -100,6 +99,8 @@ generateFoodSelect();
       headers: {
         Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
       }
+    });
+  }
 
   //-------------------------Yelp API and functions--------------------------------------------------
 
@@ -116,10 +117,10 @@ function yelpSearch(userSearch) {
   }
 
     }).then(function (response) {
-      var lat = response.region.center.latitude;
-      var lon = response.region.center.longitude;
+      // var lat = response.region.center.latitude;
+      // var lon = response.region.center.longitude;
       console.log("yelp", response);
-      console.log(lat, lon)
+      // console.log(lat, lon)
 
       //attaching Restaurant name to title of card
       var name = $("#cardTitle");
@@ -141,6 +142,15 @@ function yelpSearch(userSearch) {
       //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
       console.log(response.businesses.length);
       for (i = 0; i < response.businesses.length; i++) {
+        //buisness establishment coordinates
+        var latitude = response.businesses[i].coordinates.latitude
+        var longitude = response.businesses[i].coordinates.longitude
+
+        // console.log("test")
+        // console.log(latitude, longitude)
+        // bingAPI(latitude,longitude)
+        console.log(bingAPI(latitude, longitude))
+
         searchResponse.push(response.businesses[i]);
         // console.log("search response " + JSON.stringify(searchResponse[i]))
       }
@@ -149,13 +159,26 @@ function yelpSearch(userSearch) {
       resultCompareLoop(foodChoice);
       console.log(matchingFoodPlace);
 
-      var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations=" + lat + "," + lon + "&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
-      $.ajax({
-        url: queryURL,
-        method: "GET"
+      //Geolocation function
 
-      }).then(function (response) {
-        console.log("bing", response);
+      navigator.geolocation.getCurrentPosition(showPosition);
+
+      function showPosition(position) {
+        // innerHTML = "Latitude: " + position.coords.latitude +
+        //   "<br>Longitude: " + position.coords.longitude;
+        // var response= response.data;
+        var userLocallat = position.coords.latitude;
+        var userLocallon = position.coords.longitude;
+        // userLocate.push(position)
+        console.log(position)
+      }
+
+      function bingAPI(latitude, longitude) {
+        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations="+latitude+","+longitude+"&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        });
 
 ////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
 function generateFoodSelect(){
@@ -179,10 +202,9 @@ function generateFoodSelect(){
 ///////////////////////////////////////////////////////////////////////////////////
 
 
-      })
 
-    });
-  }
+   
+  
   //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
@@ -257,8 +279,8 @@ function yelpSearchEntertain(userSearch) {
 resultCompareLoopEntertain(entertainChoice);
 console.log(matchingEntertainPlace);
       
-  });
-}
+  
+
 
 ////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
@@ -311,7 +333,7 @@ function generateEntertainSelect(){
   document.getElementById('dropdownentertainselect').onchange=function(){
     console.log(this.value)
     entertainChoice=this.value;
-  }
+  
 }
 ////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
 function generateFoodSelect(){
