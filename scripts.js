@@ -1,9 +1,9 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-// var categoriesListFood=$('#dropdownfood');
-var businesses=[];
+  // var categoriesListFood=$('#dropdownfood');
+  var businesses = [];
 
-//Global variable that hides the container with the cards on the opening page.
+  //Global variable that hides the container with the cards on the opening page.
   var cardsContainer = $("#card-page").hide();
 
   //the unordered list that holds drop down menu items
@@ -21,7 +21,7 @@ var businesses=[];
   var categoriesforFun=["Choose Entertainment","Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
-  var matchingFoodPlace=[];
+  var matchingFoodPlace = [];
 
   var matchingEntertainPlace=[];
 
@@ -72,15 +72,29 @@ function buttonEnableDisable(){
   $("#card-page").show();
   yelpSearch(userSearch);
   yelpSearchEntertain(userSearch);
-
-
-//-------------------------Yelp API and functions for food--------------------------------------------------
-
   window.location.href = "#cardResults"
+  });  
+
+
+
+    //-------------------------Yelp API and functions for food--------------------------------------------------
+
+    window.location.href = "#cardResults"
   });
 
 
-//-------------------------Yelp API and functions--------------------------------------------------
+  function yelpSearch(userSearch) {
+    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
+    console.log(yelpQueryURL);
+    //start Ajax call  
+    $.ajax({
+      url: yelpQueryURL,
+      method: "GET",
+      headers: {
+        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+      }
+
+  //-------------------------Yelp API and functions--------------------------------------------------
 
 function yelpSearch(userSearch) {
   String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
@@ -94,17 +108,20 @@ function yelpSearch(userSearch) {
     Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
   }
 
-  }).then(function(response) {
-      console.log ("yelp" , response);
+    }).then(function (response) {
+      var lat = response.region.center.latitude;
+      var lon = response.region.center.longitude;
+      console.log("yelp", response);
+      console.log(lat, lon)
 
-     
-//attaching Restaurant name to title of card
+      //attaching Restaurant name to title of card
       var name = $("#cardTitle");
       name.text(response.businesses[0].name);
       // var foodPic = $("<img>");
       // foodPic.attr(response.businesses[0].image_url);
       // var cardSection = $("#cardSection");
       // cardSection.attr('src', response.businesses[0].image_url);
+
       var cardRating = $("#cardSection");
       cardRating.text("Rating: " + response.businesses[0].rating);
       var cardPrice = $("<p>");
@@ -114,19 +131,24 @@ function yelpSearch(userSearch) {
       //for (var i=0; i<cardInput.length;i++) {
 
 
-//for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
-       console.log(response.businesses.length);
-           for(i=0; i<response.businesses.length; i++ ){
-              searchResponse.push(response.businesses[i]);
-              // console.log("search response " + JSON.stringify(searchResponse[i]))
-           }
-      
-//runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
-resultCompareLoop(foodChoice);
-console.log(matchingFoodPlace);
-      
-  });
-}
+      //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
+      console.log(response.businesses.length);
+      for (i = 0; i < response.businesses.length; i++) {
+        searchResponse.push(response.businesses[i]);
+        // console.log("search response " + JSON.stringify(searchResponse[i]))
+      }
+
+      //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
+      resultCompareLoop(foodChoice);
+      console.log(matchingFoodPlace);
+
+      var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations=" + lat + "," + lon + "&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+
+      }).then(function (response) {
+        console.log("bing", response);
 
 ////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
 function generateFoodSelect(){
@@ -150,6 +172,11 @@ function generateFoodSelect(){
 ///////////////////////////////////////////////////////////////////////////////////
 
 
+      })
+
+    });
+  }
+  //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
@@ -172,6 +199,8 @@ function generateFoodSelect(){
     }
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
+
+
 
 /////////////////////function for yelp entertainment user search//////////////////////
 
@@ -282,42 +311,42 @@ function generateEntertainSelect(){
 
 
 
-//////////////////////////////////////////////GOOGLE MAPS API WE WANT//////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////GOOGLE MAPS API WE WANT//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//google maps api key AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
+  //google maps api key AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
 
-var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
-// console.log(queryURL);
-$.ajax({
-  url: queryURL,
-  method: "GET"
-  
-}).then(function(response) {
-// console.log (response);
-});
+  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
+  // console.log(queryURL);
+  $.ajax({
+    url: queryURL,
+    method: "GET"
 
-//google api to get some restaurants with rating around a location
-var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-// console.log(queryURL);
-$.ajax({
-  url: queryURL,
-  method: "GET"
-  
-}).then(function(response) {
-// console.log (response);
-});
+  }).then(function (response) {
+    // console.log (response);
+  });
 
-//google api to get some restaurants with rating around a location
-//google places AJAX call
-var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-// console.log(queryURL);
-$.ajax({
-  url: queryURL,
-  method: "GET"
-  
-}).then(function(response) {
-// console.log (response);
-});
+  //google api to get some restaurants with rating around a location
+  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+  // console.log(queryURL);
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+
+  }).then(function (response) {
+    // console.log (response);
+  });
+
+  //google api to get some restaurants with rating around a location
+  //google places AJAX call
+  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+  // console.log(queryURL);
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+
+  }).then(function (response) {
+    // console.log (response);
+  });
 
 });
 
@@ -335,7 +364,7 @@ $.ajax({
 //   options.onclick=function(){
 //    console.log("running the click function");
 //    entertainChoice = $(this)[0].innerHTML;
-   
+
 //    console.log($(this)[0].innerHTML);
 //     }
 //     //   //add ID to list item
@@ -387,7 +416,7 @@ $.ajax({
 // $.ajax({
 //   url: queryURL,
 //   method: "GET"
-  
+
 // }).then(function(response) {
 
 // });
