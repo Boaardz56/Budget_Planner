@@ -25,7 +25,6 @@ $(document).ready(function () {
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
 
-
   var matchingEntertainPlace=[];
 
 //empty array that holds the whole 50 restaraunts in area
@@ -35,7 +34,6 @@ $(document).ready(function () {
 
 //string that is compared to restaraunt categories
   var foodChoice="";
-
 
   //string that is compared to entertainment categories
   var entertainChoice = "";
@@ -64,7 +62,12 @@ $(document).ready(function () {
   });  
 
 
- //-------------------------Yelp API and functions--------------------------------------------------
+
+    //-------------------------Yelp API and functions for food--------------------------------------------------
+
+    window.location.href = "#cardResults"
+  });
+
 
   function yelpSearch(userSearch) {
     var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
@@ -77,6 +80,7 @@ $(document).ready(function () {
         Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
       }
 
+  //-------------------------Yelp API and functions--------------------------------------------------
 
 function yelpSearch(userSearch) {
   String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
@@ -90,7 +94,11 @@ function yelpSearch(userSearch) {
     Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
   }
 
-
+    }).then(function (response) {
+      var lat = response.region.center.latitude;
+      var lon = response.region.center.longitude;
+      console.log("yelp", response);
+      console.log(lat, lon)
 
       //attaching Restaurant name to title of card
       var name = $("#cardTitle");
@@ -99,6 +107,7 @@ function yelpSearch(userSearch) {
       // foodPic.attr(response.businesses[0].image_url);
       // var cardSection = $("#cardSection");
       // cardSection.attr('src', response.businesses[0].image_url);
+
       var cardRating = $("#cardSection");
       cardRating.text("Rating: " + response.businesses[0].rating);
       var cardPrice = $("<p>");
@@ -119,8 +128,21 @@ function yelpSearch(userSearch) {
       resultCompareLoop(foodChoice);
       console.log(matchingFoodPlace);
 
+      var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations=" + lat + "," + lon + "&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+
+      }).then(function (response) {
+        console.log("bing", response);
+
+
+      })
+
     });
   }
+  //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
+
 
   ///////////////////////////FOOD MATCHING FUNCTIONS///////////////////////////////////////////////////////////
 
@@ -153,7 +175,6 @@ function yelpSearch(userSearch) {
     }
   }
   ////////////////////end food drop down////////////////////////
-
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
