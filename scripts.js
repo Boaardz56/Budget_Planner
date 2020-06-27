@@ -48,22 +48,33 @@ generateEntertainSelect();
 generateFoodSelect();
 buttonEnableDisable();
 
+// checkforInput();
 
+
+//function to enable and disable the search button if not all 3 inputs are met
 function buttonEnableDisable(){
-  document.getElementById('submitBtn').disabled=true;
-  if(searchFunSelected===true && searchFoodSelected ===true){
+
+  if(searchFunSelected===true && searchFoodSelected ===true && inputSearchLoc ===true){
     
     document.getElementById('submitBtn').disabled=false;
  
+  }else{
+
+    document.getElementById('submitBtn').disabled=true;
   }
   console.log(searchFunSelected)
+  console.log(searchFoodSelected)
+  console.log(inputSearchLoc)
 }
+
+
 
 //runs the generate list function which creates the list items used to select food type
 // generateFoodList();
 // generateEntertainList();
-generateEntertainSelect();
-generateFoodSelect();
+//generateEntertainSelect();
+//generateFoodSelect();
+
 
 
 
@@ -79,15 +90,22 @@ generateFoodSelect();
   $("#card-page").show();
   yelpSearch(userSearch);
   yelpSearchEntertain(userSearch);
-  window.location.href = "#cardResults"
-  });  
-
-
 
     //-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
+
+///this is where we disable the search button if there is no input for location
+  document.getElementById('searchField').oninput=function(){
+    if(this.value === ""){
+      inputSearchLoc=false;
+      console.log("hey")
+    }else{
+      inputSearchLoc=true;
+    }
+    buttonEnableDisable();
+  }
 
 
   function yelpSearch(userSearch) {
@@ -167,6 +185,7 @@ function generateFoodSelect(){
       options.id = optionID;
      options.innerHTML=categoriesForChoose[i];
      foodSelects.append(options);
+
   }
   document.getElementById('dropdownfoodselect').onchange=function(){
     // console.log(this.value)
@@ -178,12 +197,6 @@ function generateFoodSelect(){
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-
-      })
-
-    });
-  }
-  //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
@@ -206,7 +219,6 @@ function generateFoodSelect(){
     }
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
-
 
 
 /////////////////////function for yelp entertainment user search//////////////////////
@@ -297,36 +309,7 @@ function generateEntertainSelect(){
     console.log(this.value)
     entertainChoice=this.value;
     searchFunSelected=true;
-    buttonEnableDisable();
-  }
-}
-
-
-
-     options.innerHTML=categoriesforFun[i];
-
-
-     entertainSelects.append(options);
-  }
-  document.getElementById('dropdownentertainselect').onchange=function(){
-    console.log(this.value)
-    entertainChoice=this.value;
-  }
-}
-////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
-function generateFoodSelect(){
-  for (i = 0; i < categoriesForChoose.length; i++) {
-    var optionID = "foodType" + categoriesForChoose[i];
-    //console.log(optionID);
-    var options = document.createElement("OPTION");
-    //console.log(options);
-      options.id = optionID;
-     options.innerHTML=categoriesForChoose[i];
-     foodSelects.append(options);
-  }
-  document.getElementById('dropdownfoodselect').onchange=function(){
-    console.log(this.value)
-    foodChoice=this.value;
+     buttonEnableDisable();
   }
 }
 
