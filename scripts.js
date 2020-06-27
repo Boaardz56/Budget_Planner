@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+
   // var categoriesListFood=$('#dropdownfood');
   var businesses = [];
 
@@ -17,7 +19,7 @@ $(document).ready(function () {
   var categoriesForChoose=["Choose Food", "Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-  var categoriesforFun=["Choose Entertainment","Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
+  var categoriesforFun=["Choose Entertainment","Bars", "Movie Theaters", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
@@ -42,28 +44,26 @@ var inputSearchLoc = false;
 
 
 //runs the generate list function which creates the list items used to select food type
-
 generateEntertainSelect();
 generateFoodSelect();
 buttonEnableDisable();
 
 
+//function to enable and disable the search button if not all 3 inputs are met
 function buttonEnableDisable(){
-  document.getElementById('submitBtn').disabled=true;
-  if(searchFunSelected===true && searchFoodSelected ===true){
+
+  if(searchFunSelected===true && searchFoodSelected ===true && inputSearchLoc ===true){
     
     document.getElementById('submitBtn').disabled=false;
  
+  }else{
+
+    document.getElementById('submitBtn').disabled=true;
   }
   console.log(searchFunSelected)
+  console.log(searchFoodSelected)
+  console.log(inputSearchLoc)
 }
-
-//runs the generate list function which creates the list items used to select food type
-// generateFoodList();
-// generateEntertainList();
-generateEntertainSelect();
-generateFoodSelect();
-
 
 
 //Button event for user's search.
@@ -78,28 +78,22 @@ generateFoodSelect();
   $("#card-page").show();
   yelpSearch(userSearch);
   yelpSearchEntertain(userSearch);
-  window.location.href = "#cardResults"
-  });  
 
-
-
-    //-------------------------Yelp API and functions for food--------------------------------------------------
+//-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
 
 
-  function yelpSearch(userSearch) {
-    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.toLowerCase();
-    console.log(yelpQueryURL);
-    //start Ajax call  
-    $.ajax({
-      url: yelpQueryURL,
-      method: "GET",
-      headers: {
-        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
-      }
-    });
+///this is where we disable the search button if there is no input for location
+  document.getElementById('searchField').oninput=function(){
+    if(this.value === ""){
+      inputSearchLoc=false;
+      console.log("hey")
+    }else{
+      inputSearchLoc=true;
+    }
+    buttonEnableDisable();
   }
 
   //-------------------------Yelp API and functions--------------------------------------------------
@@ -117,41 +111,32 @@ function yelpSearch(userSearch) {
   }
 
     }).then(function (response) {
-      // var lat = response.region.center.latitude;
-      // var lon = response.region.center.longitude;
-      console.log("yelp", response);
+
+      var lat = response.region.center.latitude;
+      var lon = response.region.center.longitude;
+      //console.log("yelp", response);
       // console.log(lat, lon)
 
       //attaching Restaurant name to title of card
-      var name = $("#cardTitle");
-      name.text(response.businesses[0].name);
+      for(i=0; i < 5; i++){
+      var name = $('#cardTitle' + i);
+      name.text(response.businesses[i].name);
       // var foodPic = $("<img>");
       // foodPic.attr(response.businesses[0].image_url);
-      // var cardSection = $("#cardSection");
-      // cardSection.attr('src', response.businesses[0].image_url);
-
-      var cardRating = $("#cardSection");
-      cardRating.text("Rating: " + response.businesses[0].rating);
+      var cardRating = $('#cardSection' + i);
+      cardRating.text("Rating: " + response.businesses[i].rating);
       var cardPrice = $("<p>");
-      cardPrice.text("Price: " + response.businesses[0].price);
+      cardPrice.text("Price: " + response.businesses[i].price);
       cardRating.append(cardPrice);
-      //attaching for loop
-      //for (var i=0; i<cardInput.length;i++) {
+      }
 
 
       //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
-      console.log(response.businesses.length);
+      var latBus = response.businesses.length[i].coordinates.latitude;
+      var lonBus = response.businesses.length[i].coordinates.longitude;
       for (i = 0; i < response.businesses.length; i++) {
-        //buisness establishment coordinates
-        var latitude = response.businesses[i].coordinates.latitude
-        var longitude = response.businesses[i].coordinates.longitude
-
-        // console.log("test")
-        // console.log(latitude, longitude)
-        // bingAPI(latitude,longitude)
-        console.log(bingAPI(latitude, longitude))
-
         searchResponse.push(response.businesses[i]);
+        console.log(latBus, lonBus)
         // console.log("search response " + JSON.stringify(searchResponse[i]))
       }
 
@@ -179,8 +164,15 @@ function yelpSearch(userSearch) {
           url: queryURL,
           method: "GET"
         });
+      
+ }
 
-////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
+     
+    });
+  }
+  
+
+////////////////FOOD SELECTS//////////////////////////////////////////////
 function generateFoodSelect(){
   for (i = 0; i < categoriesForChoose.length; i++) {
     var optionID = "foodType" + categoriesForChoose[i];
@@ -190,6 +182,7 @@ function generateFoodSelect(){
       options.id = optionID;
      options.innerHTML=categoriesForChoose[i];
      foodSelects.append(options);
+
   }
   document.getElementById('dropdownfoodselect').onchange=function(){
     // console.log(this.value)
@@ -199,13 +192,6 @@ function generateFoodSelect(){
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////////
-
-
-
-   
-  
-  //bing locations api to get distance between places and/or distance to places. Key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA
 
 ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
@@ -222,14 +208,13 @@ function generateFoodSelect(){
           matchingFoodPlace.push(searchResponse[i]);
           // console.log("added to array");
         }
-
 // console.log(searchResponse[i].categories[j].title);
       } 
     }
   }
 ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
 
-
+//////start entertainment////////////
 
 /////////////////////function for yelp entertainment user search//////////////////////
 
@@ -252,20 +237,18 @@ function yelpSearchEntertain(userSearch) {
       console.log ("yelp entertain" , response);
 
      
-//attaching Restaurant name to title of card
-      // var name = $("#cardTitle");
-      // name.text(response.businesses[0].name);
-      // var foodPic = $("<img>");
-      // foodPic.attr(response.businesses[0].image_url);
-      // var cardSection = $("#cardSection");
-      // cardSection.attr('src', response.businesses[0].image_url);
-      // var cardRating = $("#cardSection");
-      // cardRating.text("Rating: " + response.businesses[0].rating);
-      // var cardPrice = $("<p>");
-      // cardPrice.text("Price: " + response.businesses[0].price);
-      // cardRating.append(cardPrice);
-      //attaching for loop
-      //for (var i=0; i<cardInput.length;i++) {
+   //attaching Restaurant name to title of card
+   for(i=5; i < 10; i++){
+    var name = $('#cardTitle' + i);
+    name.text(response.businesses[i-5].name);
+    // var foodPic = $("<img>");
+    // foodPic.attr(response.businesses[0].image_url);
+    var cardRating = $('#cardSection' + i);
+    cardRating.text("Rating: " + response.businesses[i-5].rating);
+    var cardPrice = $("<p>");
+    cardPrice.text("Price: " + response.businesses[i-5].price);
+    cardRating.append(cardPrice);
+    }
 
 
 //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
@@ -279,8 +262,8 @@ function yelpSearchEntertain(userSearch) {
 resultCompareLoopEntertain(entertainChoice);
 console.log(matchingEntertainPlace);
       
-  
-
+  });
+}
 
 ////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
@@ -319,36 +302,7 @@ function generateEntertainSelect(){
     console.log(this.value)
     entertainChoice=this.value;
     searchFunSelected=true;
-    buttonEnableDisable();
-  }
-}
-
-
-
-     options.innerHTML=categoriesforFun[i];
-
-
-     entertainSelects.append(options);
-  }
-  document.getElementById('dropdownentertainselect').onchange=function(){
-    console.log(this.value)
-    entertainChoice=this.value;
-  
-}
-////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
-function generateFoodSelect(){
-  for (i = 0; i < categoriesForChoose.length; i++) {
-    var optionID = "foodType" + categoriesForChoose[i];
-    //console.log(optionID);
-    var options = document.createElement("OPTION");
-    //console.log(options);
-      options.id = optionID;
-     options.innerHTML=categoriesForChoose[i];
-     foodSelects.append(options);
-  }
-  document.getElementById('dropdownfoodselect').onchange=function(){
-    console.log(this.value)
-    foodChoice=this.value;
+     buttonEnableDisable();
   }
 }
 
@@ -374,40 +328,41 @@ function generateFoodSelect(){
 
   //google maps api key AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
 
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
-  // console.log(queryURL);
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
+  // // console.log(queryURL);
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
 
-  }).then(function (response) {
-    // console.log (response);
-  });
+  // }).then(function (response) {
+  //   // console.log (response);
+  // });
 
-  //google api to get some restaurants with rating around a location
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-  // console.log(queryURL);
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+  // //google api to get some restaurants with rating around a location
+  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+  // // console.log(queryURL);
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
 
-  }).then(function (response) {
-    // console.log (response);
-  });
+  // }).then(function (response) {
+  //   // console.log (response);
+  // });
 
-  //google api to get some restaurants with rating around a location
-  //google places AJAX call
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-  // console.log(queryURL);
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+  // //google api to get some restaurants with rating around a location
+  // //google places AJAX call
+  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
+  // // console.log(queryURL);
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
 
-  }).then(function (response) {
-    // console.log (response);
-  });
+  // }).then(function (response) {
+  //   // console.log (response);
+  // });
 
 });
+
 
 
 
@@ -491,4 +446,5 @@ function generateFoodSelect(){
 //CLOSING document tag!!!
 
 
-
+    
+    
