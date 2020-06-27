@@ -47,16 +47,23 @@ var inputSearchLoc = false;
 generateEntertainSelect();
 generateFoodSelect();
 buttonEnableDisable();
+// checkforInput();
 
 
+//function to enable and disable the search button if not all 3 inputs are met
 function buttonEnableDisable(){
-  document.getElementById('submitBtn').disabled=true;
-  if(searchFunSelected===true && searchFoodSelected ===true){
+
+  if(searchFunSelected===true && searchFoodSelected ===true && inputSearchLoc ===true){
     
     document.getElementById('submitBtn').disabled=false;
  
+  }else{
+
+    document.getElementById('submitBtn').disabled=true;
   }
   console.log(searchFunSelected)
+  console.log(searchFoodSelected)
+  console.log(inputSearchLoc)
 }
 
 
@@ -66,18 +73,29 @@ function buttonEnableDisable(){
 //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
   //var cardHeader = $("h4");
   var userSearch = $("#searchField").val();
+
+
   //cardHeader.text(userSearch)
   // console.log(userSearch)
 //Shows container with cards after search.
   $("#card-page").show();
   yelpSearch(userSearch);
   yelpSearchEntertain(userSearch);
-
-
 //-------------------------Yelp API and functions for food--------------------------------------------------
 
   window.location.href = "#cardResults"
   });
+
+///this is where we disable the search button if there is no input for location
+  document.getElementById('searchField').oninput=function(){
+    if(this.value === ""){
+      inputSearchLoc=false;
+      console.log("hey")
+    }else{
+      inputSearchLoc=true;
+    }
+    buttonEnableDisable();
+  }
 
 
 //-------------------------Yelp API and functions--------------------------------------------------
@@ -260,7 +278,7 @@ function generateEntertainSelect(){
     console.log(this.value)
     entertainChoice=this.value;
     searchFunSelected=true;
-    buttonEnableDisable();
+     buttonEnableDisable();
   }
 }
 
