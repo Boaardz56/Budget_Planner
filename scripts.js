@@ -19,7 +19,7 @@ $(document).ready(function () {
   var categoriesForChoose=["Choose Food", "Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-  var categoriesforFun=["Choose Entertainment","Bars", "Cinema", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
+  var categoriesforFun=["Choose Entertainment","Bars", "Movie Theaters", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
@@ -114,8 +114,8 @@ function yelpSearch(userSearch) {
 
       var lat = response.region.center.latitude;
       var lon = response.region.center.longitude;
-      console.log("yelp", response);
-      console.log(lat, lon)
+      //console.log("yelp", response);
+      // console.log(lat, lon)
 
       //attaching Restaurant name to title of card
       for(i=0; i < 5; i++){
@@ -123,23 +123,20 @@ function yelpSearch(userSearch) {
       name.text(response.businesses[i].name);
       // var foodPic = $("<img>");
       // foodPic.attr(response.businesses[0].image_url);
-      // var cardSection = $("#cardSection");
-      // cardSection.attr('src', response.businesses[0].image_url);
-
       var cardRating = $('#cardSection' + i);
       cardRating.text("Rating: " + response.businesses[i].rating);
       var cardPrice = $("<p>");
       cardPrice.text("Price: " + response.businesses[i].price);
       cardRating.append(cardPrice);
-      //attaching for loop
-      //for (var i=0; i<cardInput.length;i++) {
       }
 
 
       //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
-      console.log(response.businesses.length);
+      var latBus = response.businesses.length[i].coordinates.latitude;
+      var lonBus = response.businesses.length[i].coordinates.longitude;
       for (i = 0; i < response.businesses.length; i++) {
         searchResponse.push(response.businesses[i]);
+        console.log(latBus, lonBus)
         // console.log("search response " + JSON.stringify(searchResponse[i]))
       }
 
@@ -147,22 +144,30 @@ function yelpSearch(userSearch) {
       resultCompareLoop(foodChoice);
       console.log(matchingFoodPlace);
 
-      navigator.geolocation.getCurrentPosition(locationHandler);
- 
-      function locationHandler(position){
-   var lat = position.coords.latitude;
-   var lng = position.coords.longitude;
-   console.log("These are the coords" + lat,lng)
+      //Geolocation function
+
+      navigator.geolocation.getCurrentPosition(showPosition);
+
+      function showPosition(position) {
+        // innerHTML = "Latitude: " + position.coords.latitude +
+        //   "<br>Longitude: " + position.coords.longitude;
+        // var response= response.data;
+        var userLocallat = position.coords.latitude;
+        var userLocallon = position.coords.longitude;
+        // userLocate.push(position)
+        console.log(position)
+      }
+
+      function bingAPI(latitude, longitude) {
+        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations="+latitude+","+longitude+"&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        });
+      
  }
 
-      var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations=" + lat + "," + lon + "&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-
-      }).then(function (response) {
-        console.log("bing", response);
-      })
+     
     });
   }
   
@@ -238,16 +243,11 @@ function yelpSearchEntertain(userSearch) {
     name.text(response.businesses[i-5].name);
     // var foodPic = $("<img>");
     // foodPic.attr(response.businesses[0].image_url);
-    // var cardSection = $("#cardSection");
-    // cardSection.attr('src', response.businesses[0].image_url);
-
     var cardRating = $('#cardSection' + i);
     cardRating.text("Rating: " + response.businesses[i-5].rating);
     var cardPrice = $("<p>");
     cardPrice.text("Price: " + response.businesses[i-5].price);
     cardRating.append(cardPrice);
-    //attaching for loop
-    //for (var i=0; i<cardInput.length;i++) {
     }
 
 
@@ -446,4 +446,5 @@ function generateEntertainSelect(){
 //CLOSING document tag!!!
 
 
+    
     
