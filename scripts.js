@@ -132,11 +132,15 @@ function yelpSearch(userSearch) {
 
 
       //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
-      var latBus = response.businesses.length[i].coordinates.latitude;
-      var lonBus = response.businesses.length[i].coordinates.longitude;
+      console.log(response.businesses.length);
       for (i = 0; i < response.businesses.length; i++) {
+        var latitude = response.businesses[i].coordinates.latitude
+        var longitude = response.businesses[i].coordinates.longitude
+        // console.log("test")
+        console.log(latitude, longitude)
+        // bingAPI(latitude,longitude)
+        console.log(bingAPI(latitude, longitude))
         searchResponse.push(response.businesses[i]);
-        console.log(latBus, lonBus)
         // console.log("search response " + JSON.stringify(searchResponse[i]))
       }
 
@@ -159,12 +163,13 @@ function yelpSearch(userSearch) {
       }
 
       function bingAPI(latitude, longitude) {
-        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=47.6044,-122.3345;47.6731,-122.1185;47.6149,-122.1936&destinations="+latitude+","+longitude+"&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
+        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins="+ userLocallat+","+userLocallon+"&destinations="+latitude+","+longitude+"&travelMode=driving&key=AroPEfTB4hg6gbnAT0DX7db1IHBHEAD6c6eWInD46ms_Q6j7NkxBo1ZItNijcTVA"
         $.ajax({
           url: queryURL,
           method: "GET"
-        });
-      
+        }).then(function (response) {
+          console.log(response);
+        })
  }
 
      
