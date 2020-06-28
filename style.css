@@ -35,10 +35,14 @@ body{
 .card{
     margin-bottom:5px;
     height: 160px;
+
      border-radius: 20px;
      background-color: #1f1f2d;
      color: blanchedalmond;
   
+
+    position: relative;
+
   
 }
 /* Padding Added to cards to add some seperation between them. */
@@ -114,3 +118,20 @@ border-bottom-right-radius: 30px;
   margin-bottom: 100px;
 } */
   
+.images {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 1px;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin-left: 1px;
+}
+
+.card-section {
+  text-align: center;
+  padding: 1px;
+  position: absolute;
+  top: 40%;
+  left: 30%;
+}
