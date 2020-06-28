@@ -162,10 +162,12 @@ $(document).ready(function () {
           var userLocallon = position.coords.longitude;
           // userLocate.push(position)
 
+          // var distanceTravel = response.resourceSets[0].resources[0].destinations.results[0].travelDistance
+          // var travelTime = response.resourceSets[0].resources[0].destinations.results[0].travelDuration
+          // console.log("THIS IS THE DISTANCE AND TIME" + distanceTravel,travelTime)
 
 
-
-          var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
+          var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
           $.ajax({
             url: queryURL,
             method: "GET"
@@ -175,7 +177,7 @@ $(document).ready(function () {
         }
 
       }
-      });
+    });
   }
 
 
