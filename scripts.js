@@ -179,8 +179,8 @@ function generateCards(){
     restname.text(restaurantArray[i].name);
 
     console.log("business name" + restaurantArray[i].name)
-    // var foodPic = $("<img>");
-    // foodPic.attr(response.businesses[0].image_url);
+    var foodPic = $("#img" + i);
+    foodPic.attr('src', restaurantArray[i].image_url);
     var cardRating = $('#cardSection' + i);
     cardRating.text("Rating: " + restaurantArray[i].rating);
     var cardPrice = $("<p>");
@@ -214,8 +214,8 @@ function generateCards(){
   for (k = 5; k < 10; k++) {
     var entname = $('#cardTitle' + k);
     entname.text(entertainmentArray[k - 5].name);
-    // var foodPic = $("<img>");
-    // foodPic.attr(response.businesses[0].image_url);
+    var foodPic = $("#img" + k);
+    foodPic.attr('src', entertainmentArray[k - 5].image_url);
     var cardRating = $('#cardSection' + k);
     cardRating.text("Rating: " + entertainmentArray[k - 5].rating);
     var cardPrice = $("<p>");
