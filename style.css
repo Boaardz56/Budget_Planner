@@ -45,19 +45,23 @@ body{
     padding: 10px;
     margin-left: 1px;
 }
+.submitBtn:disabled{
+  background-color: black;
+}
 .input-group-rounded .input-group-field {
     border-radius: 5000px 0 0 5000px;
     padding-left: 1rem;
+    
    
   }
 .input-group-rounded .input-group-button .button {
     border-radius: 0 5000px 5000px 0;
     font-size: 0.8rem;
   }
-/* #startingBtn{
-  
-  } */
-/* centered checkbox under search bar */
+
+  .input-group{
+    margin-bottom: 0px;
+  }
 .menu{
   background: #333;
   width: 30%;
@@ -68,20 +72,25 @@ position:-webkit-sticky;
 position:sticky;
 top:0;
 width:70%;
+
 }
 
 
 
-#dropdownfood{
+#dropdownfoodselect{
 float:left;
-margin-top: -16px;
+width:30%;
+border-bottom-left-radius: 30px;
 margin-left:20%;
-border-bottom-left-radius: 50px; 
-}
 
-#dropdownentertain{
-  margin-top:-16px;
-  border-bottom-right-radius: 50px;
+
+}
+#dropdownentertainselect{
+
+width:30%;
+border-bottom-right-radius: 30px;
+
+
   }
 
 /* Added margin spacing to create seperate environment for card results. */
