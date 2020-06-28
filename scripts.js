@@ -47,6 +47,10 @@ $(document).ready(function () {
   //inside bingAPI it tells which card section to point to (for loop was not working inside or outside function because of timing)
   var globalCounter = 0;
 
+   var restaurantArray = [];
+
+   var entertainmentArray = [];
+
 
   //runs the generate list function which creates the list items used to select food type
   generateEntertainSelect();
@@ -82,14 +86,12 @@ $(document).ready(function () {
     //Shows container with cards after search.
     $("#card-page").show();
     yelpSearch(userSearch);
-    yelpSearchEntertain(userSearch);
+   // yelpSearchEntertain(userSearch);
 
     //-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
-
-
 
   ///this is where we disable the search button if there is no input for location
   document.getElementById('searchField').oninput = function () {
@@ -107,8 +109,9 @@ $(document).ready(function () {
   function yelpSearch(userSearch) {
     String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
     var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + foodChoice.alltrim().toLowerCase();
+    var yelpQueryEntertainURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + entertainChoice.alltrim().toLowerCase();
     console.log(yelpQueryURL);
-    //start Ajax call  
+    //start Ajax call 
     $.ajax({
       url: yelpQueryURL,
       method: "GET",
@@ -117,48 +120,121 @@ $(document).ready(function () {
       }
 
     }).then(function (response) {
+     
+      console.log(response);
+      console.log("FUCK")
+        var i=0;
+        for(i;i<response.businesses.length;i++){
+        restaurantArray.push(response.businesses[i]);
+        console.log("restaurant array " + restaurantArray)
+        console.log("name check " + restaurantArray[i].name)
+        }
+        if(i==response.businesses.length){
+            console.log("second loop???")
+           $.ajax({
+             url: yelpQueryEntertainURL,
+             method: "GET",
+             headers: {
+               Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+             }
+      
+           }).then(function (secondResponse) {
+            console.log(secondResponse)
+            var j = 0;
+             for(j;j<secondResponse.businesses.length;j++){
+              
+               entertainmentArray.push(secondResponse.businesses[j]);
+               console.log("entertainment array " + entertainmentArray)
 
-      // var lat = response.region.center.latitude;
-      // var lon = response.region.center.longitude;
-
-      //console.log("yelp", response);
-      // console.log(lat, lon)
-
-      //attaching Restaurant name to title of card
-      for (i = 0; i < 5; i++) {
-        var restname = $('#cardTitle' + i);
-        restname.text(response.businesses[i].name);
-        // var foodPic = $("<img>");
-        // foodPic.attr(response.businesses[0].image_url);
-        var cardRating = $('#cardSection' + i);
-        cardRating.text("Rating: " + response.businesses[i].rating);
-        var cardPrice = $("<p>");
-        cardPrice.text("Price: " + response.businesses[i].price);
-        cardRating.append(cardPrice);
-        cardGlobalRating = cardRating;
-      }
-    })
+             }
+               if(j==secondResponse.businesses.length){
+                 generateCards();
+               }
+          })
+        }  
+  })
   }
 
 
-      //for loop that takes 5 restaraunts and pushes into a global array so we can access outside this function
-      console.log(response.businesses.length);
-      for (i = 0; i < response.businesses.length; i++) {
-        var latitude = response.businesses[i].coordinates.latitude
-        var longitude = response.businesses[i].coordinates.longitude
-        // console.log("test")
-        console.log(latitude, longitude)
-        bingAPI(latitude,longitude)
-        //console.log(bingAPI(latitude, longitude))
-        searchResponse.push(response.businesses[i]);
-        // console.log("search response " + JSON.stringify(searchResponse[i]))
-      }
+//for loop that takes 5 restaraunts and pushes into a global array so we can access outside this function
+     // console.log(response.businesses.length);
+     
 
       //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
       resultCompareLoop(foodChoice);
+      // resultCompareLoop(entertainChoice);
       console.log(matchingFoodPlace);
 
-  ////////////////FOOD SELECTS//////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+function generateCards(){
+
+  for (i = 0; i < 5; i++) {
+    var restname = $('#cardTitle' + i);
+    console.log("restname =" + restname);
+    console.log("restaurant array= "+restaurantArray)
+    restname.text(restaurantArray[i].name);
+
+    console.log("business name" + restaurantArray[i].name)
+    // var foodPic = $("<img>");
+    // foodPic.attr(response.businesses[0].image_url);
+    var cardRating = $('#cardSection' + i);
+    cardRating.text("Rating: " + restaurantArray[i].rating);
+    var cardPrice = $("<p>");
+    cardPrice.text("Price: " + restaurantArray[i].price);
+    cardRating.append(cardPrice);
+    cardGlobalRating = cardRating;
+  }
+
+
+
+  for (j = 0; j < restaurantArray.length; j++) {
+    var foodLatitude = restaurantArray[j].coordinates.latitude
+    console.log("response" + j + " lat = " + restaurantArray[j].coordinates.latitude)
+    var foodLongitude = restaurantArray[j].coordinates.longitude
+    // console.log("test")
+    console.log(foodLatitude, foodLongitude)
+    bingAPI(foodLatitude,foodLongitude)
+    //console.log(bingAPI(latitude, longitude))
+    searchResponse.push(restaurantArray[j]);
+    // console.log("search response " + JSON.stringify(searchResponse[i]))
+  }
+
+  // attaching Entertainment name to title of card
+  for (k = 5; k < 10; k++) {
+    var entname = $('#cardTitle' + k);
+    entname.text(entertainmentArray[k - 5].name);
+    // var foodPic = $("<img>");
+    // foodPic.attr(response.businesses[0].image_url);
+    var cardRating = $('#cardSection' + k);
+    cardRating.text("Rating: " + entertainmentArray[k - 5].rating);
+    var cardPrice = $("<p>");
+    cardPrice.text("Price: " + entertainmentArray[k - 5].price);
+    cardRating.append(cardPrice);
+  }
+
+
+ // for loop that takes 5 entertain and pushes into a global array so we can access outside this function
+  //console.log(response.businesses.length);
+  for (l = 0; l < entertainmentArray.length; l++) {
+      var entertainlatitude = entertainmentArray[l].coordinates.latitude
+      var entertainlongitude = entertainmentArray[l].coordinates.longitude
+      console.log("test")
+       console.log(entertainlatitude, entertainlongitude)
+        // globalCounter
+      //console.log(bingAPI(latitude, longitude))
+      searchResponseEntertain.push(entertainmentArray[l]);
+        // console.log("these are entertainment coords" + bingAPI(entertainlatitude,entertainlongitude))
+      bingAPI(entertainlatitude,entertainlongitude)
+  }
+
+  //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
+  resultCompareLoopEntertain(entertainChoice);
+  console.log(matchingEntertainPlace);
+
+}
+
+////////////////FOOD SELECTS//////////////////////////////////////////////
   function generateFoodSelect() {
     for (i = 0; i < categoriesForChoose.length; i++) {
       var optionID = "foodType" + categoriesForChoose[i];
@@ -201,59 +277,6 @@ $(document).ready(function () {
 
   //////start entertainment////////////
 
-  /////////////////////function for yelp entertainment user search//////////////////////////////////////////////////
-
-  function yelpSearchEntertain(userSearch) {
-    String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
-
-    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + entertainChoice.alltrim().toLowerCase();
-
-    console.log(entertainChoice.alltrim().toLowerCase());
-    console.log(yelpQueryURL);
-    //start Ajax call  
-    $.ajax({
-      url: yelpQueryURL,
-      method: "GET",
-      headers: {
-        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
-      }
-
-    }).then(function (response) {
-      console.log("yelp entertain", response);
-
-
-      //attaching Entertainment name to title of card
-      for (i = 5; i < 10; i++) {
-        var entname = $('#cardTitle' + i);
-        entname.text(response.businesses[i - 5].name);
-        // var foodPic = $("<img>");
-        // foodPic.attr(response.businesses[0].image_url);
-        var cardRating = $('#cardSection' + i);
-        cardRating.text("Rating: " + response.businesses[i - 5].rating);
-        var cardPrice = $("<p>");
-        cardPrice.text("Price: " + response.businesses[i - 5].price);
-        cardRating.append(cardPrice);
-      }
-
-
-      //for loop that takes 5 entertain and pushes into a global array so we can access outside this function
-      console.log(response.businesses.length);
-      for (i = 0; i < response.businesses.length; i++) {
-          var entertainlatitude = response.businesses[i].coordinates.latitude
-          var entertainlongitude = response.businesses[i].coordinates.longitude
-          // console.log("test")
-          console.log(latitude, longitude)
-          bingAPI(entertainlatitude,entertainlongitude)
-          //console.log(bingAPI(latitude, longitude))
-          searchResponse.push(response.businesses[i]);
-      }
-
-      //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
-      resultCompareLoopEntertain(entertainChoice);
-      console.log(matchingEntertainPlace);
-
-    });
-  }
 
   ////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
@@ -307,6 +330,7 @@ $(document).ready(function () {
       // var response= response.data;
       var userLocallat = position.coords.latitude;
       var userLocallon = position.coords.longitude;
+      console.log("our position: " + userLocallat, userLocallon)
 
       // userLocate.push(position)
 
@@ -319,26 +343,32 @@ $(document).ready(function () {
         console.log(response);
        // distanceArray.push(response);
         //console.log("this is the conents of distance array" + distanceArray);
-      
-          console.log("global counter" + globalCounter);
 //increments the card sections
-           var cardRating = $('#cardSection' + globalCounter);
+     
 //takes travel distance from obj and makes it into local var
            var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
 //same same
            var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
+
+           var distanceAndTime = [distanceTravel, travelTime];
+           return distanceAndTime;
+
+           var cardRating = $("#cardSection" + globalCounter);
+           console.log("cardRating: " + cardRating)
 //Appending users travel time and distance to cards.
            var travelInfo = $("<p>");
+           console.log("distance travel = " + distanceTravel + " travel time = " + travelTime)
            travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
            cardRating.append(travelInfo);
 //when we run bingAPI it will append to diff card
            globalCounter++;
+           console.log("global counter" + globalCounter);
         //   console.log("this is the length" + response.resourceSets.length)
         // }
 
        // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
 //if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
-       if(globalCounter==10){
+       if(globalCounter==5){
          console.log("global counter reset")
           globalCounter=0;
        }
