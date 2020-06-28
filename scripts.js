@@ -203,7 +203,7 @@ function generateCards(){
     var arrayLongitude = combinedArray[j].coordinates.longitude
     // console.log("test")
     console.log(arrayLatitude, arrayLongitude)
-    bingAPI(arrayLatitude,arrayLongitude)
+    bingAPI(arrayLatitude,arrayLongitude, j)
     //console.log(bingAPI(latitude, longitude))
     searchResponse.push(combinedArray[j]);
     // console.log("search response " + JSON.stringify(searchResponse[i]))
@@ -211,13 +211,6 @@ function generateCards(){
     
   }
 
-//   for (l = 0; l < entertainmentArray.length; l++) {
-    
-//   // console.log("TEST VAR " + testvar)
-// }
-
-
-  // attaching Entertainment name to title of card
   for (k = 5; k < 10; k++) {
     var entname = $('#cardTitle' + k);
     entname.text(entertainmentArray[k - 5].name);
@@ -281,8 +274,6 @@ function generateCards(){
   }
   ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
 
-  //////start entertainment////////////
-
 
   ////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
@@ -327,13 +318,10 @@ function generateCards(){
 
 
   //Geolocation function
-  function bingAPI(latitude, longitude) {
+  function bingAPI(latitude, longitude, cardPosition) {
     navigator.geolocation.getCurrentPosition(showPosition);
 
     function showPosition(position) {
-      // innerHTML = "Latitude: " + position.coords.latitude +
-      //   "<br>Longitude: " + position.coords.longitude;
-      // var response= response.data;
       var userLocallat = position.coords.latitude;
       var userLocallon = position.coords.longitude;
       console.log("our position: " + userLocallat, userLocallon)
@@ -348,8 +336,7 @@ function generateCards(){
         method: "GET"
       }).then(function (response) {
         console.log(response);
-       // distanceArray.push(response);
-        //console.log("this is the conents of distance array" + distanceArray);
+
 //increments the card sections
      
 //takes travel distance from obj and makes it into local var
@@ -363,21 +350,13 @@ function generateCards(){
            console.log("////DIST AND TIME////" + distanceAndTime)
           // return distanceAndTime;
 
-           var cardRating = $("#cardSection" + globalCounter);
+           var cardRating = $("#cardSection" + cardPosition);
            console.log("cardRating: " + cardRating)
 //Appending users travel time and distance to cards.
            var travelInfo = $("<p>");
            console.log("distance travel = " + distanceTravel + " travel time = " + travelTime)
            travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
            cardRating.append(travelInfo);
-//when we run bingAPI it will append to diff card
-           globalCounter++;
-           console.log("global counter" + globalCounter);
-        //   console.log("this is the length" + response.resourceSets.length)
-        // }
-
-       // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
-//if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
        if(globalCounter==10){
          console.log("global counter reset")
           globalCounter=0;
@@ -508,7 +487,3 @@ function generateCards(){
 
 
 //CLOSING document tag!!!
-
-
-
-
