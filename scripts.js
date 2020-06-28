@@ -158,11 +158,6 @@ $(document).ready(function () {
   })
   }
 
-
-//for loop that takes 5 restaraunts and pushes into a global array so we can access outside this function
-     // console.log(response.businesses.length);
-     
-
       //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
       resultCompareLoop(foodChoice);
       // resultCompareLoop(entertainChoice);
@@ -222,10 +217,6 @@ function generateCards(){
     cardPrice.text("Price: " + entertainmentArray[k - 5].price);
     cardRating.append(cardPrice);
   }
-
-
- // for loop that takes 5 entertain and pushes into a global array so we can access outside this function
-  //console.log(response.businesses.length);
  
   //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
   resultCompareLoopEntertain(entertainChoice);
@@ -243,8 +234,8 @@ function generateCards(){
       options.id = optionID;
       options.innerHTML = categoriesForChoose[i];
       foodSelects.append(options);
-
     }
+
     document.getElementById('dropdownfoodselect').onchange = function () {
       // console.log(this.value)
       foodChoice = this.value;
@@ -252,8 +243,6 @@ function generateCards(){
       buttonEnableDisable();
     }
   }
-
-  ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
   /////function to compare restaraunt categories to search term/////
   function resultCompareLoop(searchTerm) {
@@ -272,8 +261,6 @@ function generateCards(){
       }
     }
   }
-  ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
-
 
   ////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
