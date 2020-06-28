@@ -51,6 +51,9 @@ $(document).ready(function () {
 
    var entertainmentArray = [];
 
+   var distanceTimeArray = [];
+
+   var combinedArray = [];
 
   //runs the generate list function which creates the list items used to select food type
   generateEntertainSelect();
@@ -185,20 +188,34 @@ function generateCards(){
     cardRating.append(cardPrice);
     cardGlobalRating = cardRating;
   }
-
-
-
-  for (j = 0; j < restaurantArray.length; j++) {
-    var foodLatitude = restaurantArray[j].coordinates.latitude
-    console.log("response" + j + " lat = " + restaurantArray[j].coordinates.latitude)
-    var foodLongitude = restaurantArray[j].coordinates.longitude
-    // console.log("test")
-    console.log(foodLatitude, foodLongitude)
-    bingAPI(foodLatitude,foodLongitude)
-    //console.log(bingAPI(latitude, longitude))
-    searchResponse.push(restaurantArray[j]);
-    // console.log("search response " + JSON.stringify(searchResponse[i]))
+  for(l=0;l<10;l++){
+    if(l<5){
+    combinedArray.push(restaurantArray[l]);
+    } else {
+      combinedArray.push(entertainmentArray[l-5]);
+    }
   }
+
+
+  for (j = 0; j < combinedArray.length; j++) {
+    var arrayLatitude = combinedArray[j].coordinates.latitude
+    console.log("response" + j + " lat = " + combinedArray[j].coordinates.latitude)
+    var arrayLongitude = combinedArray[j].coordinates.longitude
+    // console.log("test")
+    console.log(arrayLatitude, arrayLongitude)
+    bingAPI(arrayLatitude,arrayLongitude)
+    //console.log(bingAPI(latitude, longitude))
+    searchResponse.push(combinedArray[j]);
+    // console.log("search response " + JSON.stringify(searchResponse[i]))
+    console.log("VALUE OF J " + j)
+    
+  }
+
+//   for (l = 0; l < entertainmentArray.length; l++) {
+    
+//   // console.log("TEST VAR " + testvar)
+// }
+
 
   // attaching Entertainment name to title of card
   for (k = 5; k < 10; k++) {
@@ -216,18 +233,7 @@ function generateCards(){
 
  // for loop that takes 5 entertain and pushes into a global array so we can access outside this function
   //console.log(response.businesses.length);
-  for (l = 0; l < entertainmentArray.length; l++) {
-      var entertainlatitude = entertainmentArray[l].coordinates.latitude
-      var entertainlongitude = entertainmentArray[l].coordinates.longitude
-      console.log("test")
-       console.log(entertainlatitude, entertainlongitude)
-        // globalCounter
-      //console.log(bingAPI(latitude, longitude))
-      searchResponseEntertain.push(entertainmentArray[l]);
-        // console.log("these are entertainment coords" + bingAPI(entertainlatitude,entertainlongitude))
-      bingAPI(entertainlatitude,entertainlongitude)
-  }
-
+ 
   //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
   resultCompareLoopEntertain(entertainChoice);
   console.log(matchingEntertainPlace);
@@ -338,6 +344,7 @@ function generateCards(){
       var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
       $.ajax({
         url: queryURL,
+        async: false,
         method: "GET"
       }).then(function (response) {
         console.log(response);
@@ -351,7 +358,10 @@ function generateCards(){
            var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
 
            var distanceAndTime = [distanceTravel, travelTime];
-           return distanceAndTime;
+
+           distanceTimeArray.push(distanceAndTime);
+           console.log("////DIST AND TIME////" + distanceAndTime)
+          // return distanceAndTime;
 
            var cardRating = $("#cardSection" + globalCounter);
            console.log("cardRating: " + cardRating)
@@ -368,7 +378,7 @@ function generateCards(){
 
        // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
 //if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
-       if(globalCounter==5){
+       if(globalCounter==10){
          console.log("global counter reset")
           globalCounter=0;
        }
