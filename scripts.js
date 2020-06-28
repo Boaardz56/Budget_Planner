@@ -26,9 +26,10 @@ $(document).ready(function () {
 
   var matchingEntertainPlace = [];
 
-  //empty array that holds the whole 50 restaraunts in area
+  //empty array that holds the whole 5 restaraunts in area
   var searchResponse = [];
 
+  //holds 5 entertainment places
   var searchResponseEntertain = [];
 
   //string that is compared to restaraunt categories
@@ -37,12 +38,13 @@ $(document).ready(function () {
   //string that is compared to entertainment categories
   var entertainChoice = "";
 
+  //sets food selected and fun select to false so menu bar works
   var searchFoodSelected = false;
   var searchFunSelected = false;
-
+//makes sure user types city input
   var inputSearchLoc = false;
 
-  var distanceArray = [];
+  //inside bingAPI it tells which card section to point to (for loop was not working inside or outside function because of timing)
   var globalCounter = 0;
 
 
@@ -157,9 +159,7 @@ $(document).ready(function () {
 
       
 
-      //Geolocation function
-
-
+ //Geolocation function
       function bingAPI(latitude, longitude) {
         navigator.geolocation.getCurrentPosition(showPosition);
 
@@ -187,19 +187,23 @@ $(document).ready(function () {
             //loop through function to pull distance and times 
             // for (i = 0; i < response.resourceSets.length; i++) {
               console.log("global counter" + globalCounter);
+//increments the card sections
                var cardRating = $('#cardSection' + globalCounter);
+//takes travel distance from obj and makes it into local var
                var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
+//same same
                var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
-            //   //Appending users travel time and distance to cards.
+//Appending users travel time and distance to cards.
                var travelInfo = $("<p>");
                travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
                cardRating.append(travelInfo);
+//when we run bingAPI it will append to diff card
                globalCounter++;
             //   console.log("this is the length" + response.resourceSets.length)
             // }
 
            // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
-
+//if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
            if(globalCounter==5){
              console.log("global counter reset")
              globalCounter=0;
@@ -347,31 +351,6 @@ $(document).ready(function () {
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
-
-function distanceLoop(){
-  for (i = 0; i < distanceArray.length; i++) {
-    var cardRating = $('#cardSection' + i);
-    var distanceTravel = distanceArray[i].resourceSets[0].resources[0].results[0].travelDistance;
-    console.log("test thing "+ distanceArray[i])
-    var travelTime = distanceArray[i].resourceSets[0].resources[0].results[0].travelDuration;
-    //Appending users travel time and distance to cards.
-    var travelInfo = $("<p>");
-    travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
-    cardRating.append(travelInfo);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
