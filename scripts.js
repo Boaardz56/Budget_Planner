@@ -110,7 +110,9 @@ $(document).ready(function () {
   //-------------------------Yelp API and functions--------------------------------------------------
 
   function yelpSearch(userSearch) {
+    //changing search terms to match yelp categories
     String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+    //query database
     var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + foodChoice.alltrim().toLowerCase();
     var yelpQueryEntertainURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + entertainChoice.alltrim().toLowerCase();
     console.log(yelpQueryURL);
@@ -121,12 +123,14 @@ $(document).ready(function () {
       headers: {
         Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
       }
-
+//give a response
     }).then(function (response) {
      
       console.log(response);
       console.log("FUCK")
+  //setting var i to zero so that it can be used twice
         var i=0;
+        restaurantArray=[];
         for(i;i<response.businesses.length;i++){
         restaurantArray.push(response.businesses[i]);
         console.log("restaurant array " + restaurantArray)
@@ -144,14 +148,15 @@ $(document).ready(function () {
            }).then(function (secondResponse) {
             console.log(secondResponse)
             var j = 0;
+            entertainmentArray=[];
              for(j;j<secondResponse.businesses.length;j++){
-              
                entertainmentArray.push(secondResponse.businesses[j]);
                console.log("entertainment array " + entertainmentArray)
 
              }
                if(j==secondResponse.businesses.length){
                  generateCards();
+                // combinedArray=[]
                }
           })
         }  
@@ -171,7 +176,6 @@ $(document).ready(function () {
 //////////////////////////////////////////////////////////////////////////
 
 function generateCards(){
-
   for (i = 0; i < 5; i++) {
     var restname = $('#cardTitle' + i);
     console.log("restname =" + restname);
@@ -188,6 +192,7 @@ function generateCards(){
     cardRating.append(cardPrice);
     cardGlobalRating = cardRating;
   }
+  combinedArray=[]
   for(l=0;l<10;l++){
     if(l<5){
     combinedArray.push(restaurantArray[l]);
