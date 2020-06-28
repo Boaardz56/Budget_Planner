@@ -42,6 +42,9 @@ $(document).ready(function () {
 
   var inputSearchLoc = false;
 
+  var distanceArray = [];
+  var globalCounter = 0;
+
 
   //runs the generate list function which creates the list items used to select food type
   generateEntertainSelect();
@@ -101,7 +104,7 @@ $(document).ready(function () {
 
   function yelpSearch(userSearch) {
     String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
-    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.alltrim().toLowerCase();
+    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + foodChoice.alltrim().toLowerCase();
     console.log(yelpQueryURL);
     //start Ajax call  
     $.ajax({
@@ -120,8 +123,8 @@ $(document).ready(function () {
 
       //attaching Restaurant name to title of card
       for (i = 0; i < 5; i++) {
-        var name = $('#cardTitle' + i);
-        name.text(response.businesses[i].name);
+        var restname = $('#cardTitle' + i);
+        restname.text(response.businesses[i].name);
         // var foodPic = $("<img>");
         // foodPic.attr(response.businesses[0].image_url);
         var cardRating = $('#cardSection' + i);
@@ -140,8 +143,8 @@ $(document).ready(function () {
         var longitude = response.businesses[i].coordinates.longitude
         // console.log("test")
         console.log(latitude, longitude)
-        // bingAPI(latitude,longitude)
-        console.log(bingAPI(latitude, longitude))
+        bingAPI(latitude,longitude)
+        //console.log(bingAPI(latitude, longitude))
         searchResponse.push(response.businesses[i]);
         // console.log("search response " + JSON.stringify(searchResponse[i]))
       }
@@ -149,6 +152,10 @@ $(document).ready(function () {
       //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
       resultCompareLoop(foodChoice);
       console.log(matchingFoodPlace);
+
+      console.log("//////// DISTANCE.LENGTH/////////"+distanceArray.length)
+
+      
 
       //Geolocation function
 
@@ -174,22 +181,32 @@ $(document).ready(function () {
             method: "GET"
           }).then(function (response) {
             console.log(response);
-            var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
-            var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
+           // distanceArray.push(response);
+            //console.log("this is the conents of distance array" + distanceArray);
+          
             //loop through function to pull distance and times 
-            for (i = 0; i < response.resourceSets.length; i++) {
-              var cardRating = $('#cardSection' + i);
-              //Appending users travel time and distance to cards.
-              var travelInfo = $("<p>");
-              travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
-              cardRating.append(travelInfo);
-            }
+            // for (i = 0; i < response.resourceSets.length; i++) {
+              console.log("global counter" + globalCounter);
+               var cardRating = $('#cardSection' + globalCounter);
+               var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
+               var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
+            //   //Appending users travel time and distance to cards.
+               var travelInfo = $("<p>");
+               travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
+               cardRating.append(travelInfo);
+               globalCounter++;
+            //   console.log("this is the length" + response.resourceSets.length)
+            // }
 
-            console.log("THESE ARE GLOBAL LATLONS " + distanceTravel, travelTime)
+           // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
+
+           if(globalCounter==5){
+             console.log("global counter reset")
+             globalCounter=0;
+           }
 
           })
         }
-
       }
     });
   }
@@ -244,7 +261,7 @@ $(document).ready(function () {
   function yelpSearchEntertain(userSearch) {
     String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
 
-    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.alltrim().toLowerCase();
+    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + entertainChoice.alltrim().toLowerCase();
 
     console.log(entertainChoice.alltrim().toLowerCase());
     console.log(yelpQueryURL);
@@ -260,10 +277,10 @@ $(document).ready(function () {
       console.log("yelp entertain", response);
 
 
-      //attaching Restaurant name to title of card
+      //attaching Entertainment name to title of card
       for (i = 5; i < 10; i++) {
-        var name = $('#cardTitle' + i);
-        name.text(response.businesses[i - 5].name);
+        var entname = $('#cardTitle' + i);
+        entname.text(response.businesses[i - 5].name);
         // var foodPic = $("<img>");
         // foodPic.attr(response.businesses[0].image_url);
         var cardRating = $('#cardSection' + i);
@@ -331,7 +348,18 @@ $(document).ready(function () {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
-
+function distanceLoop(){
+  for (i = 0; i < distanceArray.length; i++) {
+    var cardRating = $('#cardSection' + i);
+    var distanceTravel = distanceArray[i].resourceSets[0].resources[0].results[0].travelDistance;
+    console.log("test thing "+ distanceArray[i])
+    var travelTime = distanceArray[i].resourceSets[0].resources[0].results[0].travelDuration;
+    //Appending users travel time and distance to cards.
+    var travelInfo = $("<p>");
+    travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
+    cardRating.append(travelInfo);
+  }
+}
 
 
 
