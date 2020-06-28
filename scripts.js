@@ -225,6 +225,9 @@ function generateCards(){
     cardRating.text("Rating: " + entertainmentArray[k - 5].rating);
     var cardPrice = $("<p>");
     cardPrice.text("Price: " + entertainmentArray[k - 5].price);
+    if (entertainmentArray[k - 5].price === undefined) {
+      cardPrice.hide();
+    }
     cardRating.append(cardPrice);
   }
 
