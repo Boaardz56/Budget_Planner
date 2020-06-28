@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
+  var userGlobalDistance;
 
+  var userGlobalTime;
   // var categoriesListFood=$('#dropdownfood');
   var businesses = [];
 
@@ -85,6 +87,7 @@ $(document).ready(function () {
   });
 
 
+
   ///this is where we disable the search button if there is no input for location
   document.getElementById('searchField').oninput = function () {
     if (this.value === "") {
@@ -128,6 +131,9 @@ $(document).ready(function () {
         var cardPrice = $("<p>");
         cardPrice.text("Price: " + response.businesses[i].price);
         cardRating.append(cardPrice);
+        var travelInfo = $("<p>");
+        travelInfo.text("Distance: " + userGlobalDistance + "Travel Time: " + userGlobalTime);
+        cardRating.append(travelInfo);
       }
 
 
@@ -160,10 +166,11 @@ $(document).ready(function () {
           // var response= response.data;
           var userLocallat = position.coords.latitude;
           var userLocallon = position.coords.longitude;
-          // userLocate.push(position)
-      
 
-         
+          // userLocate.push(position)
+
+
+
 
           var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
           $.ajax({
@@ -171,10 +178,13 @@ $(document).ready(function () {
             method: "GET"
           }).then(function (response) {
             console.log(response);
-            var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance
-            var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration
-            console.log("THIS IS THE DISTANCE AND TIME" + distanceTravel,travelTime)
-  
+            var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
+            var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
+            userGlobalDistance = distanceTravel;
+            userGlobalTime = travelTime;
+
+            console.log("THESE ARE GLOBAL LATLONS" + userGlobalDistance, userGlobalTime)
+
           })
         }
 
