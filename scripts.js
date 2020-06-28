@@ -1,8 +1,6 @@
 $(document).ready(function () {
 
-  var userGlobalDistance;
-
-  var userGlobalTime;
+  var cardGlobalRating;
   // var categoriesListFood=$('#dropdownfood');
   var businesses = [];
 
@@ -131,9 +129,7 @@ $(document).ready(function () {
         var cardPrice = $("<p>");
         cardPrice.text("Price: " + response.businesses[i].price);
         cardRating.append(cardPrice);
-        var travelInfo = $("<p>");
-        travelInfo.text("Distance: " + userGlobalDistance + "Travel Time: " + userGlobalTime);
-        cardRating.append(travelInfo);
+        cardGlobalRating = cardRating;
       }
 
 
@@ -180,10 +176,16 @@ $(document).ready(function () {
             console.log(response);
             var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
             var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
-            userGlobalDistance = distanceTravel;
-            userGlobalTime = travelTime;
+            //loop through function to pull distance and times 
+            for (i = 0; i < response.resourceSets.length; i++) {
+              var cardRating = $('#cardSection' + i);
+              //Appending users travel time and distance to cards.
+              var travelInfo = $("<p>");
+              travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
+              cardRating.append(travelInfo);
+            }
 
-            console.log("THESE ARE GLOBAL LATLONS" + userGlobalDistance, userGlobalTime)
+            console.log("THESE ARE GLOBAL LATLONS " + distanceTravel, travelTime)
 
           })
         }
