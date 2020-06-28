@@ -161,11 +161,9 @@ $(document).ready(function () {
           var userLocallat = position.coords.latitude;
           var userLocallon = position.coords.longitude;
           // userLocate.push(position)
+      
 
-          // var distanceTravel = response.resourceSets[0].resources[0].destinations.results[0].travelDistance
-          // var travelTime = response.resourceSets[0].resources[0].destinations.results[0].travelDuration
-          // console.log("THIS IS THE DISTANCE AND TIME" + distanceTravel,travelTime)
-
+         
 
           var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
           $.ajax({
@@ -173,6 +171,10 @@ $(document).ready(function () {
             method: "GET"
           }).then(function (response) {
             console.log(response);
+            var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance
+            var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration
+            console.log("THIS IS THE DISTANCE AND TIME" + distanceTravel,travelTime)
+  
           })
         }
 
