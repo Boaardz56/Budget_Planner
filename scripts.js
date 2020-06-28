@@ -19,7 +19,7 @@ $(document).ready(function () {
   var categoriesForChoose = ["Choose Food", "Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-  var categoriesforFun = ["Choose Entertainment", "Bars", "Movie Theaters", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
+  var categoriesforFun = ["Choose Entertainment", "Bars", "Movie Theaters", "Galleries", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
@@ -118,8 +118,9 @@ $(document).ready(function () {
 
     }).then(function (response) {
 
-      var lat = response.region.center.latitude;
-      var lon = response.region.center.longitude;
+      // var lat = response.region.center.latitude;
+      // var lon = response.region.center.longitude;
+
       //console.log("yelp", response);
       // console.log(lat, lon)
 
@@ -136,9 +137,11 @@ $(document).ready(function () {
         cardRating.append(cardPrice);
         cardGlobalRating = cardRating;
       }
+    })
+  }
 
 
-      //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
+      //for loop that takes 5 restaraunts and pushes into a global array so we can access outside this function
       console.log(response.businesses.length);
       for (i = 0; i < response.businesses.length; i++) {
         var latitude = response.businesses[i].coordinates.latitude
@@ -157,7 +160,7 @@ $(document).ready(function () {
 
       console.log("//////// DISTANCE.LENGTH/////////"+distanceArray.length)
 
-      
+     
 
  //Geolocation function
       function bingAPI(latitude, longitude) {
@@ -173,8 +176,6 @@ $(document).ready(function () {
           // userLocate.push(position)
 
 
-
-
           var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
           $.ajax({
             url: queryURL,
@@ -184,8 +185,6 @@ $(document).ready(function () {
            // distanceArray.push(response);
             //console.log("this is the conents of distance array" + distanceArray);
           
-            //loop through function to pull distance and times 
-            // for (i = 0; i < response.resourceSets.length; i++) {
               console.log("global counter" + globalCounter);
 //increments the card sections
                var cardRating = $('#cardSection' + globalCounter);
@@ -204,16 +203,14 @@ $(document).ready(function () {
 
            // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
 //if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
-           if(globalCounter==5){
+           if(globalCounter==10){
              console.log("global counter reset")
-             globalCounter=0;
+              globalCounter=0;
            }
-
           })
         }
       }
-    });
-  }
+  
 
 
   ////////////////FOOD SELECTS//////////////////////////////////////////////
@@ -235,7 +232,6 @@ $(document).ready(function () {
       buttonEnableDisable();
     }
   }
-
 
   ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
@@ -260,7 +256,7 @@ $(document).ready(function () {
 
   //////start entertainment////////////
 
-  /////////////////////function for yelp entertainment user search//////////////////////
+  /////////////////////function for yelp entertainment user search//////////////////////////////////////////////////
 
   function yelpSearchEntertain(userSearch) {
     String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
@@ -295,11 +291,16 @@ $(document).ready(function () {
       }
 
 
-      //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
+      //for loop that takes 5 entertain and pushes into a global array so we can access outside this function
       console.log(response.businesses.length);
       for (i = 0; i < response.businesses.length; i++) {
-        searchResponseEntertain.push(response.businesses[i]);
-        // console.log("search response " + JSON.stringify(searchResponse[i]))
+          var latitude = response.businesses[i].coordinates.latitude
+          var longitude = response.businesses[i].coordinates.longitude
+          // console.log("test")
+          console.log(latitude, longitude)
+          bingAPI(latitude,longitude)
+          //console.log(bingAPI(latitude, longitude))
+          searchResponse.push(response.businesses[i]);
       }
 
       //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
