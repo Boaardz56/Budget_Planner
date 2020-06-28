@@ -16,99 +16,99 @@ $(document).ready(function () {
   var foodSelects = $('#dropdownfoodselect')
 
   //array of predetermined choices/can be edited
-  var categoriesForChoose=["Choose Food", "Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
+  var categoriesForChoose = ["Choose Food", "Mexican", "Asian Fusion", "Vegan", "Italian", "Seafood"];
 
   //array of predetermined choices for entertainment
-  var categoriesforFun=["Choose Entertainment","Bars", "Movie Theaters", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
+  var categoriesforFun = ["Choose Entertainment", "Bars", "Movie Theaters", "Galleries", "Cabaret", "Museums", "Music Venues", "Theater", "Race Tracks"]
 
   //empty array that holds matching places with food category
   var matchingFoodPlace = [];
 
-  var matchingEntertainPlace=[];
+  var matchingEntertainPlace = [];
 
-//empty array that holds the whole 50 restaraunts in area
+  //empty array that holds the whole 50 restaraunts in area
   var searchResponse = [];
 
-  var searchResponseEntertain= [];
+  var searchResponseEntertain = [];
 
-//string that is compared to restaraunt categories
-  var foodChoice="";
+  //string that is compared to restaraunt categories
+  var foodChoice = "";
 
-//string that is compared to entertainment categories
-var entertainChoice="";
+  //string that is compared to entertainment categories
+  var entertainChoice = "";
 
-var searchFoodSelected = false;
-var searchFunSelected = false;
+  var searchFoodSelected = false;
+  var searchFunSelected = false;
 
-var inputSearchLoc = false;
-
-
-//runs the generate list function which creates the list items used to select food type
-generateEntertainSelect();
-generateFoodSelect();
-buttonEnableDisable();
+  var inputSearchLoc = false;
 
 
-//function to enable and disable the search button if not all 3 inputs are met
-function buttonEnableDisable(){
+  //runs the generate list function which creates the list items used to select food type
+  generateEntertainSelect();
+  generateFoodSelect();
+  buttonEnableDisable();
 
-  if(searchFunSelected===true && searchFoodSelected ===true && inputSearchLoc ===true){
-    
-    document.getElementById('submitBtn').disabled=false;
- 
-  }else{
 
-    document.getElementById('submitBtn').disabled=true;
+  //function to enable and disable the search button if not all 3 inputs are met
+  function buttonEnableDisable() {
+
+    if (searchFunSelected === true && searchFoodSelected === true && inputSearchLoc === true) {
+
+      document.getElementById('submitBtn').disabled = false;
+
+    } else {
+
+      document.getElementById('submitBtn').disabled = true;
+    }
+    console.log(searchFunSelected)
+    console.log(searchFoodSelected)
+    console.log(inputSearchLoc)
   }
-  console.log(searchFunSelected)
-  console.log(searchFoodSelected)
-  console.log(inputSearchLoc)
-}
 
 
-//Button event for user's search.
-  $("#submitBtn").click(function(){
+  //Button event for user's search.
+  $("#submitBtn").click(function () {
 
-//Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
-  //var cardHeader = $("h4");
-  var userSearch = $("#searchField").val();
-  //cardHeader.text(userSearch)
-  // console.log(userSearch)
-//Shows container with cards after search.
-  $("#card-page").show();
-  yelpSearch(userSearch);
-  yelpSearchEntertain(userSearch);
+    //Made it so the search data/text is taken and can be used.  cardHeader variable is a placeholder to demonstrate that the code is working with the page.
+    //var cardHeader = $("h4");
+    var userSearch = $("#searchField").val();
+    //cardHeader.text(userSearch)
+    // console.log(userSearch)
+    //Shows container with cards after search.
+    $("#card-page").show();
+    yelpSearch(userSearch);
+    yelpSearchEntertain(userSearch);
 
-//-------------------------Yelp API and functions for food--------------------------------------------------
+    //-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
 
 
-///this is where we disable the search button if there is no input for location
-  document.getElementById('searchField').oninput=function(){
-    if(this.value === ""){
-      inputSearchLoc=false;
+  ///this is where we disable the search button if there is no input for location
+  document.getElementById('searchField').oninput = function () {
+    if (this.value === "") {
+      inputSearchLoc = false;
       console.log("hey")
-    }else{
-      inputSearchLoc=true;
+    } else {
+      inputSearchLoc = true;
     }
     buttonEnableDisable();
   }
 
   //-------------------------Yelp API and functions--------------------------------------------------
 
-function yelpSearch(userSearch) {
-  String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.alltrim().toLowerCase();
-  console.log(yelpQueryURL);
-//start Ajax call  
-  $.ajax({
-  url: yelpQueryURL,
-  method: "GET",
-  headers:{
-    Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
-  }
+  function yelpSearch(userSearch) {
+    String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + foodChoice.alltrim().toLowerCase();
+    console.log(yelpQueryURL);
+    //start Ajax call  
+    $.ajax({
+      url: yelpQueryURL,
+      method: "GET",
+      headers: {
+        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+      }
 
     }).then(function (response) {
 
@@ -118,16 +118,16 @@ function yelpSearch(userSearch) {
       // console.log(lat, lon)
 
       //attaching Restaurant name to title of card
-      for(i=0; i < 5; i++){
-      var name = $('#cardTitle' + i);
-      name.text(response.businesses[i].name);
-      // var foodPic = $("<img>");
-      // foodPic.attr(response.businesses[0].image_url);
-      var cardRating = $('#cardSection' + i);
-      cardRating.text("Rating: " + response.businesses[i].rating);
-      var cardPrice = $("<p>");
-      cardPrice.text("Price: " + response.businesses[i].price);
-      cardRating.append(cardPrice);
+      for (i = 0; i < 5; i++) {
+        var name = $('#cardTitle' + i);
+        name.text(response.businesses[i].name);
+        // var foodPic = $("<img>");
+        // foodPic.attr(response.businesses[0].image_url);
+        var cardRating = $('#cardSection' + i);
+        cardRating.text("Rating: " + response.businesses[i].rating);
+        var cardPrice = $("<p>");
+        cardPrice.text("Price: " + response.businesses[i].price);
+        cardRating.append(cardPrice);
       }
 
 
@@ -150,168 +150,170 @@ function yelpSearch(userSearch) {
 
       //Geolocation function
 
-      navigator.geolocation.getCurrentPosition(showPosition);
-
-      function showPosition(position) {
-        // innerHTML = "Latitude: " + position.coords.latitude +
-        //   "<br>Longitude: " + position.coords.longitude;
-        // var response= response.data;
-        var userLocallat = position.coords.latitude;
-        var userLocallon = position.coords.longitude;
-        // userLocate.push(position)
-        console.log(position)
-      }
 
       function bingAPI(latitude, longitude) {
-        var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins="+ userLocallat+","+userLocallon+"&destinations="+latitude+","+longitude+"&travelMode=driving&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function (response) {
-          console.log(response);
-        })
- }
+        navigator.geolocation.getCurrentPosition(showPosition);
 
-     
-    });
+        function showPosition(position) {
+          // innerHTML = "Latitude: " + position.coords.latitude +
+          //   "<br>Longitude: " + position.coords.longitude;
+          // var response= response.data;
+          var userLocallat = position.coords.latitude;
+          var userLocallon = position.coords.longitude;
+          // userLocate.push(position)
+
+
+
+
+          var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          }).then(function (response) {
+            console.log(response);
+          })
+        }
+
+      }
+      });
   }
-  
 
-////////////////FOOD SELECTS//////////////////////////////////////////////
-function generateFoodSelect(){
-  for (i = 0; i < categoriesForChoose.length; i++) {
-    var optionID = "foodType" + categoriesForChoose[i];
-    //console.log(optionID);
-    var options = document.createElement("OPTION");
-    //console.log(options);
+
+  ////////////////FOOD SELECTS//////////////////////////////////////////////
+  function generateFoodSelect() {
+    for (i = 0; i < categoriesForChoose.length; i++) {
+      var optionID = "foodType" + categoriesForChoose[i];
+      //console.log(optionID);
+      var options = document.createElement("OPTION");
+      //console.log(options);
       options.id = optionID;
-     options.innerHTML=categoriesForChoose[i];
-     foodSelects.append(options);
+      options.innerHTML = categoriesForChoose[i];
+      foodSelects.append(options);
 
+    }
+    document.getElementById('dropdownfoodselect').onchange = function () {
+      // console.log(this.value)
+      foodChoice = this.value;
+      searchFoodSelected = true;
+      buttonEnableDisable();
+    }
   }
-  document.getElementById('dropdownfoodselect').onchange=function(){
-    // console.log(this.value)
-    foodChoice=this.value;
-    searchFoodSelected = true;
-    buttonEnableDisable();
-  }
-}
 
 
-////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
+  ////////////////////COMPARE FOOD CHOICE TO YELP FOOD CAT///////////////////////////////////////////////////
 
-/////function to compare restaraunt categories to search term/////
-  function resultCompareLoop(searchTerm){
-      // console.log("search term is " + searchTerm)
-//loops through all 50 restaraunts
-    for(i=0; i<searchResponse.length; i++){
-//loops through categories in restaraunt
-      for(j=0; j<searchResponse[i].categories.length; j++){
-//if the selected term matches restaraunt categories        
-        if(searchResponse[i].categories[j].title == searchTerm){
-//push the matching restaraunt object into the matching food place array
+  /////function to compare restaraunt categories to search term/////
+  function resultCompareLoop(searchTerm) {
+    // console.log("search term is " + searchTerm)
+    //loops through all 50 restaraunts
+    for (i = 0; i < searchResponse.length; i++) {
+      //loops through categories in restaraunt
+      for (j = 0; j < searchResponse[i].categories.length; j++) {
+        //if the selected term matches restaraunt categories        
+        if (searchResponse[i].categories[j].title == searchTerm) {
+          //push the matching restaraunt object into the matching food place array
           matchingFoodPlace.push(searchResponse[i]);
           // console.log("added to array");
         }
-// console.log(searchResponse[i].categories[j].title);
-      } 
+        // console.log(searchResponse[i].categories[j].title);
+      }
     }
   }
-////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////END YELP STUFF FOR FOOD////////////////////////////////////////////////////////////////////////////////
 
-//////start entertainment////////////
+  //////start entertainment////////////
 
-/////////////////////function for yelp entertainment user search//////////////////////
+  /////////////////////function for yelp entertainment user search//////////////////////
 
-function yelpSearchEntertain(userSearch) {
-  String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+  function yelpSearchEntertain(userSearch) {
+    String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
 
-  var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.alltrim().toLowerCase();
+    var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=50" + "&categories=" + entertainChoice.alltrim().toLowerCase();
 
-  console.log(entertainChoice.alltrim().toLowerCase());
-  console.log(yelpQueryURL);
-//start Ajax call  
-  $.ajax({
-  url: yelpQueryURL,
-  method: "GET",
-  headers:{
-    Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+    console.log(entertainChoice.alltrim().toLowerCase());
+    console.log(yelpQueryURL);
+    //start Ajax call  
+    $.ajax({
+      url: yelpQueryURL,
+      method: "GET",
+      headers: {
+        Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
+      }
+
+    }).then(function (response) {
+      console.log("yelp entertain", response);
+
+
+      //attaching Restaurant name to title of card
+      for (i = 5; i < 10; i++) {
+        var name = $('#cardTitle' + i);
+        name.text(response.businesses[i - 5].name);
+        // var foodPic = $("<img>");
+        // foodPic.attr(response.businesses[0].image_url);
+        var cardRating = $('#cardSection' + i);
+        cardRating.text("Rating: " + response.businesses[i - 5].rating);
+        var cardPrice = $("<p>");
+        cardPrice.text("Price: " + response.businesses[i - 5].price);
+        cardRating.append(cardPrice);
+      }
+
+
+      //for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
+      console.log(response.businesses.length);
+      for (i = 0; i < response.businesses.length; i++) {
+        searchResponseEntertain.push(response.businesses[i]);
+        // console.log("search response " + JSON.stringify(searchResponse[i]))
+      }
+
+      //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
+      resultCompareLoopEntertain(entertainChoice);
+      console.log(matchingEntertainPlace);
+
+    });
   }
 
-  }).then(function(response) {
-      console.log ("yelp entertain" , response);
+  ////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
 
-     
-   //attaching Restaurant name to title of card
-   for(i=5; i < 10; i++){
-    var name = $('#cardTitle' + i);
-    name.text(response.businesses[i-5].name);
-    // var foodPic = $("<img>");
-    // foodPic.attr(response.businesses[0].image_url);
-    var cardRating = $('#cardSection' + i);
-    cardRating.text("Rating: " + response.businesses[i-5].rating);
-    var cardPrice = $("<p>");
-    cardPrice.text("Price: " + response.businesses[i-5].price);
-    cardRating.append(cardPrice);
+  /////function to compare restaraunt categories to search term/////
+  function resultCompareLoopEntertain(searchTerm) {
+    //loops through all 50 restaraunts
+    console.log("this is entertainchoice" + entertainChoice)
+    console.log("this is search term" + searchTerm)
+    for (i = 0; i < searchResponseEntertain.length; i++) {
+      //loops through categories in restaraunt
+      for (j = 0; j < searchResponseEntertain[i].categories.length; j++) {
+        //if the selected term matches restaraunt categories        
+        if (searchResponseEntertain[i].categories[j].title == searchTerm) {
+          //push the matching restaraunt object into the matching food place array
+          matchingEntertainPlace.push(searchResponseEntertain[i]);
+          console.log("added to array");
+        }
+      }
     }
+  }
 
+  ///////////////STUFF WE CAN USE LATER MAYBE/////////////////////////////////////////////
 
-//for loop that takes 50 restaraunts and pushes into a global array so we can access outside this function
-       console.log(response.businesses.length);
-           for(i=0; i<response.businesses.length; i++ ){
-              searchResponseEntertain.push(response.businesses[i]);
-              // console.log("search response " + JSON.stringify(searchResponse[i]))
-           }
-      
-//runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
-resultCompareLoopEntertain(entertainChoice);
-console.log(matchingEntertainPlace);
-      
-  });
-}
+  ////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
 
-////////////////////COMPARE VENUE CHOICE TO YELP ENTERTAIN CAT///////////////////////////////////////////////////
-
-/////function to compare restaraunt categories to search term/////
-function resultCompareLoopEntertain(searchTerm){
-//loops through all 50 restaraunts
-console.log("this is entertainchoice" + entertainChoice)
-console.log ("this is search term" + searchTerm)
-for(i=0; i<searchResponseEntertain.length; i++){
-//loops through categories in restaraunt
-  for(j=0; j<searchResponseEntertain[i].categories.length; j++){
-//if the selected term matches restaraunt categories        
-    if(searchResponseEntertain[i].categories[j].title == searchTerm){
-//push the matching restaraunt object into the matching food place array
-      matchingEntertainPlace.push(searchResponseEntertain[i]);
-      console.log("added to array");
-    }
-  } 
-}
-}
-
-///////////////STUFF WE CAN USE LATER MAYBE/////////////////////////////////////////////
-
-////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
-
-function generateEntertainSelect(){
-  for (i = 0; i < categoriesforFun.length; i++) {
-    var optionID = "entertainType" + categoriesforFun[i];
-    var options = document.createElement("OPTION");
+  function generateEntertainSelect() {
+    for (i = 0; i < categoriesforFun.length; i++) {
+      var optionID = "entertainType" + categoriesforFun[i];
+      var options = document.createElement("OPTION");
       options.id = optionID;
 
-     options.innerHTML=categoriesforFun[i];
-     entertainSelects.append(options);
+      options.innerHTML = categoriesforFun[i];
+      entertainSelects.append(options);
+    }
+    document.getElementById('dropdownentertainselect').onchange = function () {
+      console.log(this.value)
+      entertainChoice = this.value;
+      searchFunSelected = true;
+      buttonEnableDisable();
+    }
   }
-  document.getElementById('dropdownentertainselect').onchange=function(){
-    console.log(this.value)
-    entertainChoice=this.value;
-    searchFunSelected=true;
-     buttonEnableDisable();
-  }
-}
 
-///////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -451,5 +453,5 @@ function generateEntertainSelect(){
 //CLOSING document tag!!!
 
 
-    
-    
+
+
