@@ -16,9 +16,10 @@ body{
   }
 
   .logo{
-    height: 50%;
-    width: 50%;
+    height: 75%;
+    width: 75%;
     margin:auto;
+    margin-top: -200px;
   }
 
   #card-page{
