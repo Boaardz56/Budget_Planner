@@ -158,61 +158,6 @@ $(document).ready(function () {
       resultCompareLoop(foodChoice);
       console.log(matchingFoodPlace);
 
-      console.log("//////// DISTANCE.LENGTH/////////"+distanceArray.length)
-
-     
-
- //Geolocation function
-      function bingAPI(latitude, longitude) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-
-        function showPosition(position) {
-          // innerHTML = "Latitude: " + position.coords.latitude +
-          //   "<br>Longitude: " + position.coords.longitude;
-          // var response= response.data;
-          var userLocallat = position.coords.latitude;
-          var userLocallon = position.coords.longitude;
-
-          // userLocate.push(position)
-
-
-          var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
-          $.ajax({
-            url: queryURL,
-            method: "GET"
-          }).then(function (response) {
-            console.log(response);
-           // distanceArray.push(response);
-            //console.log("this is the conents of distance array" + distanceArray);
-          
-              console.log("global counter" + globalCounter);
-//increments the card sections
-               var cardRating = $('#cardSection' + globalCounter);
-//takes travel distance from obj and makes it into local var
-               var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
-//same same
-               var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
-//Appending users travel time and distance to cards.
-               var travelInfo = $("<p>");
-               travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
-               cardRating.append(travelInfo);
-//when we run bingAPI it will append to diff card
-               globalCounter++;
-            //   console.log("this is the length" + response.resourceSets.length)
-            // }
-
-           // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
-//if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
-           if(globalCounter==10){
-             console.log("global counter reset")
-              globalCounter=0;
-           }
-          })
-        }
-      }
-  
-
-
   ////////////////FOOD SELECTS//////////////////////////////////////////////
   function generateFoodSelect() {
     for (i = 0; i < categoriesForChoose.length; i++) {
@@ -294,11 +239,11 @@ $(document).ready(function () {
       //for loop that takes 5 entertain and pushes into a global array so we can access outside this function
       console.log(response.businesses.length);
       for (i = 0; i < response.businesses.length; i++) {
-          var latitude = response.businesses[i].coordinates.latitude
-          var longitude = response.businesses[i].coordinates.longitude
+          var entertainlatitude = response.businesses[i].coordinates.latitude
+          var entertainlongitude = response.businesses[i].coordinates.longitude
           // console.log("test")
           console.log(latitude, longitude)
-          bingAPI(latitude,longitude)
+          bingAPI(entertainlatitude,entertainlongitude)
           //console.log(bingAPI(latitude, longitude))
           searchResponse.push(response.businesses[i]);
       }
@@ -322,15 +267,13 @@ $(document).ready(function () {
       for (j = 0; j < searchResponseEntertain[i].categories.length; j++) {
         //if the selected term matches restaraunt categories        
         if (searchResponseEntertain[i].categories[j].title == searchTerm) {
-          //push the matching restaraunt object into the matching food place array
+          //push the matching restaraunt object into the matching entertain place array
           matchingEntertainPlace.push(searchResponseEntertain[i]);
           console.log("added to array");
         }
       }
     }
   }
-
-  ///////////////STUFF WE CAN USE LATER MAYBE/////////////////////////////////////////////
 
   ////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
 
@@ -351,7 +294,57 @@ $(document).ready(function () {
     }
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////
+  //////////////////////GEOLOCATE STUFF HERE/////////////////////////////////////////////////////////////
+
+
+  //Geolocation function
+  function bingAPI(latitude, longitude) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+
+    function showPosition(position) {
+      // innerHTML = "Latitude: " + position.coords.latitude +
+      //   "<br>Longitude: " + position.coords.longitude;
+      // var response= response.data;
+      var userLocallat = position.coords.latitude;
+      var userLocallon = position.coords.longitude;
+
+      // userLocate.push(position)
+
+
+      var queryURL = "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=" + userLocallat + "," + userLocallon + "&destinations=" + latitude + "," + longitude + "&travelMode=driving&distanceUnit=mi&key=At2SCR-6vENC2Cj3r4z2BPnKIwQVBbz-EtSXYqKjQCWTCF14BLLL06wG3puUnaiC"
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+        console.log(response);
+       // distanceArray.push(response);
+        //console.log("this is the conents of distance array" + distanceArray);
+      
+          console.log("global counter" + globalCounter);
+//increments the card sections
+           var cardRating = $('#cardSection' + globalCounter);
+//takes travel distance from obj and makes it into local var
+           var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
+//same same
+           var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
+//Appending users travel time and distance to cards.
+           var travelInfo = $("<p>");
+           travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
+           cardRating.append(travelInfo);
+//when we run bingAPI it will append to diff card
+           globalCounter++;
+        //   console.log("this is the length" + response.resourceSets.length)
+        // }
+
+       // console.log("THESE ARE GLOBAL distance time " + distanceTravel, travelTime)
+//if globalcounter is 5 it is reset after all cards generated so if new search all cards will still work
+       if(globalCounter==10){
+         console.log("global counter reset")
+          globalCounter=0;
+       }
+      })
+    }
+  }
 
 
 
