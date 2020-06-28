@@ -15,6 +15,13 @@ body{
   
   }
 
+  .logo{
+    height: 75%;
+    width: 75%;
+    margin:auto;
+    margin-top: -200px;
+  }
+
   #card-page{
     /* background-image: url("./assets/images/Dining.jpg"); */
     background-size: cover;
