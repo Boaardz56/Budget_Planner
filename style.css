@@ -1,6 +1,6 @@
 
 body{
-  background-image:url("./assets/images/Party.jpg");
+  background-image:url("./assets/images/WebsiteBG.jpg");
   background-repeat: no-repeat; 
   background-size: cover;
 }
@@ -16,7 +16,7 @@ body{
   }
 
   #card-page{
-    background-image: url("./assets/images/Dining.jpg");
+    /* background-image: url("./assets/images/Dining.jpg"); */
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.308);
     height:100vh,100%;
