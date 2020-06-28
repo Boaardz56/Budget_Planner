@@ -195,7 +195,7 @@ $(document).ready(function () {
                var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
 //Appending users travel time and distance to cards.
                var travelInfo = $("<p>");
-               travelInfo.text("Distance: " + distanceTravel + " Miles    " + "Time: " + travelTime + " Minutes");
+               travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
                cardRating.append(travelInfo);
 //when we run bingAPI it will append to diff card
                globalCounter++;
