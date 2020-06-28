@@ -35,7 +35,14 @@ body{
 .card{
     margin-bottom:5px;
     height: 160px;
+
+     border-radius: 20px;
+     background-color: #1f1f2d;
+     color: blanchedalmond;
+  
+
     position: relative;
+
   
 }
 /* Padding Added to cards to add some seperation between them. */
