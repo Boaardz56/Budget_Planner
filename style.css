@@ -19,7 +19,7 @@ body{
     background-image: url("./assets/images/Dining.jpg");
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.308);
-    height:100vh;
+    height:100vh,100%;
   }
  
 
@@ -75,6 +75,11 @@ width:70%;
 
 }
 
+#footer{
+  color: white;
+  background-color: black;
+  opacity: 75%;
+}
 
 
 #dropdownfoodselect{
