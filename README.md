@@ -8,13 +8,21 @@ Offers user the chance to plan an outing in a local or unfamiliar area based on 
 - CSS
 - JavaScript
 ### APIs used
-- Yelp API was used to retrieve buisness name, price information, rating and the location of each establishent
+- [YelpAPI](https://rapidapi.com/blog/yelp-fusion-api-profile-pull-local-business-data/) Yelp API was used to retrieve buisness name, price information, rating and the location of each establishent
+- [BingAPI](https://docs.microsoft.com/en-us/bingmaps/rest-services/routes/calculate-a-distance-matrix?redirectedfrom=MSDN) Bing distance matrix API was used to calculate the distance and time between users and their prospective destinations
 - HTML5 built in geolocaiton was used to get users current locaiton
-- Bing distance matrix API was used to calculate the distance and time between users and their prospective destinations
-## Credits
-[BingAPI](https://docs.microsoft.com/en-us/bingmaps/rest-services/routes/calculate-a-distance-matrix?redirectedfrom=MSDN)
-[YelpAPI](https://rapidapi.com/blog/yelp-fusion-api-profile-pull-local-business-data/)
+
 ## Libraries
 [Foundation Wireframe](https://get.foundation/develop/getting-started.html)
+
 [Google Fonts](https://fonts.google.com/)
-Console.log(do you see this)
+
+## Method
+Used HTML to create a series of rows and columns to organize search result cards. In the javascript file, we created global variables that can be accessed by entire file. Click function is disabled until user inputs location, foods and entertainment. Yelp API based on userSearch is called in the click function which also gives us the latitude and longitude variables of the buisness locations. All information returned from Yelp API is for looped to extract pertienent data.
+
+Inside the BingAPI function the geolocation api is utilized to get current userlocation. These are stored in the variables userLocallat and userLocallon which are added to the bing query URL. This returns the distance between the two locations.
+
+Seperate for loops were created to append price, rating,  buisness name and distance/time values to cards.
+
+Finally, CSS was used for styling purposes.
+
