@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var cardGlobalRating;
+  
   // var categoriesListFood=$('#dropdownfood');
   var businesses = [];
 
@@ -92,7 +92,6 @@ $(document).ready(function () {
   document.getElementById('searchField').oninput = function () {
     if (this.value === "") {
       inputSearchLoc = false;
-      console.log("hey")
     } else {
       inputSearchLoc = true;
     }
@@ -107,7 +106,6 @@ $(document).ready(function () {
 //query database
     var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + foodChoice.alltrim().toLowerCase();
     var yelpQueryEntertainURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + entertainChoice.alltrim().toLowerCase();
-    console.log(yelpQueryURL);
     //start Ajax call 
     $.ajax({
       url: yelpQueryURL,
@@ -117,9 +115,7 @@ $(document).ready(function () {
       }
 //give a response
     }).then(function (response) {
-     
       console.log(response);
-      console.log("FUCK")
 //setting var i to zero so that it can be used twice within this function
         var i=0;
 //resets restaurant array to empty when function runs
@@ -291,7 +287,6 @@ function generateCards(){
       entertainSelects.append(options);
     }
     document.getElementById('dropdownentertainselect').onchange = function () {
-      console.log(this.value)
       entertainChoice = this.value;
       searchFunSelected = true;
       buttonEnableDisable();
