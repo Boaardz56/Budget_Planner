@@ -17,3 +17,4 @@ Offers user the chance to plan an outing in a local or unfamiliar area based on 
 ## Libraries
 [Foundation Wireframe](https://get.foundation/develop/getting-started.html)
 [Google Fonts](https://fonts.google.com/)
+Console.log(do you see this)
