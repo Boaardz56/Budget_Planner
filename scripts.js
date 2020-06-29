@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+// var categoriesListFood=$('#dropdownfood');
+  var businesses = [];
+
+  //Global variable that hides the container with the cards on the opening page.
+  var cardsContainer = $("#card-page").hide();
+
   var entertainSelects = $('#dropdownentertainselect')
   var foodSelects = $('#dropdownfoodselect')
 
