@@ -60,7 +60,6 @@ $(document).ready(function () {
   //disables and enables the search bar so user puts in all inputs 
   buttonEnableDisable();
 
-
   //function to enable and disable the search button if not all 3 inputs are met
   function buttonEnableDisable() {
     //if you select an entertainment option and food option and put in a city then the search button is enabled
@@ -96,7 +95,6 @@ $(document).ready(function () {
     }
     buttonEnableDisable();
   }
-
   //-------------------------Yelp API and functions--------------------------------------------------
 
   function yelpSearch(userSearch) {
@@ -204,7 +202,7 @@ $(document).ready(function () {
       searchResponse.push(combinedArray[j]);
     }
 
-    //fill column 2 with entertainment options
+//fill column 2 with entertainment options
     for (k = 5; k < 10; k++) {
       var entname = $('#cardTitle' + k);
       entname.text(entertainmentArray[k - 5].name);
@@ -213,7 +211,7 @@ $(document).ready(function () {
       var cardRating = $('#cardSection' + k);
       cardRating.text("Rating: " + entertainmentArray[k - 5].rating);
       var cardPrice = $("<p>");
-      //if there is no price for an option do not show it
+//if there is no price for an option do not show it
       cardPrice.text("Price: " + entertainmentArray[k - 5].price);
       if (entertainmentArray[k - 5].price === undefined) {
         cardPrice.hide();
@@ -221,7 +219,7 @@ $(document).ready(function () {
       cardRating.append(cardPrice);
     }
 
-    //runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
+//runs the compare loop function which takes food choice and sees if any restaraunts have that category and if so they are pushed into array        
     resultCompareLoopEntertain(entertainChoice);
   }
 
