@@ -325,9 +325,7 @@ $(document).ready(function () {
         travelDist.text("Distance: " + Math.round(distanceTravel) + " Miles").appendTo(cardRating);
         var travelMin = $("<p>");
         travelMin.text("Time: " + Math.round(travelTime) + " Minutes").appendTo(travelDist);
-        if (globalCounter == 10) {
-          globalCounter = 0;
-        }
+   
       })
     }
   }
