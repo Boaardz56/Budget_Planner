@@ -30,15 +30,7 @@ span{
  font-family: 'Bungee Inline';
  }
 
-.logo{
-    height: 60%;
-    width: 60%;
-    /* margin:auto; */
-    margin: auto;
-    margin-top: auto;
-     margin-bottom: auto;
-     
- }
+
  
 /* ----------- CONTAINER W/SEARCH INPUT AND BUTTON ----------- */
 .searchBar{
@@ -48,6 +40,7 @@ span{
   /* padding:auto; */
   border-color: #1f1f2d;
   /* margin-top: auto; */
+  /* width: 30%; */
 }
 
 .submitBtn{
@@ -70,8 +63,11 @@ background-color: black;
 }
 
 .input-group{
+  margin:auto;
   margin-top: 30px;
   margin-bottom: 0px;
+  width: 50%;
+  
 }
 
 .menu{
@@ -147,18 +143,26 @@ margin-bottom: auto;
   /* Scoping for dropdown options */
 #dropdownfoodselect{
   float:left;
-  width:30%;
+  width:15%;
   border-bottom-left-radius: 30px;
-  margin-left:20%;
+  margin-left:33%;
   background-color: #ffd578;
   border-color: #1f1f2d;
 }
   #dropdownentertainselect{
-  width:30%;
+  width:15%;
   border-bottom-right-radius: 30px;
   background-color: #ffd578;
   border-color: #1f1f2d;
   }
+
+  .logo{
+    height: 60%;
+    width: 60%;
+    margin: auto;
+
+     
+ }
   
 /*---------FOOTER---------*/
 #footer{
@@ -170,6 +174,18 @@ margin-bottom: auto;
   width: 100%;
 }
 
+@media only screen and (max-width: 850px) {
+ 
+  h5{
+    margin-top: 20%;
+  }
+
+  .logo{
+    height: auto;
+    width: auto;
+  }
+
+}
 
 
 

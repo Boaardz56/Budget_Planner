@@ -28,5 +28,5 @@ Finally, CSS was used for styling purposes.
 
 ![](images/NightLife_Gif.gif)
 
-https://boaardz56.github.io/Wanderlust/
+https://boaardz56.github.io/Nightlife/
 
