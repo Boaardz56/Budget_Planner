@@ -31,10 +31,12 @@ span{
  }
 
 .logo{
-    height: auto;
-    width: auto;
-    margin-top: -20%;
-     margin-bottom: -50px;
+    height: 60%;
+    width: 60%;
+    /* margin:auto; */
+    margin: auto;
+    margin-top: auto;
+     margin-bottom: auto;
      
  }
  
@@ -83,6 +85,7 @@ position:-webkit-sticky;
 position:sticky;
 top:0;
 width:70%;
+margin-bottom: auto;
 }
  
 
