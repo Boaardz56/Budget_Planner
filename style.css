@@ -38,13 +38,22 @@ body{
 
      border-radius: 20px;
      background-color: #1f1f2d;
-     color: blanchedalmond;
-  
 
-    position: relative;
+     color: #fbf0e3;
+     border-color: #ffd578;
+     border-style: double;
+    border-width: 7px;
+}
+
+.card-divider{
+background-color: #ffd578;
+color: #1f1f2d;
+position: relative;
 
   
 }
+
+
 /* Padding Added to cards to add some seperation between them. */
 .cell{
     padding-right: 20px;
@@ -54,6 +63,7 @@ body{
 .searchBar{
     margin-right: 0;
     padding: 2px;
+    border-color: #1f1f2d;
 }
 .submitBtn{
     padding: 10px;
@@ -101,13 +111,16 @@ float:left;
 width:30%;
 border-bottom-left-radius: 30px;
 margin-left:20%;
-
+background-color: #ffd578;
+border-color: #1f1f2d;
 
 }
 #dropdownentertainselect{
 
 width:30%;
 border-bottom-right-radius: 30px;
+background-color: #ffd578;
+border-color: #1f1f2d;
 
 
   }
