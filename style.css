@@ -159,6 +159,9 @@ width:70%;
   color: white;
   background-color: black;
   opacity: 75%;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 
