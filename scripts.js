@@ -1,16 +1,5 @@
 $(document).ready(function () {
 
-// var categoriesListFood=$('#dropdownfood');
-  var businesses = [];
-
-  //Global variable that hides the container with the cards on the opening page.
-  var cardsContainer = $("#card-page").hide();
-
-  //the unordered list that holds drop down menu items
-  var foodOptions = $("#foodOptions");
-
-  var entertainOptions = $('#entertainOptions');
-
   var entertainSelects = $('#dropdownentertainselect')
   var foodSelects = $('#dropdownfoodselect')
 
@@ -49,8 +38,6 @@ $(document).ready(function () {
   var restaurantArray = [];
   //pushes 5 entertainment options into array from yelp
   var entertainmentArray = [];
-  //adds distance and time to an array from bing function
-  var distanceTimeArray = [];
   //where we push both restauraunts and entertainment options
   var combinedArray = [];
 
@@ -129,7 +116,7 @@ $(document).ready(function () {
           headers: {
             Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
           }
-
+//second response runs only after stuff in first response
         }).then(function (secondResponse) {
           console.log(secondResponse)
           //initialize j variable as a counter so it does not interact with i variable earlier in function
@@ -142,6 +129,8 @@ $(document).ready(function () {
           }
           //once we fill that array we generate the card info with the info from these arrays
           if (j == secondResponse.businesses.length) {
+//generate cards only runs after both responses are generated
+//because we want to generate cards after ajax yelp functions are done
             generateCards();
           }
         })
@@ -183,13 +172,17 @@ $(document).ready(function () {
     for (l = 0; l < 10; l++) {
       //put 5 restaurants info into combined array
       if (l < 5) {
+        //if its less than 5 it pushes rest into array
         combinedArray.push(restaurantArray[l]);
       } else {
         //put 5 entertainment info into combined array
+        //if more than 5 pushes into combined array 
         combinedArray.push(entertainmentArray[l - 5]);
+//pushes both into combined array in one loop
       }
     }
 
+//for loop runs length of combined array and creates a var for lat and lon and passes those into bing and counter j that tells what card to put stuff on
     //when J is initialized at zero and is less than the combined array increment J
     for (j = 0; j < combinedArray.length; j++) {
       //set array latitide to the combined array (entertain + food) coords
@@ -240,7 +233,7 @@ $(document).ready(function () {
     }
   }
 
-  /////function to compare restaraunt categories to search term/////
+/////function to compare restaraunt categories to search term/////
   function resultCompareLoop(searchTerm) {
     //loops through all 5 restaraunts
     for (i = 0; i < searchResponse.length; i++) {
@@ -293,6 +286,7 @@ $(document).ready(function () {
   //////////////////////GEOLOCATE STUFF HERE/////////////////////////////////////////////////////////////
 
   //Geolocation function
+  //card position fixes asynchronous loading because we are forcing it to use position we want 
   function bingAPI(latitude, longitude, cardPosition) {
     navigator.geolocation.getCurrentPosition(showPosition);
 
@@ -308,17 +302,13 @@ $(document).ready(function () {
       }).then(function (response) {
         console.log(response);
 
-        //takes travel distance from obj and makes it into local var
+//takes travel distance from obj and makes it into local var
+        //pulls dist and time from response
         var distanceTravel = response.resourceSets[0].resources[0].results[0].travelDistance;
-        //same same
+//same same
         var travelTime = response.resourceSets[0].resources[0].results[0].travelDuration;
-
-        var distanceAndTime = [distanceTravel, travelTime];
-
-        distanceTimeArray.push(distanceAndTime);
-
         var cardRating = $("#cardSection" + cardPosition);
-        //Appending users travel time and distance to cards.
+ //Appending users travel time and distance to cards.
         var travelDist = $("<p>");
         travelDist.text("Distance: " + Math.round(distanceTravel) + " Miles").appendTo(cardRating);
         var travelMin = $("<p>");
@@ -329,3 +319,5 @@ $(document).ready(function () {
   }
 
 });
+
+
