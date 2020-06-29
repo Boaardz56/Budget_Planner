@@ -8,8 +8,8 @@ Offers user the chance to plan an outing in a local or unfamiliar area based on 
 - CSS
 - JavaScript
 ### APIs used
-- [YelpAPI](https://rapidapi.com/blog/yelp-fusion-api-profile-pull-local-business-data/) Yelp API was used to retrieve buisness name, price information, rating and the location of each establishent
-- [BingAPI](https://docs.microsoft.com/en-us/bingmaps/rest-services/routes/calculate-a-distance-matrix?redirectedfrom=MSDN) Bing distance matrix API was used to calculate the distance and time between users and their prospective destinations
+- [YelpAPI](https://rapidapi.com/blog/yelp-fusion-api-profile-pull-local-business-data/) was used to retrieve buisness name, price information, rating and the location of each establishent
+- [BingAPI](https://docs.microsoft.com/en-us/bingmaps/rest-services/routes/calculate-a-distance-matrix?redirectedfrom=MSDN) distance matrix API was used to calculate the distance and time between users and their prospective destinations
 - HTML5 built in geolocaiton was used to get users current locaiton
 
 ## Libraries
