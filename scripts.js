@@ -91,7 +91,7 @@ $(document).ready(function () {
     yelpSearch(userSearch);
    // yelpSearchEntertain(userSearch);
 
-    //-------------------------Yelp API and functions for food--------------------------------------------------
+//-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
@@ -110,7 +110,9 @@ $(document).ready(function () {
   //-------------------------Yelp API and functions--------------------------------------------------
 
   function yelpSearch(userSearch) {
+    //changing search terms to match yelp categories
     String.prototype.alltrim = function () { return this.replace(/\s+/g, ""); }
+    //query database
     var yelpQueryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + foodChoice.alltrim().toLowerCase();
     var yelpQueryEntertainURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=" + userSearch + "&limit=5" + "&categories=" + entertainChoice.alltrim().toLowerCase();
     console.log(yelpQueryURL);
@@ -121,12 +123,14 @@ $(document).ready(function () {
       headers: {
         Authorization: "Bearer U3DP3tTXAE_o7T9a7hSMOS4MGwikjj-Q41FB7D8gdSNu5FaUojPMLoVRDSSD09XlrU8sGL01D9uv7oP4taznIPoCt_UU7zUnnakL0xSCyNRd7Z22JLeLQLye7E7yXnYx"
       }
-
+//give a response
     }).then(function (response) {
      
       console.log(response);
       console.log("FUCK")
+  //setting var i to zero so that it can be used twice
         var i=0;
+        restaurantArray=[];
         for(i;i<response.businesses.length;i++){
         restaurantArray.push(response.businesses[i]);
         console.log("restaurant array " + restaurantArray)
@@ -144,14 +148,15 @@ $(document).ready(function () {
            }).then(function (secondResponse) {
             console.log(secondResponse)
             var j = 0;
+            entertainmentArray=[];
              for(j;j<secondResponse.businesses.length;j++){
-              
                entertainmentArray.push(secondResponse.businesses[j]);
                console.log("entertainment array " + entertainmentArray)
 
              }
                if(j==secondResponse.businesses.length){
                  generateCards();
+                // combinedArray=[]
                }
           })
         }  
@@ -171,7 +176,6 @@ $(document).ready(function () {
 //////////////////////////////////////////////////////////////////////////
 
 function generateCards(){
-
   for (i = 0; i < 5; i++) {
     var restname = $('#cardTitle' + i);
     console.log("restname =" + restname);
@@ -179,8 +183,8 @@ function generateCards(){
     restname.text(restaurantArray[i].name);
 
     console.log("business name" + restaurantArray[i].name)
-    // var foodPic = $("<img>");
-    // foodPic.attr(response.businesses[0].image_url);
+    var foodPic = $("#img" + i);
+    foodPic.attr('src', restaurantArray[i].image_url);
     var cardRating = $('#cardSection' + i);
     cardRating.text("Rating: " + restaurantArray[i].rating);
     var cardPrice = $("<p>");
@@ -188,6 +192,7 @@ function generateCards(){
     cardRating.append(cardPrice);
     cardGlobalRating = cardRating;
   }
+  combinedArray=[]
   for(l=0;l<10;l++){
     if(l<5){
     combinedArray.push(restaurantArray[l]);
@@ -214,12 +219,15 @@ function generateCards(){
   for (k = 5; k < 10; k++) {
     var entname = $('#cardTitle' + k);
     entname.text(entertainmentArray[k - 5].name);
-    // var foodPic = $("<img>");
-    // foodPic.attr(response.businesses[0].image_url);
+    var foodPic = $("#img" + k);
+    foodPic.attr('src', entertainmentArray[k - 5].image_url);
     var cardRating = $('#cardSection' + k);
     cardRating.text("Rating: " + entertainmentArray[k - 5].rating);
     var cardPrice = $("<p>");
     cardPrice.text("Price: " + entertainmentArray[k - 5].price);
+    if (entertainmentArray[k - 5].price === undefined) {
+      cardPrice.hide();
+    }
     cardRating.append(cardPrice);
   }
 
@@ -316,7 +324,6 @@ function generateCards(){
 
   //////////////////////GEOLOCATE STUFF HERE/////////////////////////////////////////////////////////////
 
-
   //Geolocation function
   function bingAPI(latitude, longitude, cardPosition) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -353,10 +360,10 @@ function generateCards(){
            var cardRating = $("#cardSection" + cardPosition);
            console.log("cardRating: " + cardRating)
 //Appending users travel time and distance to cards.
-           var travelInfo = $("<p>");
-           console.log("distance travel = " + distanceTravel + " travel time = " + travelTime)
-           travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
-           cardRating.append(travelInfo);
+          var travelDist = $("<p>");
+          travelDist.text("Distance: " + Math.round(distanceTravel) + " Miles").appendTo(cardRating);
+          var travelMin = $("<p>");
+          travelMin.text("Time: " + Math.round(travelTime) + " Minutes").appendTo(travelDist);
        if(globalCounter==10){
          console.log("global counter reset")
           globalCounter=0;
@@ -365,125 +372,4 @@ function generateCards(){
     }
   }
 
-
-
-  //////////////////////////////////////////////GOOGLE MAPS API WE WANT//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  //google maps api key AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
-
-  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ";
-  // // console.log(queryURL);
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-
-  // }).then(function (response) {
-  //   // console.log (response);
-  // });
-
-  // //google api to get some restaurants with rating around a location
-  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-  // // console.log(queryURL);
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-
-  // }).then(function (response) {
-  //   // console.log (response);
-  // });
-
-  // //google api to get some restaurants with rating around a location
-  // //google places AJAX call
-  // var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&rankby=prominence&fields=photos,formatted_address,name,rating&key=AIzaSyCZv8-G_j3tkOqJ5sIqhGFN0iYBDs-Q664";
-  // // console.log(queryURL);
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-
-  // }).then(function (response) {
-  //   // console.log (response);
-  // });
-
 });
-
-
-
-
-///////////////STUFF WE CAN USE LATER MAYBE/////////////////////////////////////////////
-
-////////////////////////ENTERTAIN SELECTS USE LATER MAYBE/////////////////////////////////
-
-// function generateEntertainSelect(){
-//   for (i = 0; i < categoriesforFun.length; i++) {
-//     var optionID = "entertainType" + categoriesforFun[i];
-//     var options = document.createElement("OPTION");
-
-//   options.onclick=function(){
-//    console.log("running the click function");
-//    entertainChoice = $(this)[0].innerHTML;
-
-//    console.log($(this)[0].innerHTML);
-//     }
-//     //   //add ID to list item
-//       options.id = optionID;
-
-//      options.innerHTML=categoriesforFun[i];
-
-//      entertainSelects.append(options);
-//   }
-// }
-//////////////////FOOD SELECTS USE LATER MAYBE//////////////////////////////////////////////
-// function generateFoodSelect(){
-//   for (i = 0; i < categoriesForChoose.length; i++) {
-//     var optionID = "foodType" + categoriesForChoose[i];
-//     //console.log(optionID);
-//     var options = document.createElement("OPTION");
-//     //console.log(options);
-
-//   options.setAttribute('value', "#");
-
-//   options.onclick=function(){
-//     preventDefault ()
-
-//    console.log("running the click function");
-
-//    foodChoice = $(this)[0].innerHTML;
-
-//    //console.log($(this)[0].innerHTML);
-//     }
-//     //   //add ID to list item
-//       options.id = optionID;
-
-//      options.innerHTML=categoriesForChoose[i];
-
-//      foodSelects.append(options);
-//   }
-// }
-
-///////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//commented out for future use
-//google maps api AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ
-
-// var queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=AIzaSyCd4rMGw53QW6U8tfSVBXMHztxnCnWJgmQ&callback=myMap";
-// console.log(queryURL);
-// $.ajax({
-//   url: queryURL,
-//   method: "GET"
-
-// }).then(function(response) {
-
-// });
-
-// map = new google.maps.Map(document.getElementById('map'), {
-//     center: {lat: -34.397, lng: 150.644},
-//     zoom: 8
-//   });
-
-
-
-
-//CLOSING document tag!!!
