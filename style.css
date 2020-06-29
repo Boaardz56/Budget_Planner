@@ -3,26 +3,27 @@ body{
   background-image:url("./assets/images/WebsiteBG.jpg");
   background-repeat: no-repeat; 
   background-size: cover;
+
   font-family: 'Baloo Bhai 2';
-  
 }
+
 /* Adding a transparent background color for the elements in top of it to pop out, and aligning them to center. */
-  #opening-page{
-   
-  background-color: rgba(0, 0, 0, 0.514);
-  height:100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#opening-page{
+   background-color: rgba(0, 0, 0, 0.514);
+   height:100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  
   }
 
-  h4{
-    text-align: center;
-    font-family: 'Montserrat Alternates', sans-serif;
-    color:rgb(255, 255, 255);
-    text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 3px black;
-    margin-top: -150px;
-    letter-spacing: 2px;
+h4{
+   text-align: center;
+   font-family: 'Montserrat Alternates', sans-serif;
+   color:rgb(255, 255, 255);
+   text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 3px black;
+   margin-top: -150px;
+   letter-spacing: 2px;
     
  
   }
@@ -32,41 +33,42 @@ body{
  
   }
   .logo{
-    height: 70%;
-    width: 70%;
-    margin:auto;
-    margin-top: -500px;
+   height: 70%;
+   width: 70%;
+   margin:auto;
+   margin-top: -500px;
   }
-
-  #card-page{
-    
-    background-size: cover;
-    background-color: rgba(0, 0, 0, 0.514);
-    height:100vh,100%;
-  }
- 
 
   
+ 
+
+/* ---------- CARD CSS -----------*/
+#card-page{
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.514);
+  height:100vh,100%;
+}
+
 /* Added to make cards closer together. */
 .card{
-    margin-bottom:5px;
-    height: 160px;
+  margin-bottom:5px;
+  height: 160px;
 
-     border-radius: 20px;
-     background-color: #1f1f2d;
+  border-radius: 20px;
+  background-color: #1f1f2d;
 
-     color: #fbf0e3;
-     border-color: #ffd578;
-     border-style: double;
-    border-width: 7px;
-    position: relative;
+  color: #fbf0e3;
+  border-color: #ffd578;
+  border-style: double;
+  border-width: 7px;
+  position: relative;
 }
 
 .card-divider{
-background-color: #ffd578;
-color: #1f1f2d;  
-padding: 4px;
-margin-bottom: 0px;
+  background-color: #ffd578;
+  color: #1f1f2d;  
+  padding: 4px;
+  margin-bottom: 0px;
 }
 
 .card-section {
@@ -77,14 +79,13 @@ margin-bottom: 0px;
 }
 
 .images {
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  padding: 1px;
+  border-radius: 5px;
+  padding: 0px;
   width: 100px;
-  height: 100px;
+  height: 110px;
   display: block;
   margin-left: 5px;
-  top: 30%;
+  top: 23%;
   position: absolute;
 }
 
@@ -93,51 +94,57 @@ p {
   margin-bottom: 0px;
 }
 
+
 /* Padding Added to cards to add some seperation between them. */
 .cell{
     padding-right: 20px;
     padding-left:20px;
 }
 
+
+/* ----------- SEARCH BAR ----------- */
 .searchBar{
     margin-right: 0;
     padding: 2px;
     border-color: #1f1f2d;
 }
+
 .submitBtn{
     padding: 10px;
     margin-left: 1px;
 }
+
 .submitBtn:disabled{
   background-color: black;
 }
+
 .input-group-rounded .input-group-field {
     border-radius: 5000px 0 0 5000px;
     padding-left: 1rem;
-    
-   
   }
+
 .input-group-rounded .input-group-button .button {
     border-radius: 0 5000px 5000px 0;
     font-size: 0.8rem;
   }
 
-  .input-group{
+.input-group{
     margin-top: 30px;
     margin-bottom: 0px;
   }
+
 .menu{
   background: #333;
   width: 30%;
   }
 /* Stick search bar to top og page when scrolled down. */
 #searchContainer{
-position:-webkit-sticky;
-position:sticky;
-top:0;
-width:70%;
-
+  position:-webkit-sticky;
+  position:sticky;
+  top:0;
+  width:70%;
 }
+
 
 #footer{
   color: white;
