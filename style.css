@@ -37,10 +37,19 @@ body{
     height: 160px;
      border-radius: 20px;
      background-color: #1f1f2d;
-     color: blanchedalmond;
-  
-  
+     color: #fbf0e3;
+     border-color: #ffd578;
+     border-style: double;
+    border-width: 7px;
 }
+
+.card-divider{
+background-color: #ffd578;
+color: #1f1f2d;
+
+}
+
+
 /* Padding Added to cards to add some seperation between them. */
 .cell{
     padding-right: 20px;
