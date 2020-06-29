@@ -22,7 +22,7 @@
 <body>
 
 
-    <!-- <div class="opening-page"> -->
+    <!-- Opening Page Container -->
     <div class="container" id="opening-page">
  
         <div id="searchContainer">
@@ -30,9 +30,9 @@
             <div class = logo>
                 <img src="./assets/images/NightlifeLogo-01.png"; alt="">
                  </div>
-
-                 <h4><span>Looking for things to do? We got you.</span> Pick from our food and entertainment dropdowns, type in your location, and get ready for your night out!</h4>
-         <!-- Search button  -->        
+                 <h5><span>Looking for things to do? We got you.</span> Pick from our food and entertainment dropdowns, type in your location, and get ready for your night out!</h5>
+                 
+          <!-- Container for search input and button-->
             <div class="container" id="startingBtn">
                 <div class="input-group input-group-rounded">
                     <input class="input-group-field" id=searchField type="search">
@@ -40,20 +40,15 @@
                         <input type="submit" id="submitBtn" class="button secondary" value="Search">
                     </div>
                 </div>
-
-
-            <!-- Scope for food and entertainment calls-->
+          <!-- Scope for food and entertainment calls-->
                 <label>
                     <select id="dropdownfoodselect">
                     </select>
                 </label>
-
                 <label>
                     <select id="dropdownentertainselect" onChange="myFunction()">
                     </select>
                 </label>
-
-
             </div>
         </div>
     </div>
@@ -64,16 +59,15 @@
 
         <div class="grid-container">
             <div class="grid-x">
-
+             <!-- First cell(column) will hold Restaurant cards within this grid(row) -->
                 <div class="cell large-6">
                     <div class="card">
                         <div class="card-divider" id="cardTitle0"></div>
                         <img class="images" id="img0">
-
                         <div class="card-section" id="cardSection0"> </div>
                     </div>
                 </div>
-
+               <!-- Second cell(column) will hold Entertainment cards within this grid(row)-->
                 <div class="cell large-6">
                     <div class="card">
                         <div class="card-divider" id="cardTitle5"></div>
@@ -134,13 +128,9 @@
 
                 <div class="cell large-6">
                     <div class="card">
-                        <div class="card-divider" id="cardTitle8">
-                        </div>
+                        <div class="card-divider" id="cardTitle8"></div>
                         <img class="images" id="img8">
-                        <div class="card-section" id="cardSection8">
-                            <h4></h4>
-                            <p></p>
-                        </div>
+                        <div class="card-section" id="cardSection8"></div>
                     </div>
                 </div>
             </div>
@@ -150,11 +140,7 @@
                     <div class="card">
                         <div class="card-divider" id="cardTitle4"></div>
                         <img class="images" id="img4">
-                        <div class="card-section" id="cardSection4">
-                            <h4></h4>
-                            <p></p>
-
-                        </div>
+                        <div class="card-section" id="cardSection4"></div>
                     </div>
                 </div>
 
