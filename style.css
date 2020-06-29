@@ -55,7 +55,7 @@ h4{
   height: 160px;
 
   border-radius: 20px;
-  background-color: #1f1f2d;
+  background-color: #1f1f2d44;
 
   color: #fbf0e3;
   border-color: #ffd578;
@@ -79,7 +79,6 @@ h4{
 }
 
 .images {
-  
   padding: 0px;
   width: 115px;
   height: 115px;
@@ -93,12 +92,13 @@ p {
   margin-bottom: 0px;
 }
 
-
 /* Padding Added to cards to add some seperation between them. */
 .cell{
     padding-right: 20px;
     padding-left:20px;
+    margin-bottom: 5px;
 }
+
 
 
 /* ----------- SEARCH BAR ----------- */
