@@ -360,10 +360,10 @@ function generateCards(){
            var cardRating = $("#cardSection" + cardPosition);
            console.log("cardRating: " + cardRating)
 //Appending users travel time and distance to cards.
-           var travelInfo = $("<p>");
-           console.log("distance travel = " + distanceTravel + " travel time = " + travelTime)
-           travelInfo.text("Distance: " + Math.round(distanceTravel) + " Miles    " + "Time: " + Math.round(travelTime) + " Minutes");
-           cardRating.append(travelInfo);
+          var travelDist = $("<p>");
+          travelDist.text("Distance: " + Math.round(distanceTravel) + " Miles").appendTo(cardRating);
+          var travelMin = $("<p>");
+          travelMin.text("Time: " + Math.round(travelTime) + " Minutes").appendTo(travelDist);
        if(globalCounter==10){
          console.log("global counter reset")
           globalCounter=0;
