@@ -3,7 +3,8 @@ body{
   background-image:url("./assets/images/WebsiteBG.jpg");
   background-repeat: no-repeat; 
   background-size: cover;
-  font-family: 'Baloo Bhai 2', cursive; 
+
+  font-family: 'Baloo Bhai 2';
 }
 
 /* Adding a transparent background color for the elements in top of it to pop out, and aligning them to center. */
@@ -26,9 +27,9 @@ h4{
     
  
   }
-span{
-   color: #ffd578;
-   font-family: 'Bungee Inline', cursive;
+  span{
+ color: #ffd578;
+ font-family: 'Bungee Inline';
  
   }
   .logo{
@@ -145,27 +146,6 @@ p {
 }
 
 
-/* --------- SCOPE TABLE --------- */
-
-#dropdownfoodselect{
-   float:left;
-   width:30%;
-   border-bottom-left-radius: 30px;
-   margin-left:20%;
-   background-color: #ffd578;
-   border-color: #1f1f2d;
-
-}
-#dropdownentertainselect{
-
-   width:30%;
-   border-bottom-right-radius: 30px;
-   background-color: #ffd578;
-   border-color: #1f1f2d;
-  }
-
-
-/* ------- FOOTER ------ */
 #footer{
   color: white;
   background-color: black;
@@ -173,4 +153,25 @@ p {
 }
 
 
+#dropdownfoodselect{
+float:left;
+width:30%;
+border-bottom-left-radius: 30px;
+margin-left:20%;
+background-color: #ffd578;
+border-color: #1f1f2d;
 
+}
+#dropdownentertainselect{
+
+width:30%;
+border-bottom-right-radius: 30px;
+background-color: #ffd578;
+border-color: #1f1f2d;
+  }
+
+@media only screen and (max-width: 1400px) {
+#searchContainer{
+margin-top: 30%;
+}
+}

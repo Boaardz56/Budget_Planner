@@ -91,7 +91,7 @@ $(document).ready(function () {
     yelpSearch(userSearch);
    // yelpSearchEntertain(userSearch);
 
-    //-------------------------Yelp API and functions for food--------------------------------------------------
+//-------------------------Yelp API and functions for food--------------------------------------------------
 
     window.location.href = "#cardResults"
   });
