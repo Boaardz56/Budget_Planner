@@ -25,4 +25,4 @@ Inside the BingAPI function the geolocation api is utilized to get current userl
 Seperate for loops were created to append price, rating,  buisness name and distance/time values to cards.
 
 Finally, CSS was used for styling purposes.
-
+![](images/NightLife_Gif.gif)
