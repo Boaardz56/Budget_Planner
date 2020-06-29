@@ -59,6 +59,7 @@ color: #1f1f2d;
 .searchBar{
     margin-right: 0;
     padding: 2px;
+    border-color: #1f1f2d;
 }
 .submitBtn{
     padding: 10px;
@@ -106,13 +107,16 @@ float:left;
 width:30%;
 border-bottom-left-radius: 30px;
 margin-left:20%;
-
+background-color: #ffd578;
+border-color: #1f1f2d;
 
 }
 #dropdownentertainselect{
 
 width:30%;
 border-bottom-right-radius: 30px;
+background-color: #ffd578;
+border-color: #1f1f2d;
 
 
   }
