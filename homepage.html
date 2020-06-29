@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
 
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Baloo+Bhai+2:wght@500&family=Bungee+Inline&family=Bungee+Shade&family=Julius+Sans+One&family=Montserrat+Alternates:wght@500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Baloo+Bhai+2:wght@500&family=Bungee+Inline&family=Bungee+Shade&family=Julius+Sans+One&family=Montserrat+Alternates:wght@500&display=swap"
+        rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
 </head>
@@ -25,15 +27,20 @@
 
     <!-- Opening Page Container -->
     <div class="container" id="opening-page">
- 
+
         <div id="searchContainer">
 
-            <div class = logo>
-                <img src="./assets/images/NightlifeLogo-01.png"; alt="">
-                 </div>
-                 <h5><span>Looking for things to do? We got you.</span> Pick from our food and entertainment dropdowns, type in your location, and get ready for your night out!</h5>
-                 
-          <!-- Container for search input and button-->
+            <div class="grid-y">
+                <div class="cell small-6 medium-4 large-8 logo">
+                    <img src="./assets/images/NightlifeLogo-01.png" ; alt="">
+                </div>
+            </div>
+            <div class="grid-y">
+                <h5 class="cell small-6 medium-8 large-4"><span>Looking for things to do? We got you.</span> Pick from
+                    our food and entertainment dropdowns, type in your location, and get ready for your night out!</h5>
+            </div>
+
+            <!-- Container for search input and button-->
             <div class="container" id="startingBtn">
                 <div class="input-group input-group-rounded">
                     <input class="input-group-field" id=searchField type="search">
@@ -41,7 +48,7 @@
                         <input type="submit" id="submitBtn" class="button secondary" value="Search">
                     </div>
                 </div>
-          <!-- Scope for food and entertainment calls-->
+                <!-- Scope for food and entertainment calls-->
                 <label>
                     <select id="dropdownfoodselect">
                     </select>
@@ -60,7 +67,7 @@
 
         <div class="grid-container">
             <div class="grid-x">
-             <!-- First cell(column) will hold Restaurant cards within this grid(row) -->
+                <!-- First cell(column) will hold Restaurant cards within this grid(row) -->
                 <div class="cell large-6">
                     <div class="card">
                         <div class="card-divider" id="cardTitle0"></div>
@@ -68,7 +75,7 @@
                         <div class="card-section" id="cardSection0"> </div>
                     </div>
                 </div>
-               <!-- Second cell(column) will hold Entertainment cards within this grid(row)-->
+                <!-- Second cell(column) will hold Entertainment cards within this grid(row)-->
                 <div class="cell large-6">
                     <div class="card">
                         <div class="card-divider" id="cardTitle5"></div>
@@ -171,6 +178,7 @@
 
     <!-- FOOTER-->
     <footer id=footer class="columns sticky-footer-css-body text-center id=footer" class= "columns sticky-footer-css-body text-center"> © NIGHTLIFE ★ ☾ 2020</footer>
+
 
 
 </body>
