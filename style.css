@@ -78,14 +78,13 @@ span{
 }
 
 .images {
-  border-radius: 5px;
+  
   padding: 0px;
-  width: 100px;
-  height: 110px;
+  width: 115px;
+  height: 115px;
   display: block;
-  margin-left: 5px;
-  top: 23%;
-  position: absolute;
+  margin-left: 0px;
+  position: relative;
 }
 
 p {
