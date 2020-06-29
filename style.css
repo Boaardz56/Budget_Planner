@@ -33,18 +33,20 @@ span{
 .logo{
     height: auto;
     width: auto;
-    margin:auto;
-    margin-top: -200px;
-    margin-bottom: 5px;
+    /* margin:auto; */
+    margin-top: -20%;
+     margin-bottom: -50px;
+     
  }
  
 /* ----------- CONTAINER W/SEARCH INPUT AND BUTTON ----------- */
 .searchBar{
   margin-right: 0;
+  /* margin-bottom: -10%; */
   /* padding: 2px; */
-  padding:auto;
+  /* padding:auto; */
   border-color: #1f1f2d;
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 
 .submitBtn{
@@ -163,7 +165,7 @@ width:70%;
   opacity: 75%;
   position: fixed;
   bottom: 0;
-  width: 100;
+  width: 100%;
 }
 
 
